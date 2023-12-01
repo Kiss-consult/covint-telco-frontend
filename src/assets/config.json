@@ -1,0 +1,4 @@
+{
+    "TelcoBackendUrl": "http://localhost:8095",
+    "KeycloakUrl": "http://localhost:8084"
+}

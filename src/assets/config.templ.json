@@ -1,0 +1,4 @@
+{
+    "TelcoBackendUrl": "${TELCO_BACKEND_URL}",
+    "KeycloakUrl": "${KEYCLOAK_URL}"
+}
