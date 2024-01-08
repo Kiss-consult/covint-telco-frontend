@@ -1,6 +1,6 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 //import { ColorPickerModule } from 'ngx-color-picker';
 
-
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { initializeApp } from './init/init';
 
@@ -49,15 +49,14 @@ import { initializeApp } from './init/init';
     MatSortModule,
     MatFormFieldModule,
     MatIconModule,
-
-    DragDropModule,
-
-    MatIconModule,
-
+    MatInputModule,
+    DragDropModule,   
+    BrowserAnimationsModule,
     KeycloakAngularModule,
  //   ColorPickerModule,
   //  BrowserAnimationsModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     ConfigService,
     // {
