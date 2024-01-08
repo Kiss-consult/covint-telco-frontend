@@ -1,0 +1,24 @@
+
+<ng-template #alternateContent>
+    <!-- Itt jelenjen meg az alapértelmezett tartalom, mivel be vagy jelentkezve a felhasználó -->
+    <h1>A COVINT ha nem vagy bejelentkezve</h1>
+    <!-- Alapértelmezett tartalom részei itt -->
+  </ng-template>
+
+  <ng-container *ngIf="loginService.isLoggedIn; else alternateContent">
+  
+
+    <h1>A COVINT -Telco</h1>
+    
+      <h2>A projekt célja</h2>
+    
+    <div class="container">
+        
+        <div class="covinttext">
+        <a> A SARS-CoV-2 fertőzés szempontjából kockázatos csoportok kiszűrése és nyomon követése a személyre szabott egészségvédelem és célzott,
+          hatékony terápiás kezelés érdekében. Az adatszolgáltatással Ön is hozzájárulhat ahhoz, hogy jobban megismerjük a magyar populációra vonatkozó összefüggéseket
+          a COVID-19 betegség súlyosságát befolyásoló tényezőkkel kapcsolatban.</a>
+      </div>
+    </div>
+
+ </ng-container>

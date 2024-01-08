@@ -1,0 +1,110 @@
+.container{
+    padding-top: 0;
+}
+
+.text{
+    text-align: center;
+}
+
+#okebutton{
+    margin-left: 0;
+    margin-top: 60px;
+    box-shadow: 0 0 0 20px white;
+}
+
+.markerbno{
+    display: flex; 
+    border-bottom: solid 3px #848484; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+.droptextbox{
+    margin-right: 20px;
+}
+
+.markerbno2{
+    display: flex; 
+    border-bottom: solid 3px #0800ff; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+.content2{
+    margin-top: 60px;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+#trueDead{
+    margin-left: 12px;
+}
+
+#falseDead{
+    margin-left: 10px;
+}
+
+#trueHosp{
+    margin-left: 12px;
+}
+
+#falseHosp{
+    margin-left: 10px;
+}
+
+.container2{
+    display: flex;
+    background: rgb(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgb(255, 255, 255) 90%);
+    justify-content: space-between;
+    padding-bottom: 40px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 40px;
+}
+
+.container3{
+    text-align: left;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    padding-bottom: 60px;
+}
+
+#markerbnoclass{
+    display: flex;
+}
+
+#dead{
+    margin-left: 30px;
+}
+
+@media (max-width: 1200px){
+    #markerbnoclass{
+        text-align: left;
+        display: flex;
+        flex-direction: column; 
+        margin-bottom: 40px;        
+    }
+
+    #markers{
+        margin-left: 0;
+    }  
+    
+    #hospdead{
+        flex-direction: column;
+    }
+
+    #dead{
+        margin-left: 0;
+    }
+}
