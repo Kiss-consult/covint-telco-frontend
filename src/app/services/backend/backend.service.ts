@@ -104,7 +104,7 @@ public deleteCampaignById(id : number): Observable<Result<{}>> {
 
 
 uploadFile(file: File, name: string): Observable<Result<Empty>> {
-  const url = this.url + "formData.append('template', file);";
+  const url = this.url + "/list/import";
   let formData = new FormData();
   formData.append('name', name);
   formData.append('list', file);
@@ -114,7 +114,10 @@ uploadFile(file: File, name: string): Observable<Result<Empty>> {
     ).subscribe();
   return of(new Ok<Empty>(new Empty()));
 }
-
+cancelUpload() {
+  this.uploadSub.unsubscribe();
+  this.reset();
+}
 reset() {
   this.uploadProgress = 0;
   this.uploadSub = Subscription.EMPTY;

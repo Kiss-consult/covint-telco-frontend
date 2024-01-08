@@ -1,1 +1,52 @@
-<p>managecampaign works!</p>
+
+<h1>
+    Kampányok
+    
+   </h1>
+   <h2>Kampányok </h2>
+   <div class="container">
+    <!--TABLE-->
+    <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+    
+    <div class="acceptuser"  >
+     <mat-form-field>
+         <mat-label>Keresés</mat-label>
+         <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
+       </mat-form-field>
+ 
+       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">  
+ 
+      
+      
+      
+ 
+       <ng-container matColumnDef="name">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>kampány neve</th>
+         <td mat-cell *matCellDef="let auditlog">
+          {{ auditlog.Date}}
+         </td>
+       </ng-container>     
+      
+       <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Kezdete</th>
+          <td mat-cell *matCellDef="let auditlog">
+           {{ auditlog.Time}}
+          </td>
+        </ng-container>    
+ 
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Vége</th>
+          <td mat-cell *matCellDef="let auditlog">
+           {{ auditlog.Level}}
+          </td>
+        </ng-container>    
+ 
+          
+     
+       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     </table>
+ 
+     <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
+    </div>
+   </div>
