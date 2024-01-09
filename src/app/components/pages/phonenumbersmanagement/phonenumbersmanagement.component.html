@@ -1,1 +1,50 @@
-<p>phonenumbersmanagement works!</p>
+<h1>telefonszám lista kezelése
+  
+</h1>
+<h2>telefonszám lista feltöltés és szerkesztés </h2>
+<div class="container">
+
+  <div class="container2">
+<h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+<div class="exportbutton">
+    
+    <div class="tab-button">
+      lista feltöltése
+    </div>
+<div>
+    <div hidden>
+      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+      <p>telefon lista feltöltése</p>
+    </div>
+
+    <div class="file-upload">
+      <br>
+      <div class="exportbutton2">
+        <label class="text"> Adjon nevet a listának! <s>*</s></label>
+        <br>
+        <input class="droptextbox" type="text" id="listname" name="listname" [(ngModel)]="listname" placeholder="345667..." title="Kérem töltse ki a mezőt">
+        <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
+            attach_file</mat-icon></button>
+      </div>
+      <div class="nofile">{{uploadedMessage|| noFileMessage}}</div>
+    </div>
+<br>
+<br>
+<br>
+    <div class="progress">
+
+      <mat-progress-bar class="progress-bar" mode="determinate" [value]="backendService.uploadProgress"
+        *ngIf="backendService.uploadProgress">
+
+      </mat-progress-bar>
+
+      <mat-icon class="cancel-upload" (click)="backendService.cancelUpload()"
+        *ngIf="backendService.uploadProgress">delete_forever</mat-icon>
+
+    </div>
+  </div>
+</div>
+<footer>   
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
+</div>
