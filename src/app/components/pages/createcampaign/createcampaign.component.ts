@@ -6,6 +6,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { Campaign } from 'src/app/models/campaign/campaign';
+import { Answer } from 'src/app/models/answer/answer';
 
 
 @Component({
@@ -22,7 +23,15 @@ export class CreatecampaignComponent {
   liveActive: boolean = false;
   origialFromTime : string = "";
   origialToTime : string = "";
+  
+  questionNumber: number = 0 ;
+  minioPath: string = "";
+  valueToSet: string = "";
+  answers : Answer[] = [];
 
+getNumbersArray(count: number): number[] {
+  return Array.from({ length: count }, (_, index) => index + 1);
+}
 
   toggleContent(contentType: string) {
     if (contentType === 'auto') {

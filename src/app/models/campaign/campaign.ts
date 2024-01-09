@@ -21,6 +21,7 @@ export class Campaign {
     question: Question[] = []; // kérdések-válaszok tömbje
     callDays: string[] = []; // milen napokon akarunk hívni
 
+
 }
 
 /*
