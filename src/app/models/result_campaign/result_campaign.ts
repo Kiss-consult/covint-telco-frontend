@@ -27,6 +27,7 @@ export class ResultCampaign {
     callDays: string[] = [];
 
     id: number = 0;
+    started: boolean = false;
     VpbxUuid: string = "";
     timeStamp: string = "";
 
