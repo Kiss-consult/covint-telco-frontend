@@ -10,6 +10,8 @@ import { Campaign } from 'src/app/models/campaign/campaign';
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { Empty } from 'src/app/models/utils/empty';
 import { Sound } from 'src/app/models/sound/sound';
+import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
+import { Filter } from 'src/app/models/filter/filter';
 
 @Injectable({
     providedIn: 'root'
@@ -94,8 +96,22 @@ public deleteCampaignById(id : number): Observable<Result<{}>> {
     catchError(error => of(new Err<{}>(error)))
   );
 }
-
-
+// This function start a given existing campaign by id .
+public startCampaignById(id : number): Observable<Result<{}>> {
+  const url = this.url + "/campaign/start/" + id; 
+  return this.httpClient.post<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+// This function stop a started existing campaign by id .
+public stopCampaignById(id : number): Observable<Result<{}>> {
+  const url = this.url + "/campaign/stop/" + id; 
+  return this.httpClient.post<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 // *********************  END OF CAMPAIGN FUNCTIONS **************************************
 
 
@@ -103,7 +119,7 @@ public deleteCampaignById(id : number): Observable<Result<{}>> {
 
 
 
-
+// This function upload a csv file and put data to database. ( import)
 uploadFile(file: File, name: string): Observable<Result<Empty>> {
   const url = this.url + "/list/import";
   let formData = new FormData();
@@ -125,11 +141,32 @@ reset() {
 }
 
 
+// This function get all existing list from the database. the numbers array is null , you can use get list by id to achive the numbers
+public getAllList(): Observable<Result<[List_of_numbers]>> {
+  const url = this.url + "/list/all"; 
+  return this.httpClient.get<Result<[List_of_numbers]>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<[List_of_numbers]>(JSON.stringify(result))),
+    catchError(error => of(new Err<[List_of_numbers]>(error)))
+  );
+}
 
+// This function get a given list by id from the database.
+public getListById(id : number): Observable<Result<List_of_numbers>> {
+  const url = this.url + "/list/" + id; 
+  return this.httpClient.get<Result<List_of_numbers>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<List_of_numbers>(JSON.stringify(result))),
+    catchError(error => of(new Err<List_of_numbers>(error)))
+  );
+}
 
-
-
-
+// This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
+public filterList(filter: Filter): Observable<Result<[Number]>> {
+  const url = this.url + "/list/filter";
+  return this.httpClient.post<Result<[Number]>>(url, filter, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<[Number]>(JSON.stringify(result))),
+    catchError(error => of(new Err<[Number]>(error)))
+  );
+}
 
 
 
@@ -141,8 +178,8 @@ reset() {
 
 
 
-
-uploadSound(file: File): Observable<Result<Empty>> {
+// This function upload a sound file to minio .
+public uploadSound(file: File): Observable<Result<Empty>> {
   const url = this.url + "/sound/upload";
   let formData = new FormData();
  
@@ -154,7 +191,7 @@ uploadSound(file: File): Observable<Result<Empty>> {
   return of(new Ok<Empty>(new Empty()));
 }
 
-// This function get all existing campaign from the database.
+// This function get all available sound file name and link .
 public getAllSounds(): Observable<Result<[Sound]>> {
   const url = this.url + "/sound/all"; 
   return this.httpClient.get<Result<[Sound]>>(url,  { headers: this.getHeaders() }).pipe(
@@ -162,6 +199,22 @@ public getAllSounds(): Observable<Result<[Sound]>> {
     catchError(error => of(new Err<[Sound]>(error)))
   );
 }
+
+
+// This function get all available sound file name and link .
+public deleteSound(filename : string): Observable<Result<{}>> {
+  const url = this.url + "/sound/delete/" + filename; 
+  return this.httpClient.delete<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+
+
+
+
+
+
 // *********************  END OF SOUND FUNCTIONS **************************************
 }
 
