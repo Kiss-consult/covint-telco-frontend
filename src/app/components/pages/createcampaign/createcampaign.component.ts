@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, } from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { Campaign } from 'src/app/models/campaign/campaign';
 
@@ -8,15 +11,38 @@ import { Campaign } from 'src/app/models/campaign/campaign';
 @Component({
   selector: 'app-createcampaign',
   templateUrl: './createcampaign.component.html',
-  styleUrls: ['./createcampaign.component.css']
+  styleUrls: ['./createcampaign.component.css'], 
+  
+
 })
+
 export class CreatecampaignComponent {
   campaign : Campaign = new Campaign;
-  goBackToPrevPage(): void {
-    this.location.back();
-  }
-  constructor(private backendService: BackendService,private location: Location) {  
+  autoActive: boolean = false;
+  liveActive: boolean = false;
 
+  toggleContent(contentType: string) {
+    if (contentType === 'auto') {
+      this.autoActive = true;
+      this.liveActive = false;
+      this.campaign.liveOrAuto = true;
+      console.log("auto valsztottam", this.campaign.liveOrAuto)
+
+    } else if (contentType === 'live') {
+      this.autoActive = false;
+      this.liveActive = true;
+      this.campaign.liveOrAuto = false;
+      console.log("live választottam:", this.campaign.liveOrAuto)
+    }
+
+  }
+
+  goBackToPrevPage(): void {
+    this.location.back();    
+  }
+
+  
+  constructor(private backendService: BackendService,private location: Location) {  
       
   }
   // Format date to YYYY-MM-DD - example
@@ -54,3 +80,4 @@ export class CreatecampaignComponent {
  
 
 }
+
