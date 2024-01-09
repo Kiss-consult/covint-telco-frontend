@@ -20,6 +20,9 @@ export class CreatecampaignComponent {
   campaign : Campaign = new Campaign;
   autoActive: boolean = false;
   liveActive: boolean = false;
+  origialFromTime : string = "";
+  origialToTime : string = "";
+
 
   toggleContent(contentType: string) {
     if (contentType === 'auto') {
@@ -55,6 +58,15 @@ export class CreatecampaignComponent {
     return `${year}-${monthPadding}${month}-${dayPadding}${day}`;
   }
 
+// Format time to hh:mm:00.000 - example
+private formatTime(time: string): string {
+  console.log(time)
+  const newtime = time + ":00.000";
+  console.log(newtime)
+  return newtime;
+}
+  
+
   // Function to finish campaign creation. It checks the required fields,
   // adds the current date to the case, and inserts the campaign into the database.
   // It also clears the form for the next case.
@@ -62,7 +74,10 @@ export class CreatecampaignComponent {
     //if (!this.checkRequiredFields()) {
      // return;
   //  }
-   // this.campaign.Date = this.formatDate(new Date());
+
+  console.log(this.origialFromTime, this.origialToTime)
+   this.campaign.fromTime = this.formatTime(this.origialFromTime);
+   this.campaign.toTime = this.formatTime(this.origialToTime);
     console.log(this.campaign);
     this.backendService.createCampaign(this.campaign).subscribe(
       result => {

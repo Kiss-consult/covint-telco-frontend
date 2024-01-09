@@ -16,7 +16,7 @@ export class ManagecampaignComponent {
 
 
 resultCampaing :ResultCampaign = new ResultCampaign;
-resultCampings: ResultCampaign[] = [];
+resultCampaings: ResultCampaign[] = [];
 
 
   dataSource!: MatTableDataSource<ResultCampaign>; 
@@ -48,14 +48,14 @@ goBackToPrevPage(): void {
           console.error(result.unwrapErr());
           return;
         }
-        this.resultCampings = result.unwrap();
-        this.dataSource = new MatTableDataSource(this.resultCampings);
+        this.resultCampaings = result.unwrap();
+        this.dataSource = new MatTableDataSource(this.resultCampaings);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
   
        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Kampányok sikeres betöltés");
-        console.log(this.resultCampings);
+        console.log(this.resultCampaings);
         
 
         

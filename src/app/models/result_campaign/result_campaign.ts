@@ -26,11 +26,11 @@ export class ResultCampaign {
 
     callDays: string[] = [];
 
-    id: number =0;
-    asteriskUuid: string = "";
+    id: number = 0;
+    VpbxUuid: string = "";
     timeStamp: string = "";
-    
-    
+
+
 
 
 }
