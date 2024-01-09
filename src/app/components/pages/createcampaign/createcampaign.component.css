@@ -23,6 +23,22 @@
     padding-left: 60px;
 }
 
+.content2{
+    display: flex;
+    flex-direction: column;
+    
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.question{
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
 .container2{
     display: flex;
     flex-direction: column;
@@ -36,6 +52,15 @@
 }
 
 .container3{
+    text-align: left;
+    
+    display: flex;
+    
+    align-items: center;    
+    
+}
+
+.container4{
     text-align: left;
     
     display: flex;
