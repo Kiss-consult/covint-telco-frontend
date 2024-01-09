@@ -9,6 +9,7 @@ import { ConfigService } from '../config/config.service';
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { Empty } from 'src/app/models/utils/empty';
+import { Sound } from 'src/app/models/sound/sound';
 
 @Injectable({
     providedIn: 'root'
@@ -136,4 +137,44 @@ reset() {
 
 // *********************  END OF TELEPHONE FUNCTIONS **************************************
 
+// *********************  SOUND FUNCTIONS **************************************
+
+
+
+
+uploadSound(file: File): Observable<Result<Empty>> {
+  const url = this.url + "/sound/upload";
+  let formData = new FormData();
+ 
+  formData.append('sound', file);
+  const upload$ = this.httpClient.post(url, formData, { headers: new HttpHeaders() })
+    .pipe(
+      finalize(() => this.reset())
+    ).subscribe();
+  return of(new Ok<Empty>(new Empty()));
 }
+
+// This function get all existing campaign from the database.
+public getAllSounds(): Observable<Result<[Sound]>> {
+  const url = this.url + "/sound/all"; 
+  return this.httpClient.get<Result<[Sound]>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<[Sound]>(JSON.stringify(result))),
+    catchError(error => of(new Err<[Sound]>(error)))
+  );
+}
+// *********************  END OF SOUND FUNCTIONS **************************************
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

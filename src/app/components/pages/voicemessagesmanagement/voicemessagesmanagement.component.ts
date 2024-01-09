@@ -1,6 +1,10 @@
-import { Component ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Location } from '@angular/common'
+import { Sound } from 'src/app/models/sound/sound';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-voicemessagesmanagement',
   templateUrl: './voicemessagesmanagement.component.html',
@@ -11,50 +15,85 @@ export class VoicemessagesmanagementComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor( public backendService: BackendService,private location: Location) {
-       
-  }
 
   noFileMessage: string = `nincs file még feltöltve`;
-  uploadedMessage : string = "";
+  uploadedMessage: string = "";
   fileName: string = "";
-  submit : boolean = false;
+  submit: boolean = false;
+  sounds : Sound[] = [];
+sound: Sound = new Sound;
+  
+  dataSource!: MatTableDataSource<Sound>; 
+
+
+  @ViewChild('paginator')
+  paginator!: MatPaginator;
+@ViewChild('empTbSort') empTbSort = new MatSort();
+pageSizeOptions: number[] = [5, 10];
+
+displayedColumns: string[] = ['Name','Url']; 
+
+Filter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+  constructor(public backendService: BackendService,private location: Location ) {
+
+
+      
+    this.backendService.getAllSounds().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("hanganyagok sikertelen betöltés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.sounds = result.unwrap();
+        this.dataSource = new MatTableDataSource(this.sounds);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+  
+       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        console.log("hanganyagok sikeres betöltés");
+        console.log(this.sounds);
+        
+
+        
+          
+
+      });
+      
+  }
+
+
+ 
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    
-    
+
+
     if (file) {
-      if (file.name.endsWith(".csv") === false) {
+      if (file.name.endsWith(".wav") === false) {
         alert(`:Wrong file format error message:Wrong file format. Please upload a csv file.`)
         return;
       }
       console.log(file.name);
-      
-      
-          this.fileName = file.name;
-          this.uploadedMessage = this.fileName + "   "+  "feltöltve";
-          
-      }
-        try {
-          let result =  this.backendService.uploadFile(file, this.fileName);
-         
-         console.log(result)
-        
-        
-         
-        }
-        catch (error) {
-        
-          alert(`File feltölts sikertelen`)
-        }
-      event.target.value = null;
+      this.fileName = file.name;
+      this.uploadedMessage = this.fileName + "   " + "feltöltve";
+    }
+    try {
+      let result = this.backendService.uploadSound(file);
+      console.log(result)
 
     }
-    
-  
+    catch (error) {
+      alert(`HangFile feltölts sikertelen`)
+    }
+    event.target.value = null;
+  }
+
 
   public setSubmit() {
-    this.submit= true;
+    this.submit = true;
   }
 }
