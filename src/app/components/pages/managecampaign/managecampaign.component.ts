@@ -27,7 +27,7 @@ resultCampaings: ResultCampaign[] = [];
 @ViewChild('empTbSort') empTbSort = new MatSort();
 pageSizeOptions: number[] = [5, 10];
 
-displayedColumns: string[] = ['name','startDate','endDate']; 
+displayedColumns: string[] = ['name','startDate','endDate','liveOrAuto','numberOfQuestions','VpbxUuid','started']; 
 
 Filter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;

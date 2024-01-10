@@ -96,6 +96,8 @@ private formatTime(time: string): string {
   //  }
 //this.question.answers.push(this.answers)
 
+console.log("answers", this.answers)
+
   console.log(this.origialFromTime, this.origialToTime)
    this.campaign.fromTime = this.formatTime(this.origialFromTime);
    this.campaign.toTime = this.formatTime(this.origialToTime);
