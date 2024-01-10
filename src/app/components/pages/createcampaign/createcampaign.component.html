@@ -142,6 +142,8 @@
     </div>
 
           <!--question-->
+
+          
       <!--numberOfQuestions-->
 
     <div class="container4" *ngIf="autoActive">
@@ -155,23 +157,34 @@
           </div>
         </div>
       </div>
+ <!--welcomePath-->
 
+ <div class="content">
+  <div>
+    <div>
+      <label class="text">üdvözlő üzenet felvételének a linkje<s>*</s></label>
+    </div>
+    <div>
+      <input class="droptextbox" type="url" id="welcomePath" name="institution" [(ngModel)]="campaign.welcomePath" placeholder="???" title="Kérem töltse ki a mezőt">
+    </div>
+  </div>
+</div>
+<!--goodbyePath-->
+
+<div class="content">
+<div>
+<div>
+  <label class="text">elköszönő üzenet felvételének a linkje<s>*</s></label>
+</div>
+<div>
+  <input class="droptextbox" type="url" id="goodbyePath" name="institution" [(ngModel)]="campaign.goodbyePath" placeholder="???" title="Kérem töltse ki a mezőt">
+</div>
+</div>
+</div> 
       <div *ngIf="campaign.numberOfQuestions && campaign.numberOfQuestions > 0">
         <div *ngFor="let i of getNumbersArray(campaign.numberOfQuestions); let index = index">
 
-                  <!--welcomePath-->
-
-          <div class="content">
-            <div>
-              <div>
-                <label class="text">üdvözlő üzenet felvételének a linkje<s>*</s></label>
-              </div>
-              <div>
-                <input class="droptextbox" type="url" id="welcomePath" name="institution" [(ngModel)]="campaign.welcomePath" placeholder="???" title="Kérem töltse ki a mezőt">
-              </div>
-            </div>
-          </div>
-          
+                 
 
           <div class="content2">
 
@@ -180,7 +193,8 @@
                 <label class="text">Kérdés felvétel kiválasztása<s>*</s></label>
               </div>
               <div>
-                <select class="droptextbox" id="questionselect" [(ngModel)]="campaign.question" title="Kérem válasszon.">
+                <label class="text">Kérdés {{ index + 1 }}</label>
+                <select class="droptextbox" id="questionselect" [(ngModel)]="questions[index+1].minioPath" title="Kérem válasszon.">
                   <option value="" disabled selected hidden>Válasszon Felvételt</option>
                   <option value>felvétel1</option>
                   <option value>felvétel2</option>
@@ -191,60 +205,49 @@
             <div class="question" >
               <div>
                 <label class="text">Nyomogomb {{ index + 1 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 1 }}" name="question{{ index + 1 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 1 }}" name="question{{ index + 1 }}" [(ngModel)]="answers[index+1].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 2 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 2 }}" name="question{{ index + 2 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 2 }}" name="question{{ index + 2 }}" [(ngModel)]="answers[index+2].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 3 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 3 }}" name="question{{ index + 3 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 3 }}" name="question{{ index + 3 }}" [(ngModel)]="answers[index+3].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 4 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 4 }}" name="question{{ index + 4 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 4 }}" name="question{{ index + 4 }}" [(ngModel)]="answers[index+4].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 5 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 5 }}" name="question{{ index + 5 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 5 }}" name="question{{ index + 5 }}" [(ngModel)]="answers[index+5].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 6 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 6 }}" name="question{{ index + 6 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 6 }}" name="question{{ index + 6 }}" [(ngModel)]="answers[index+6].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 7 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 7 }}" name="question{{ index + 7 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 7 }}" name="question{{ index + 7 }}" [(ngModel)]="answers[index+7].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 8 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 8 }}" name="question{{ index + 8 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 8 }}" name="question{{ index + 8 }}" [(ngModel)]="answers[index+8].value" title="Kérem válasszon">
               </div>
               <div>
                 <label class="text">Nyomogomb {{ index + 9 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 9 }}" name="question{{ index + 9 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <input class="droptextbox" type="text" id="question{{ index + 9 }}" name="question{{ index + 9 }}" [(ngModel)]="answers[index+9].value" title="Kérem válasszon">
               </div>
               <div></div>
               <div>
-                <label class="text">Nyomogomb {{ index + 0 }}<s>*</s></label>
-                <input class="droptextbox" type="text" id="question{{ index + 0 }}" name="question{{ index + 0 }}" [(ngModel)]="answers[index]" title="Kérem válasszon">
+                <label class="text">Nyomogomb {{ index + 0 }}  <s>*</s></label>
+                <input class="droptextbox" type="text" id="question{{ index + 0 }}" name="question{{ index + 0 }}" [(ngModel)]="answers[index+0].value" title="Kérem válasszon">
               </div>
             </div>
           </div>
 
-                <!--goodbyePath-->
-
-          <div class="content">
-            <div>
-              <div>
-                <label class="text">elköszönő üzenet felvételének a linkje<s>*</s></label>
-              </div>
-              <div>
-                <input class="droptextbox" type="url" id="goodbyePath" name="institution" [(ngModel)]="campaign.goodbyePath" placeholder="???" title="Kérem töltse ki a mezőt">
-              </div>
-            </div>
-          </div>          
+                    
         </div>
       </div>
     </div>
