@@ -91,7 +91,7 @@ public updateCampaign(id: number , welcomePath: string, goodbyePath:string): Obs
 // This function delete a given existing campaign by id from the database.
 public deleteCampaignById(id : number): Observable<Result<{}>> {
   const url = this.url + "/campaign/delete/" + id; 
-  return this.httpClient.get<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
+  return this.httpClient.delete<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
   );
@@ -168,7 +168,52 @@ public filterList(filter: Filter): Observable<Result<[Number]>> {
   );
 }
 
+// This function add a new number to the list ( listId), name and other is optional
+public addTolist(listId: number,   numbers: Number[] = [] ): Observable<Result<{}>> {
+  const url = this.url + "/list/add";
+  let add = {listId, numbers};
+  return this.httpClient.post<Result<{}>>(url, add, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
+// This function delete a given number by id from the database.
+public deleteNumberById(id : number): Observable<Result<{}>> {
+  const url = this.url + "/number/delete/" + id; 
+  return this.httpClient.delete<Result<{}>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+
+// This functionupdate a  number ( change number , name or other field, or three of them)
+public updateNumber( number: Number ): Observable<Result<{}>> {
+  const url = this.url + "/number/update";  
+  return this.httpClient.post<Result<{}>>(url, number, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+
+// This function update many  number ( change the other field or add other to the numbers)
+public updateManyNumber( ids: number[] = [], other : string): Observable<Result<{}>> {
+  const url = this.url + "/number/addother";  
+  let a = {ids, other}
+  return this.httpClient.post<Result<{}>>(url,a, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+
+// This function delete many number by id from the database.
+public deleteManyNumbers(ids: number[] = []): Observable<Result<{}>> {
+  const url = this.url + "/number/delete";   
+  return this.httpClient.post<Result<{}>>(url, ids, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
 
 

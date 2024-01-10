@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { Answer } from 'src/app/models/answer/answer';
+import { Question } from 'src/app/models/question/question';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class CreatecampaignComponent {
   minioPath: string = "";
   valueToSet: string = "";
   answers : Answer[] = [];
+  question : Question = new Question;
+  questions: Question[] = [];
 
 getNumbersArray(count: number): number[] {
   return Array.from({ length: count }, (_, index) => index + 1);
@@ -83,6 +86,7 @@ private formatTime(time: string): string {
     //if (!this.checkRequiredFields()) {
      // return;
   //  }
+//this.question.answers.push(this.answers)
 
   console.log(this.origialFromTime, this.origialToTime)
    this.campaign.fromTime = this.formatTime(this.origialFromTime);
