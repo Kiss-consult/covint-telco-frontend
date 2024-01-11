@@ -18,7 +18,7 @@ export class Campaign {
     welcomePath: string = ""; // üdvözlő üzenet felvételének a linkje
     goodbyePath: string = "";// elköszönő üzenet felvételének a linkje
     ringGroup: number = 0; // csöngeés csoport: ha előhangos akkor kell ez a szám
-    question: Question[] = []; // kérdések-válaszok tömbje
+    questions: Question[] = []; // kérdések-válaszok tömbje
     callDays: string[] = []; // milen napokon akarunk hívni
 
 

@@ -24,15 +24,17 @@ export class CreatecampaignComponent {
   questionNumber: number = 0 ;
   minioPath: string = "";
   valueToSet: string = "";
-  answers : Answer[] = [] = new Array(10).fill(0).map(() => new Answer());
+ // answers : Answer[] = [] = new Array(10).fill(0).map(() => new Answer());
+ answers : Answer[] = [];
+ answer: Answer = new Answer;
   question : Question = new Question;
   questions: Question[] = [];
   buttonValue: number = 0 ;
   value: string = "";
   
-  ngOnInit() {
-    this.initializeButtonValues();
-  }
+ // ngOnInit() {
+   // this.initializeButtonValues();
+ // }
 
   initializeButtonValues() {
     for (let i = 0; i < this.answers.length; i++) {
@@ -86,6 +88,11 @@ private formatTime(time: string): string {
   return newtime;
 }
   
+ public add() {
+ this.question.answers.push(this.answer);
+ this.campaign.questions.push(this.question);
+ console.log( " kampány osszerakas", this.campaign)
+ }
 
   // Function to finish campaign creation. It checks the required fields,
   // adds the current date to the case, and inserts the campaign into the database.
@@ -101,7 +108,13 @@ console.log("answers", this.answers)
   console.log(this.origialFromTime, this.origialToTime)
    this.campaign.fromTime = this.formatTime(this.origialFromTime);
    this.campaign.toTime = this.formatTime(this.origialToTime);
+
     console.log(this.campaign);
+    console.log(this.questions);
+    console.log(this.answers);
+    this.question.minioPath = this.minioPath;
+    this.questions.push(this.question);
+    /*
     this.backendService.createCampaign(this.campaign).subscribe(
       result => {
         if (result.isErr()) {
@@ -113,6 +126,7 @@ console.log("answers", this.answers)
         console.log("Successfully creat a new campaign")
         this.campaign = new Campaign();
       });
+      */
   }
 
  

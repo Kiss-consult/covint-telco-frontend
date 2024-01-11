@@ -171,25 +171,21 @@
 
       <div class="container3" id="qonq">
         <div *ngIf="campaign.numberOfQuestions && campaign.numberOfQuestions > 0">
-          <div *ngFor="let i of getNumbersArray(campaign.numberOfQuestions); let index = index">
-
+          <div *ngFor="let i of getNumbersArray(campaign.numberOfQuestions); let index = index">                
                     
 
-          
-            
-
             <div class="content2">
-
               <div>
                 <div>
-                  <label class="text">Kérdés felvétel kiválasztása<s>*</s></label>
+                 
+                  <label class="text"> Kérdés felvétel kiválasztása<s>*</s></label>
                 </div>
                 <div>
-                  <select class="droptextbox" id="questionselect" [(ngModel)]="campaign.question" title="Kérem válasszon.">
+                  <select class="droptextbox" id="soundselect" [(ngModel)]="question.minioPath" title="Kérem válasszon.">
                     <option value="" disabled selected hidden>Válasszon Felvételt</option>
-                    <option value>felvétel1</option>
-                    <option value>felvétel2</option>
-                    <option value>felvétel3</option>
+                    <option value="valami1">felvétel1</option>
+                    <option value="valami2">felvétel2</option>
+                    <option value="valami3">felvétel3</option>
                   </select>
                 </div>
               </div>
@@ -198,18 +194,22 @@
               <div class="question">
                 <div class="telefon">
                   
-                  <input class="droptextbox" type="number" id="question1" [value]="answers[0].buttonValue" readonly>
-                  <input class="droptextbox" type="text" [(ngModel)]="answers[0].value">
+                  <label class="text">nyomógomb száma<s>*</s></label>
+                  <input class="droptextbox" type="number" id="answerbutton{{index}}" [(ngModel)]="answer.buttonValue" >
+
+                  <label class="text">értéke<s>*</s></label>
+                  <input class="droptextbox" type="text" id="answervalue{{index}}" [(ngModel)]="answer.value">
+
+                  <button id="okebutton" (click)="add()" style="z-index: 2; position: relative;">  add</button>
                 </div>
-                <!-- Hasonló blokkok a többi gombhoz -->
+                <!-- Hasonló blokkok a többi gombhoz
                 <div class="telefon">
                   
                   <input class="droptextbox" type="number" id="question2" [value]="answers[1].buttonValue" readonly>
                   <input class="droptextbox" type="text" [(ngModel)]="answers[1].value">
                 </div>
+                 -->
               </div>
-
-
             </div>
           </div>
 
