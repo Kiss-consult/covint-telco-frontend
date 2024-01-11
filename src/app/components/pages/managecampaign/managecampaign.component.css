@@ -18,7 +18,10 @@
     font-size: 14px;
     width: 100%;
   }
-  
+  .ratestbutton{    
+    margin-top: 40px;
+    text-align: center;   
+}
   .popup {
     background-color: #cecece;
     padding: 10px;

@@ -6,6 +6,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-managecampaign',
@@ -24,7 +25,7 @@ export class ManagecampaignComponent {
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'started'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid','id', 'started','campaign'];
 
   campaign: Campaign = new Campaign;
 
@@ -36,7 +37,7 @@ export class ManagecampaignComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private backendService: BackendService, private location: Location) {
+  constructor(private backendService: BackendService, private location: Location, private router: Router,private _Activatedroute:ActivatedRoute) {
 
 
 
@@ -79,7 +80,14 @@ public searchCampaign() {
     });
 }
 
-
+public callCampaign(campaign: ResultCampaign){
+  console.log("result campaign",campaign)
+  console.log("id",campaign.id)
+   let id = campaign.id;
+    this.router.navigate(
+        ['/campaign', id]
+    ); 
+}
 
 
 }
