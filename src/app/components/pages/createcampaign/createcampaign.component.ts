@@ -1,10 +1,6 @@
 import { Component, } from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Location } from '@angular/common';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { Answer } from 'src/app/models/answer/answer';
 import { Question } from 'src/app/models/question/question';
@@ -28,9 +24,21 @@ export class CreatecampaignComponent {
   questionNumber: number = 0 ;
   minioPath: string = "";
   valueToSet: string = "";
-  answers : Answer[] = [];
+  answers : Answer[] = [] = new Array(10).fill(0).map(() => new Answer());
   question : Question = new Question;
   questions: Question[] = [];
+  buttonValue: number = 0 ;
+  value: string = "";
+  
+  ngOnInit() {
+    this.initializeButtonValues();
+  }
+
+  initializeButtonValues() {
+    for (let i = 0; i < this.answers.length; i++) {
+      this.answers[i].buttonValue = i + 1;
+    }
+  }
 
 getNumbersArray(count: number): number[] {
   return Array.from({ length: count }, (_, index) => index + 1);
@@ -87,6 +95,8 @@ private formatTime(time: string): string {
      // return;
   //  }
 //this.question.answers.push(this.answers)
+
+console.log("answers", this.answers)
 
   console.log(this.origialFromTime, this.origialToTime)
    this.campaign.fromTime = this.formatTime(this.origialFromTime);

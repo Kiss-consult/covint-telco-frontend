@@ -26,6 +26,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { initializeApp } from './init/init';
+import { CampaignComponent } from './components/pages/campaign/campaign.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { initializeApp } from './init/init';
     PhonenumbersmanagementComponent,
     VoicemessagesmanagementComponent,
     ReportsComponent,
-    AuditlogComponent
+    AuditlogComponent,
+    CampaignComponent
   ],
   imports: [
     BrowserModule,

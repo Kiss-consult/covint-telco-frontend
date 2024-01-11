@@ -1,0 +1,107 @@
+<h1>KAmpány adatai</h1>
+
+<h2>Kampány kezelése </h2>
+
+<div class="container">
+
+
+    <div>
+
+        <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+    </div>
+    <div class="container2">
+        <div class="form-group2">
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <div>
+                <label class="text" for="name">Név :</label>
+
+                <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="resultCampaign.name " required
+                    placeholder="Budapest" title="Kérem töltse ki a mezőt">
+            </div>
+
+            <div>
+                <label class="text" for="vpbxuuid">VPBX UUID :</label>
+
+                <input class="droptextbox" type="text" id="vpbxuuid" name="vpbxuuid"
+                    [(ngModel)]="resultCampaign.VpbxUuid" required placeholder="1007" title="Kérem töltse ki a mezőt">
+
+            </div>
+
+            <div>
+                <label class="text" for="startdate">Kezdete :</label>
+
+                <input class="droptextbox" type="text" id="startdate" name="startdate"
+                    [(ngModel)]="resultCampaign.startDate" required placeholder="1007" title="Kérem töltse ki a mezőt">
+            </div>
+            <div>
+                <label class="text" for="enddate">Vége :</label>
+
+                <input class="droptextbox" type="text" id="enddate" name="enddate" [(ngModel)]="resultCampaign.endDate"
+                    required placeholder="1007" title="Kérem töltse ki a mezőt">
+            </div>
+            <div>
+                <label class="text" for="questionnumber">Kérdések száma :</label>
+
+                <input class="droptextbox" type="text" id="questionnumber" name="questionnumber"
+                    [(ngModel)]="resultCampaign.numberOfQuestions" required placeholder="1007"
+                    title="Kérem töltse ki a mezőt">
+            </div>
+<!--
+
+
+     Az alábbi kódra nagyon büszke vagyok
+-->
+            <div>
+                <div *ngIf="resultCampaign.numberOfQuestions && resultCampaign.numberOfQuestions > 0">
+                    <div *ngFor="let i of getNumbersArray(resultCampaign.numberOfQuestions); let index = index">
+                        <label class="text" for="questions">Kérdés {{this.questions[index].questionNumber}}:</label>
+
+                        <input class="droptextbox" type="text" id="questions" name="questions"
+                            [(ngModel)]="this.questions[index].questionNumber" required placeholder="1007"
+                            title="Kérem töltse ki a mezőt">
+
+
+                        <div *ngFor="let u of getNumberofAnswers(this.questions[index].answers); let valami = index">
+                            <label class="text" for="questions">válasz
+                                {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
+                            <label class="text" for="questions">
+                                {{this.questions[index].answers[valami].value}}:</label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div *ngIf="campaign.numberOfQuestions && campaign.numberOfQuestions > 0">
+                    <div *ngFor="let i of getNumbersArray(campaign.numberOfQuestions); let index = index">
+
+                        <div class="question">
+                            <div class="telefon">
+                                <label class="text" for="question1">Kérdések:</label>
+                                <input class="droptextbox" type="number" id="question1"
+                                    [value]="this.questions[index].questionNumber" readonly>
+
+                            </div>
+                            <!-- Hasonló blokkok a többi gombhoz -->
+                            <div class="telefon">
+
+                                <input class="droptextbox" type="text" id="question2"
+                                    [value]="this.questions[index].minioPath" readonly>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>

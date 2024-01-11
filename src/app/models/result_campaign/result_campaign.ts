@@ -22,7 +22,7 @@ export class ResultCampaign {
     welcomePath: string = "";
     goodbyePath: string = "";
     ringGroup: number = 0;
-    question: Question[] = [];
+    questions: Question[] = [];
 
     callDays: string[] = [];
 

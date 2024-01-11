@@ -10,6 +10,8 @@ import { PhonenumbersmanagementComponent } from './components/pages/phonenumbers
 import { ReportsComponent } from './components/pages/reports/reports.component';
 import { VoicemessagesmanagementComponent } from './components/pages/voicemessagesmanagement/voicemessagesmanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
+import { CampaignComponent } from './components/pages/campaign/campaign.component';
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,8 +21,8 @@ const routes: Routes = [
   { path: "phonenumbersmanagement", component: PhonenumbersmanagementComponent },
   { path: "reports", component: ReportsComponent },
   { path: "voicemessagesmanagement", component: VoicemessagesmanagementComponent },
-  { path: "auditlog", component: AuditlogComponent }
-
+  { path: "auditlog", component: AuditlogComponent },
+  { path: "campaign/:id", component: CampaignComponent }
 ];
 
 @NgModule({
