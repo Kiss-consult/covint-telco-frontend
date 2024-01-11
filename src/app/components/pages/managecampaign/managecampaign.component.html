@@ -7,7 +7,40 @@
    <div class="container">
     <!--TABLE-->
     <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-    
+    <div class="container3">
+    <div>
+      <label class="text">Kampány neve <s>*</s></label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="name" name="institution" [(ngModel)]="campaign.name" placeholder="???" title="Kérem töltse ki a mezőt">
+    </div>
+
+
+    <div>
+      <div>
+        <label class="text">Kezdés dátuma <s>*</s></label>
+      </div>
+      <div>
+        <input class="droptextbox" type="date" id="startDate" name="institution" [(ngModel)]="campaign.startDate" placeholder="???" title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+  
+    <div>
+      <div>
+        <label class="text">Befejezés dátuma <s>*</s></label>
+      </div>
+      <div>
+        <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate" placeholder="???" title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+
+    <button id="okebutton" (click)="searchCampaign()" style="z-index: 2; position: relative;">
+      keresés
+  </button>
+  </div>
+
+
+
     <div class="acceptuser"  >
      <mat-form-field>
          <mat-label>Keresés</mat-label>
