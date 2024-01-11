@@ -66,7 +66,7 @@
                             title="Kérem töltse ki a mezőt">
 
 
-                        <div *ngFor="let u of getNumberofAnswers(this.questions[index].answers); let valami = index">
+                        <div *ngFor="let u of this.questions[index].answers; let valami = index">
                             <label class="text" for="questions">válasz
                                 {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
                             <label class="text" for="questions">

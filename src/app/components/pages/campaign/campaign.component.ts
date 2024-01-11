@@ -43,13 +43,7 @@ export class CampaignComponent {
     return Array.from({ length: count }, (_, index) => index + 1);
   }
 
-  getNumberofAnswers(answers: Answer[]): number[] {
-    let respons = Array.from({ length: answers.length
-    }, (_, index) => index + 1);
-    console.log("mennyi kerdes van",respons)
-    return respons;
-     
-  }
+ 
 
   goBackToPrevPage(): void {
     this.location.back();
