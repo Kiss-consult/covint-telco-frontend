@@ -9,30 +9,32 @@ import { Question } from 'src/app/models/question/question';
 @Component({
   selector: 'app-createcampaign',
   templateUrl: './createcampaign.component.html',
-  styleUrls: ['./createcampaign.component.css'], 
-  
+  styleUrls: ['./createcampaign.component.css'],
+
 
 })
 
 export class CreatecampaignComponent {
-  campaign : Campaign = new Campaign;
+  campaign: Campaign = new Campaign;
   autoActive: boolean = false;
   liveActive: boolean = false;
-  origialFromTime : string = "";
-  origialToTime : string = "";
-  
-  questionNumber: number = 0 ;
+  origialFromTime: string = "";
+  origialToTime: string = "";
+
+  questionNumber: number = 0;
   minioPath: string = "";
   valueToSet: string = "";
-  answers : Answer[] = [] = new Array(10).fill(0).map(() => new Answer());
-  question : Question = new Question;
+  // answers : Answer[] = [] = new Array(10).fill(0).map(() => new Answer());
+  answers: Answer[] = [];
+  answer: Answer = new Answer;
+  question: Question = new Question;
   questions: Question[] = [];
-  buttonValue: number = 0 ;
+  buttonValue: number = 0;
   value: string = "";
-  
-  ngOnInit() {
-    this.initializeButtonValues();
-  }
+
+  // ngOnInit() {
+  // this.initializeButtonValues();
+  // }
 
   initializeButtonValues() {
     for (let i = 0; i < this.answers.length; i++) {
@@ -40,9 +42,9 @@ export class CreatecampaignComponent {
     }
   }
 
-getNumbersArray(count: number): number[] {
-  return Array.from({ length: count }, (_, index) => index + 1);
-}
+  getNumbersArray(count: number): number[] {
+    return Array.from({ length: count }, (_, index) => index + 1);
+  }
 
   toggleContent(contentType: string) {
     if (contentType === 'auto') {
@@ -61,12 +63,12 @@ getNumbersArray(count: number): number[] {
   }
 
   goBackToPrevPage(): void {
-    this.location.back();    
+    this.location.back();
   }
 
-  
-  constructor(private backendService: BackendService,private location: Location) {  
-      
+
+  constructor(private backendService: BackendService, private location: Location) {
+
   }
   // Format date to YYYY-MM-DD - example
   private formatDate(date: Date): string {
@@ -78,30 +80,49 @@ getNumbersArray(count: number): number[] {
     return `${year}-${monthPadding}${month}-${dayPadding}${day}`;
   }
 
-// Format time to hh:mm:00.000 - example
-private formatTime(time: string): string {
-  console.log(time)
-  const newtime = time + ":00.000";
-  console.log(newtime)
-  return newtime;
-}
-  
+  // Format time to hh:mm:00.000 - example
+  private formatTime(time: string): string {
+    console.log(time)
+    const newtime = time + ":00.000";
+    console.log(newtime)
+    return newtime;
+  }
+
+  public add() {
+    this.answers.push(this.answer); 
+    console.log(" valasz osszerakas", this.answers)
+    this.answer = new Answer;
+
+  }
+  public questionDone() {
+    this.question.answers =this.answers;
+    this.questions.push(this.question);
+    console.log("kérdés  osszerakas", this.questions)
+    this.question = new Question;
+
+  }
 
   // Function to finish campaign creation. It checks the required fields,
   // adds the current date to the case, and inserts the campaign into the database.
   // It also clears the form for the next case.
   public finish() {
     //if (!this.checkRequiredFields()) {
-     // return;
-  //  }
-//this.question.answers.push(this.answers)
+    // return;
+    //  }
+    //this.question.answers.push(this.answers)
 
-console.log("answers", this.answers)
+    console.log("answers", this.answers)
 
-  console.log(this.origialFromTime, this.origialToTime)
-   this.campaign.fromTime = this.formatTime(this.origialFromTime);
-   this.campaign.toTime = this.formatTime(this.origialToTime);
+    console.log(this.origialFromTime, this.origialToTime)
+    this.campaign.fromTime = this.formatTime(this.origialFromTime);
+    this.campaign.toTime = this.formatTime(this.origialToTime);
+
     console.log(this.campaign);
+    console.log(this.questions);
+    console.log(this.answers);
+    this.question.minioPath = this.minioPath;
+    this.questions.push(this.question);
+    /*
     this.backendService.createCampaign(this.campaign).subscribe(
       result => {
         if (result.isErr()) {
@@ -113,9 +134,10 @@ console.log("answers", this.answers)
         console.log("Successfully creat a new campaign")
         this.campaign = new Campaign();
       });
+      */
   }
 
- 
+
 
 }
 
