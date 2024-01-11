@@ -201,6 +201,11 @@
                   <input class="droptextbox" type="text" id="answervalue{{index}}" [(ngModel)]="answer.value">
 
                   <button id="okebutton" (click)="add()" style="z-index: 2; position: relative;">  add</button>
+
+                  
+                  <p style="margin: 0;">{{ answer }}</p>
+
+                  <button id="okebutton" (click)="questionDone()" style="z-index: 2; position: relative;"> Kérdés kész</button>
                 </div>
                 <!-- Hasonló blokkok a többi gombhoz
                 <div class="telefon">
