@@ -264,7 +264,12 @@
       <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
         <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
           <div style="flex-grow: 1;">
-            <p style="margin: 0;">{{ questions }}</p>
+            
+            <p style="margin: 0;">{{ newQuestion.questionNumber }}</p>
+            <p style="margin: 0;">{{ newQuestion.minioPath }}</p>
+            <p style="margin: 0;">{{ newQuestion.valueToSet }}</p>
+            <p style="margin: 0;">{{ newQuestion.answers[i].buttonValue}}</p>
+            <p style="margin: 0;">{{ newQuestion.answers[i].value}}</p>
           </div>
           <div style="margin-left: auto;">
             <button (click)="removeQuestion(newQuestion)">Törlés</button>
@@ -281,12 +286,13 @@
     <ng-container *ngIf="buttonValues">
       <p class="markerbno2">Válaszok</p>
       <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
-        <div *ngFor="let newAnswer of buttonValues; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+        <div *ngFor="let newAnswer of newQuestion.answers; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
           <div style="flex-grow: 1;">
-            <p style="margin: 0;">{{ answer }}</p>
+            <p style="margin: 0;">{{ newAnswer.buttonValue }}</p>
+            <p style="margin: 0;">{{ newAnswer.value }}</p>
           </div>
           <div style="margin-left: auto;">
-            <button (click)="removeAnswer(answer)">Törlés</button>
+            <button (click)="removeAnswer(newAnswer)">Törlés</button>
           </div>
         </div>
       </div>
