@@ -1,4 +1,4 @@
 export class Answer {
-    buttonValue: number = 0 ;
+    buttonValue!: number;
     value: string = "";  
 }

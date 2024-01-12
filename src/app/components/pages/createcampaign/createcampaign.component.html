@@ -175,11 +175,95 @@
       </div>
     </div>
   
-
     
     <div class="tab-button" *ngIf="autoActive">
       <label>Kérdések</label>
     </div>
+
+
+    <div>
+      <div>
+        <label class="text" for="bno">Kérdések bevitele</label>
+      </div>
+      <div id="questionsclass">
+        <div>
+          <input class="droptextbox" type="number" id="questionnumber" name="answerbutton" [(ngModel)]="newQuestion.questionNumber" placeholder="1" title="Kérem töltse ki a mezőt">
+        </div>
+
+        <div>
+          <div>                 
+            <label class="text"> Kérdés felvétel kiválasztása<s>*</s></label>
+          </div>
+          <div>
+            <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.minioPath" title="Kérem válasszon.">
+              <option value="" disabled selected hidden>Válasszon Felvételt</option>
+              <option value="valami1">felvétel1</option>
+              <option value="valami2">felvétel2</option>
+              <option value="valami3">felvétel3</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div>                 
+            <label class="text"> Value to set<s>*</s></label>
+          </div>
+          <div>
+            <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.valueToSet" title="Kérem válasszon.">
+              <option value="" disabled selected hidden>Válasszon értéket ( hova kerul az aatbazisba)</option>
+              <option value="valami1">value1</option>
+              <option value="valami2">value2</option>
+              <option value="valami3">value3</option>
+            </select>
+          </div>
+        </div>
+       
+      
+      </div>         
+    </div>
+ 
+    
+    <div class="tab-button" *ngIf="autoActive">
+      <label>Válaszok</label>
+    </div>
+
+
+    <div>
+      <div>
+        <label class="text" for="bno">Válaszok bevitele</label>
+      </div>
+      <div id="answersclass">
+        <div>
+          <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
+        </div>
+
+        <div>
+          <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
+        </div>
+        <div>
+          <button (click)="addAnswer()">Válasz Hozzáadás</button>
+        </div> 
+      </div>         
+    </div>
+ 
+
+
+    <div>
+      <button (click)="addQuestion()">Kérdés Kész</button>
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <!--question-->
       <!--numberOfQuestions-->
@@ -227,11 +311,13 @@
 
                   <label class="text">értéke<s>*</s></label>
                   <input class="droptextbox" type="text" id="answervalue{{index}}" [(ngModel)]="answer.value">
-
+                  <div> 
                   <button id="okebutton" (click)="add()" style="z-index: 2; position: relative;">  add</button>
 
                   
-                  <p style="margin: 0;">{{ answer }}</p>
+                  <p style="margin: 0;">{{ answer.buttonValue }}  - {{ answer.value }}</p>
+                </div>
+
 
                   <button id="okebutton" (click)="questionDone()" style="z-index: 2; position: relative;"> Kérdés kész</button>
                 </div>                
