@@ -9,7 +9,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
-import { FormBuilder, FormGroup,  ReactiveFormsModule ,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Question } from 'src/app/models/question/question';
 import { Answer } from 'src/app/models/answer/answer';
 
@@ -21,7 +21,7 @@ import { Answer } from 'src/app/models/answer/answer';
 export class CampaignComponent {
 
   resultCampaign: ResultCampaign = new ResultCampaign;
- 
+
   dataSource!: MatTableDataSource<ResultCampaign>;
   @ViewChild('paginator')
   paginator!: MatPaginator;
@@ -31,56 +31,74 @@ export class CampaignComponent {
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'started'];
 
   campaign: Campaign = new Campaign;
-  
-  campaignId: any = this.resultCampaign.id  ;
+
+  campaignId: any = this.resultCampaign.id;
 
 
-  question :Question = new Question;
+  question: Question = new Question;
   answer: Answer = new Answer;
-  answers : Answer[] = [];
+  answers: Answer[] = [];
   questions: Question[] = [];
   getNumbersArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index + 1);
   }
 
- 
+
 
   goBackToPrevPage(): void {
     this.location.back();
   }
 
-  constructor(private backendService: BackendService,private location: Location, private fb: FormBuilder,
-     private _Activatedroute:ActivatedRoute,private router: Router) {  
-      
+  constructor(private backendService: BackendService, private location: Location, private fb: FormBuilder,
+    private _Activatedroute: ActivatedRoute, private router: Router) {
 
-      this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
-      console.log("lekerdeztem" , this.campaignId);
 
-      this.backendService.getCampaignById(this.campaignId).subscribe(result => {
-  
-        if (result.isErr()) {
-          let mess = result.unwrapErr().error.Error;
-          if (mess === "You are not allowed to interact the data of this user") {
-            alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
-            console.log("jogosultsági probléma")
-          }
-          else
+    this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
+    console.log("lekerdeztem", this.campaignId);
+
+    this.backendService.getCampaignById(this.campaignId).subscribe(result => {
+
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
+        }
+        else
           alert("kampány lekérdezése  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.resultCampaign = result.unwrap();
+      console.log("Kampány sikeres betöltés");
+      this.questions = this.resultCampaign.questions;
+      console.log("kérdések", this.questions);
+
+    });
+  }
+
+  public startCampaign() { }
+
+  public stopCampaign() { }
+
+
+  public updateCampaign() { }
+
+
+  public deleteCampaign(id: number) {
+
+    this.backendService.deleteCampaignById(id).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("kampány sikertelen törlése");
           console.error(result.unwrapErr());
           return;
         }
-        this.resultCampaign = result.unwrap();
-        console.log("Kampány sikeres betöltés");
-        this.questions = this.resultCampaign.questions;
-        console.log("kérdések", this.questions);
-
+        alert("kampány sikeres törlése");
+        this.router.navigate(
+          ['/managecampaign']
+        );
       });
   }
-
-public startCampaign() {}
-
-public stopCampaign() {}
-public updateCampaign() {}
-public deleteCampaign() {}
 
 }

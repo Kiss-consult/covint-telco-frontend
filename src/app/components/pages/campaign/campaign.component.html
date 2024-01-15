@@ -130,6 +130,13 @@
                                 [(ngModel)]="resultCampaign.numberOfQuestions" required placeholder="1007"
                                 title="Kérem töltse ki a mezőt">
                         </div>
+                        <div>
+                            <label class="text" for="started">Elindult :</label>
+
+                            <input class="droptextbox" type="text" id="started" name="started"
+                                [(ngModel)]="resultCampaign.started" required placeholder="1007"
+                                title="Kérem töltse ki a mezőt">
+                        </div>
                     </div>
 
 
@@ -147,7 +154,7 @@
                         </button>
 
 
-                        <button id="okebutton" (click)="deleteCampaign()" style="z-index: 2; position: relative;">
+                        <button id="okebutton" (click)="deleteCampaign(this.campaignId)" style="z-index: 2; position: relative;">
                             Delete
                         </button>
 
