@@ -236,6 +236,7 @@
               
     
 
+ gergo00
       <div id="callscontent">
         <div id="contentcall" class="content3" >
           <div>
@@ -245,7 +246,8 @@
             <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
           </div>      
           <div>
-            <label class="text" for="bno">Válaszok bevitele</label>
+
+  
           </div>
           <div>
             <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
@@ -259,6 +261,7 @@
       </div>
     
   </div>
+
 
   <div class="container5" *ngIf="autoActive">
 
@@ -293,6 +296,7 @@
             <div style="margin-left: auto;">
               <button (click)="removeAnswer(answer)">Törlés</button>
             </div>
+
           </div>
         </div>
       </ng-container>

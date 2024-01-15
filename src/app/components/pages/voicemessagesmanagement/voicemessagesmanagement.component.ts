@@ -20,27 +20,27 @@ export class VoicemessagesmanagementComponent {
   uploadedMessage: string = "";
   fileName: string = "";
   submit: boolean = false;
-  sounds : Sound[] = [];
-sound: Sound = new Sound;
-  
-  dataSource!: MatTableDataSource<Sound>; 
+  sounds: Sound[] = [];
+  sound: Sound = new Sound;
+
+  dataSource!: MatTableDataSource<Sound>;
 
 
   @ViewChild('paginator')
   paginator!: MatPaginator;
-@ViewChild('empTbSort') empTbSort = new MatSort();
-pageSizeOptions: number[] = [5, 10];
+  @ViewChild('empTbSort') empTbSort = new MatSort();
+  pageSizeOptions: number[] = [5, 10];
 
-displayedColumns: string[] = ['Name','Url']; 
+  displayedColumns: string[] = ['Name', 'Url', 'delete', 'play'];
 
-Filter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-  constructor(public backendService: BackendService,private location: Location ) {
+  Filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  constructor(public backendService: BackendService, private location: Location) {
 
 
-      
+
     this.backendService.getAllSounds().subscribe(
       result => {
         if (result.isErr()) {
@@ -52,21 +52,21 @@ Filter(event: Event) {
         this.dataSource = new MatTableDataSource(this.sounds);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
-  
-       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+
+        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("hanganyagok sikeres betöltés");
         console.log(this.sounds);
-        
 
-        
-          
+
+
+
 
       });
-      
+
   }
 
 
- 
+
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -96,4 +96,33 @@ Filter(event: Event) {
   public setSubmit() {
     this.submit = true;
   }
+
+
+  deleteSound(name: string) {
+    this.backendService.deleteSound(name).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("hanganyag sikertelen törlése");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("hanganyag sikeres törlése");
+        //this.dataSource = new MatTableDataSource(this.sounds);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+
+        this.dataSource.data = this.sounds; // Az adatforrás frissítése
+        console.log("hanganyag sikeres törlése");
+        console.log(this.sounds);
+        window.location.reload();
+
+      });
+  }
+  public Play(url: string) {
+
+    let audio: HTMLAudioElement = new Audio(url);
+    audio.play();
+  }
+
+
 }

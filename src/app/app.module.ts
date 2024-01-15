@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { initializeApp } from './init/init';
 import { CampaignComponent } from './components/pages/campaign/campaign.component';
+import { ListComponent } from './components/pages/list/list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CampaignComponent } from './components/pages/campaign/campaign.componen
     VoicemessagesmanagementComponent,
     ReportsComponent,
     AuditlogComponent,
-    CampaignComponent
+    CampaignComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

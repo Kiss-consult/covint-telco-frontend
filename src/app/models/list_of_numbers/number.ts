@@ -8,7 +8,7 @@ export class Number {
     number: string = "";
     name: string = "";
     other: string = "";
-    list_id: number = 0;
+    listId: number = 0;
     timestamp: string = "";
 
 }

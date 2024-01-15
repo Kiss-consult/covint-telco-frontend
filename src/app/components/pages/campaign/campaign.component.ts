@@ -74,15 +74,13 @@ export class CampaignComponent {
         this.questions = this.resultCampaign.questions;
         console.log("kérdések", this.questions);
 
-
-
-
-
-
       });
-
-
   }
 
+public startCampaign() {}
+
+public stopCampaign() {}
+public updateCampaign() {}
+public deleteCampaign() {}
 
 }
