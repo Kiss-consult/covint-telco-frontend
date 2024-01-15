@@ -37,9 +37,9 @@
 
       <!--startDate, endDate-->
     
-      <div class="tab-button" *ngIf="autoActive">
-        <label>Idővallumok</label>
-      </div>    
+    <div class="tab-button" *ngIf="autoActive">
+      <label>Idővallumok</label>
+    </div>    
 
     <div class="container3" *ngIf="autoActive">
       
@@ -122,7 +122,7 @@
       <!--callsPerPeriod-->
     <div id="calls" class="container5"*ngIf="autoActive">
       <div id="callscontent">
-        <div class="content" >
+        <div id="contentcall" class="content" >
           <div>
             <div>
               <label class="text">Egy periodus alatt hivott számok  <s>*</s></label>
@@ -149,7 +149,7 @@
 
         <!--welcomePath-->
       <div id="callscontent">
-        <div class="content">
+        <div id="contentcall" class="content">
           <div>
             <div>
               <label class="text">üdvözlő üzenet<s>*</s></label>
@@ -189,9 +189,9 @@
 
     <div id="calls" class="container5"*ngIf="autoActive">
       <div id="callscontent">
-        <div class="content" >
+        <div id="contentcall" class="content3" >
           <div>
-            <label class="text" for="bno">Kérdések bevitele</label>
+            <label class="text" for="bno">Kérdések száma</label>
           </div>
           <div id="questionsclass">
             <div>
@@ -214,7 +214,7 @@
         </div>
       
 
-        <div class="content" >
+        <div class="content3" >
           <div>                 
             <label class="text"> Value to set<s>*</s></label>
           </div>
@@ -226,76 +226,82 @@
               <option value="valami3">value3</option>
             </select>
           </div>
-        </div>      
-      </div>         
+          <div>
+            <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>
+          </div>  
+        </div>
+              
+      </div>
+
+              
     
 
-
-      <div class="content" >
-      <div>
-        <label class="text" for="bno">Válaszok bevitele</label>
+      <div id="callscontent">
+        <div id="contentcall" class="content3" >
+          <div>
+            <label class="text" for="bno">Válaszok száma</label>
+          </div>          
+          <div>
+            <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
+          </div>      
+          <div>
+            <label class="text" for="bno">Válaszok bevitele</label>
+          </div>
+          <div>
+            <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
+          </div>
+        </div>
+        <div class="content3" >
+          <div>
+            <button id="addanswerbutton" (click)="addAnswer()">Válasz Hozzáadás</button>
+          </div> 
+        </div>                        
       </div>
-      <div id="answersclass">
-        <div>
-          <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
-        </div>
+    
+  </div>
 
-        <div>
-          <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
+  <div class="container5" *ngIf="autoActive">
+
+    <div class="content2" style="margin-top: 60px;">
+      <ng-container *ngIf="campaign.questions && campaign.numberOfQuestions +1">
+        <p class="markerbno2" style="margin-bottom: 60px;">Hozzáadott kérdések</p>
+        <div style="max-height: 265px; width: auto; overflow-y: auto; margin-bottom: 60px;">
+          <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+            <div style="flex-grow: 1;">
+              <p style="margin: 0;">{{ questions }}</p>
+            </div>
+            <div style="margin-left: auto;">
+              <button (click)="removeQuestion(newQuestion)">Törlés</button>
+            </div>
+          </div>
         </div>
-        <div>
-          <button (click)="addAnswer()">Válasz Hozzáadás</button>
-        </div> 
-      </div>         
+      </ng-container>
+      <ng-template #noMarkers>
+        <p class="markerbno" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
+      </ng-template>
+    </div>  
+    
+
+    <div class="content2" style="margin-top: 60px;">
+      <ng-container *ngIf="buttonValues">
+        <p class="markerbno2" style="margin-bottom: 60px;">Hozzáadott válaszok</p>
+        <div style="max-height: 265px; overflow-y: auto; width: auto; margin-bottom: 60px;">
+          <div *ngFor="let newAnswer of buttonValues; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+            <div style="flex-grow: 1;">
+              <p style="margin: 0;">{{ answer }}</p>
+            </div>
+            <div style="margin-left: auto;">
+              <button (click)="removeAnswer(answer)">Törlés</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noMarkers>
+        <p class="markerbno" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
+      </ng-template>
     </div>
- 
 
-
-    <div>
-      <button (click)="addQuestion()">Kérdés Kész</button>
-    </div> 
   </div>
-
-
-
-  <div class="content2" style="margin-top: 60px;">
-    <ng-container *ngIf="campaign.questions && campaign.numberOfQuestions +1">
-      <p class="markerbno2">Kérdések</p>
-      <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
-        <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-          <div style="flex-grow: 1;">
-            <p style="margin: 0;">{{ questions }}</p>
-          </div>
-          <div style="margin-left: auto;">
-            <button (click)="removeQuestion(newQuestion)">Törlés</button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-template #noMarkers>
-      <p class="markerbno" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
-    </ng-template>
-  </div>
-
-  <div class="content2" style="margin-top: 60px;">
-    <ng-container *ngIf="buttonValues">
-      <p class="markerbno2">Válaszok</p>
-      <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
-        <div *ngFor="let newAnswer of buttonValues; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-          <div style="flex-grow: 1;">
-            <p style="margin: 0;">{{ answer }}</p>
-          </div>
-          <div style="margin-left: auto;">
-            <button (click)="removeAnswer(answer)">Törlés</button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-template #noMarkers>
-      <p class="markerbno" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
-    </ng-template>
-  </div>
-
 
 
 
@@ -305,7 +311,7 @@
 
 
           <!--question-->
-      <!--numberOfQuestions-->
+      <!--numberOfQuestions
 
     <div class="container4" *ngIf="autoActive">
       
@@ -368,7 +374,7 @@
 
      
 
-      <!--ringGroup-->
+      ringGroup
     <div class="container3"*ngIf="liveActive">
       <div class="content" >
         <div>
@@ -392,7 +398,7 @@
           <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
       </div>
     </div>  
-  </div>
+  </div>-->
   
 
   
