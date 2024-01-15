@@ -66,9 +66,28 @@
          <td mat-cell *matCellDef="let sound">
           {{ sound.Url}}
          </td>
-       </ng-container>    
+       </ng-container>   
 
+       <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let sound">
+          <div class="ratestbutton">
+          
+        <button style="margin-bottom: 5px;" (click)="deleteSound(sound.Name)">törlés</button>
        
+      </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="play">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let sound">
+          <div class="ratestbutton">
+          
+        <button style="margin-bottom: 5px;" (click)="Play(sound.Url)">lejatszas</button>
+       
+      </div>
+        </td>
+      </ng-container>
 
          
     
