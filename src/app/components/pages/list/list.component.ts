@@ -126,7 +126,7 @@ export class ListComponent {
   }
 
  addToList(number: Number) {
-  let localnumbers: Number[] = [];
+  let localnumbers: Number[] = []; // Valamiert tömbe kell átadni 
   let localnumber = number;
   let listId = this.list.id;
   
