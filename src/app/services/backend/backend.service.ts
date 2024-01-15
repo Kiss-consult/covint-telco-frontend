@@ -11,6 +11,7 @@ import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { Empty } from 'src/app/models/utils/empty';
 import { Sound } from 'src/app/models/sound/sound';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
+import { Number } from 'src/app/models/list_of_numbers/number';
 import { Filter } from 'src/app/models/filter/filter';
 
 @Injectable({
@@ -160,11 +161,11 @@ public getListById(id : number): Observable<Result<List_of_numbers>> {
 }
 
 // This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
-public filterList(filter: Filter): Observable<Result<[Number]>> {
+public filterList(filter: Filter): Observable<Result<Number[]>> {
   const url = this.url + "/list/filter";
-  return this.httpClient.post<Result<[Number]>>(url, filter, { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<[Number]>(JSON.stringify(result))),
-    catchError(error => of(new Err<[Number]>(error)))
+  return this.httpClient.post<Result<Number[]>>(url, filter, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Number[]>(JSON.stringify(result))),
+    catchError(error => of(new Err<Number[]>(error)))
   );
 }
 

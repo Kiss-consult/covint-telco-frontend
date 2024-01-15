@@ -1,7 +1,12 @@
-import { Component ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Location } from '@angular/common'
-
+import { Sound } from 'src/app/models/sound/sound';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-phonenumbersmanagement',
@@ -9,62 +14,108 @@ import { Location } from '@angular/common'
   styleUrls: ['./phonenumbersmanagement.component.css']
 })
 export class PhonenumbersmanagementComponent {
-  
-  
+  noFileMessage: string = `nincs file még feltöltve`;
+  uploadedMessage: string = "";
+  fileName: string = "";
+  submit: boolean = false;
+  listname: string = "";
+  list : List_of_numbers = new List_of_numbers;
+  lists: List_of_numbers[] = [];
+
+  dataSource!: MatTableDataSource<List_of_numbers>;
+
+  @ViewChild('paginator')
+  paginator!: MatPaginator;
+  @ViewChild('empTbSort') empTbSort = new MatSort();
+  pageSizeOptions: number[] = [5, 10];
+
+  displayedColumns: string[] = ['id', 'name', 'timestamp','calllist'];
+  Filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor( public backendService: BackendService,private location: Location) {
-       
+  constructor(public backendService: BackendService, private location: Location, private router: Router,private _Activatedroute:ActivatedRoute) {
+
+    this.backendService.getAllList().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("hanganyagok listája sikertelen betöltés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.lists = result.unwrap();
+        this.dataSource = new MatTableDataSource(this.lists);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+
+        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        console.log("hanganyagok  listája sikeres betöltés");
+        console.log(this.lists);
+
+
+
+
+
+      });
+
+
+
+
   }
 
-  noFileMessage: string = `nincs file még feltöltve`;
-  uploadedMessage : string = "";
-  fileName: string = "";
-  submit : boolean = false;
-  listname: string = "";
+
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    
-    
+
+
     if (file) {
       if (file.name.endsWith(".csv") === false) {
         alert(`:Wrong file format error message:Wrong file format. Please upload a csv file.`)
         return;
       }
       console.log("eredeti", file.name);
-       
-      
-          this.fileName = file.name;
-          console.log("uj", this.fileName);
-          this.uploadedMessage = this.fileName + "  " + "listanév:"+ "  " + this.listname  + "  " + "feltöltve";
-          
-      }
-        try {
-          let result =  this.backendService.uploadFile(file, this.listname);
-         
-         console.log(result)
-        
-        
-         
-        }
-        catch (error) {
-        
-          alert(`File feltölts sikertelen`)
-        }
-      event.target.value = null;
+
+
+      this.fileName = file.name;
+      console.log("uj", this.fileName);
+      this.uploadedMessage = this.fileName + "  " + "listanév:" + "  " + this.listname + "  " + "feltöltve";
 
     }
-    
-  
+    try {
+      let result = this.backendService.uploadFile(file, this.listname);
+
+      console.log(result)
+
+
+
+    }
+    catch (error) {
+
+      alert(`File feltölts sikertelen`)
+    }
+    event.target.value = null;
+
+  }
+
+
 
   public setSubmit() {
-    this.submit= true;
+    this.submit = true;
   }
-  
+  public callList(list: List_of_numbers){
+    console.log("telefon lista",list)
+    console.log("id",list.id)
+     let id = list.id;
+      this.router.navigate(
+          ['/list', id]
+      ); 
   }
-  
+}
+
 
 
 

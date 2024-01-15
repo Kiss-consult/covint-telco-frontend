@@ -11,6 +11,7 @@ import { ReportsComponent } from './components/pages/reports/reports.component';
 import { VoicemessagesmanagementComponent } from './components/pages/voicemessagesmanagement/voicemessagesmanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { CampaignComponent } from './components/pages/campaign/campaign.component';
+import { ListComponent } from './components/pages/list/list.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: "reports", component: ReportsComponent },
   { path: "voicemessagesmanagement", component: VoicemessagesmanagementComponent },
   { path: "auditlog", component: AuditlogComponent },
-  { path: "campaign/:id", component: CampaignComponent }
+  { path: "campaign/:id", component: CampaignComponent },
+  { path: "list/:id", component: ListComponent }
 ];
 
 @NgModule({
