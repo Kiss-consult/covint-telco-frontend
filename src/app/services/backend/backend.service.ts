@@ -223,7 +223,7 @@ public downloadExport(id: number): Observable<Result<[any[], string]>> {
     headers: this.getHeaders(),
     responseType: "blob" as "json"
   };
-  return this.httpClient.get<Blob>(this.url ,  options).pipe(
+  return this.httpClient.get<Blob>(url ,  options).pipe(
     map(response => {
       let dataType = response.type;
       let binaryData = [];
