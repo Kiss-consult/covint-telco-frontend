@@ -6,71 +6,55 @@
 <div class="container">
   <!--TABLE-->
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-  <div class="container3">
-    <div>
-      <h4><label class="text">Szűrés </label></h4>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
 
-   
+  <div class="container2">
+    <div class="container3">
+      <div>
+        <h4><label class="text">Szűrés </label></h4>      
+      </div>
+      <div class="content">
+        <div>
+          <label class="text">Név <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
+            title="Kérem töltse ki a mezőt">
+        </div>
+      
+        <div>
+          <label class="text">Lista ID <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
+            value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
 
-
-    <div>
-      <div>
-        <label class="text">Név <s>*</s></label>
+      <div class="content">
+        <div>
+          <label class="text">Egyéb <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
+            placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      
+        <div>
+          <label class="text">Telefonszám <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="filter.number" placeholder="???"
+            title="Kérem töltse ki a mezőt">
+        </div>
       </div>
-      <div>
-        <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
-          title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
-
-    <div>
-      <div>
-        <label class="text">Lista ID <s>*</s></label>
-      </div>
-      <div>
-        <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
-          value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
-
-    <div>
-      <div>
-        <label class="text">Egyéb <s>*</s></label>
-      </div>
-      <div>
-        <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
-          placeholder="???" title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
-    <div>
-      <div>
-        <label class="text">Telefonszám <s>*</s></label>
-      </div>
-      <div>
-        <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="filter.number" placeholder="???"
-          title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
-    <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
-      keresés
-    </button>
-  </div>
-
-  <div class="container">
-    <!--TABLE-->
+      <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
+        keresés
+      </button>
+    </div>        
 
     <div class="container3">
       <div>
-        <h4><label class="text">hozzáadás </label></h4>
-        <br>
-        <br>
-        <br>
-        <br>
+        <h4><label class="text">hozzáadás </label></h4>          
       </div>
       <div>
         <label class="text">Név <s>*</s></label>
@@ -80,10 +64,9 @@
           title="Kérem töltse ki a mezőt">
       </div>
 
-
       <div>
         <div>
-          <label class="text">Lista ID <s>*</s></label>
+           <label class="text">Lista ID <s>*</s></label>
         </div>
         <div>
           <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="number_.listId"
@@ -100,6 +83,7 @@
             title="Kérem töltse ki a mezőt">
         </div>
       </div>
+
       <div>
         <div>
           <label class="text">Telefonszám <s>*</s></label>
@@ -109,35 +93,37 @@
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-      <button id="okebutton" (click)="addToList(number_)" style="z-index: 2; position: relative;">
-        hozzáadás
-      </button>
-    </div>
-    <div class="content6">
-      <label>Exportálja listát</label>
-      <div class="diagrambutton" style="margin-bottom: 60px;">  
+      <div>
+        <button id="okebutton" (click)="addToList(number_)" style="z-index: 2; position: relative;">
+          hozzáadás
+        </button>
+      </div>
+      <div class="content6">
+        <div class="diagrambutton"> 
+          <label>Exportálja listát</label>
+        </div>
         <div>   
           <button (click)="export()">Export</button>
         </div> 
-        
-      </div>
+      </div>        
+    </div>
+  </div>
+
+  <div class="container4">
+
     <div class="acceptuser">
       <mat-form-field>
         <mat-label>Keresés</mat-label>
         <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
       </mat-form-field>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
-
-
-        
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">          
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
           <td mat-cell *matCellDef="let number">
             {{ number.id}}
           </td>
         </ng-container>
-
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
@@ -171,21 +157,16 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let number">
             <div class="ratestbutton">
-
               <button style="margin-bottom: 5px;" (click)="updateNumber(number)">update</button>
-
             </div>
           </td>
         </ng-container>
-
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let number">
             <div class="ratestbutton">
-
               <button style="margin-bottom: 5px;" (click)="deleteNumber(number)">törlés</button>
-
             </div>
           </td>
         </ng-container>
@@ -193,11 +174,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-
-
-
       </table>
 
       <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
     </div>
   </div>
+  
+</div>
