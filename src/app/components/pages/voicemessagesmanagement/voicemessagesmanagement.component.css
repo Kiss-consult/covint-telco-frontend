@@ -5,10 +5,7 @@
     text-align: center;
     background: rgb(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 60px;
-    
+    padding-bottom: 60px;    
 }
 
 .exportbutton:nth-child(even) {
@@ -41,7 +38,7 @@
 }
 
 .file-upload{
-    margin-top: 0;
+    margin-top: 40px;
     padding-top: 0;
 }
 
@@ -51,11 +48,13 @@
     margin-top: 5px;
 }
 .acceptuser{
+    width: 100%;
     background: rgb(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
-    padding: 20px;
-    padding-bottom: 70px;
-    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 100px;
+    padding-top: 40px;
   }
   
 h3{

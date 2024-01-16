@@ -9,15 +9,14 @@
       <div class="exportbutton">
     
         <div class="tab-button">
-          Hang file
+          Hang file feltöltése
         </div>        
         <div hidden>
           <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event)" #fileUpload>
           <p>hang file feltöltése</p>
         </div>
 
-        <div class="file-upload">
-        <br>
+        <div class="file-upload">        
           <div class="exportbutton2">
             <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
             attach_file</mat-icon></button>
@@ -39,62 +38,62 @@
         </div>
       </div>  
 
+    <div class="exportbutton">
+
+      <div class="tab-button">
+        Hang fileok
+      </div>
+
       <div class="acceptuser"  >
-        <mat-form-field>
+        <mat-form-field style="width: 100%;">
             <mat-label>Keresés</mat-label>
             <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
           </mat-form-field>
 
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">  
 
-     
-     
-     
-
-
-        <ng-container matColumnDef="Name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>hangfile neve</th>
-          <td mat-cell *matCellDef="let sound">
-          {{ sound.Name}}
-          </td>
-        </ng-container>     
-      
-        <ng-container matColumnDef="Url">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Url</th>
-          <td mat-cell *matCellDef="let sound">
-            {{ sound.Url}}
-          </td>
-        </ng-container>    
-
-
-       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-        <td mat-cell *matCellDef="let sound">
-          <div class="ratestbutton">
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>hangfile neve</th>
+              <td mat-cell *matCellDef="let sound">
+              {{ sound.Name}}
+              </td>
+            </ng-container>     
           
-        <button style="margin-bottom: 5px;" (click)="deleteSound(sound.Name)">törlés</button>
-       
-      </div>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="play">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-        <td mat-cell *matCellDef="let sound">
-          <div class="ratestbutton">
-          
-        <button style="margin-bottom: 5px;" (click)="Play(sound.Url)">lejatszas</button>
-       
-      </div>
-        </td>
-      </ng-container>
+            <ng-container matColumnDef="Url">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Url</th>
+              <td mat-cell *matCellDef="let sound">
+                {{ sound.Url}}
+              </td>
+            </ng-container>    
 
-         
-    
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+              <td mat-cell *matCellDef="let sound">
+                <div class="ratestbutton">          
+                  <button style="margin-bottom: 5px;" (click)="deleteSound(sound.Name)">törlés</button>       
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="play">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+              <td mat-cell *matCellDef="let sound">
+                <div class="ratestbutton">          
+                  <button style="margin-bottom: 5px;" (click)="Play(sound.Url)">lejatszas</button>       
+                </div>
+              </td>
+            </ng-container>            
+        
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
 
         <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
+      
       </div>
+    </div>
   </div>
+    <footer>   
+      <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+    </footer>
 </div>

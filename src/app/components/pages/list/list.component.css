@@ -2,9 +2,25 @@
     padding: 15px;
     padding-top: 0;
   }
-  .container3{
+
+  .container3{    
     text-align: center;    
-    display: flex;    
+    display: flex; 
+    flex-direction: column; 
+}
+
+.container4{
+  display: flex;
+}
+
+.content{
+  display: flex;
+}
+
+.container2{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1;
 }
   .acceptuser{
     background: rgb(224,224,224);
@@ -12,6 +28,7 @@
     padding: 20px;
     padding-bottom: 70px;
     padding-top: 100px;
+    width: 100%;
   }
   
   .mat-mdc-form-field {
