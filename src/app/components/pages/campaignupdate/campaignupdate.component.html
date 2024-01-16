@@ -1,0 +1,80 @@
+<h1>Kampány update</h1>
+
+<h2>Kampány kezelése </h2>
+
+<div class="container">
+
+
+    <div>
+
+        <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+    </div>
+  
+            
+            
+            <div class="container2">
+                <div class="content2">
+                    <div class="form-group2">
+
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+
+                        <div>
+                            <label class="text" for="id">id :</label>
+
+                            <input class="droptextbox" type="number" id="id" name="id"
+                                [(ngModel)]="this.resultCampaign.id" readonly placeholder="1007"
+                                title="Kérem töltse ki a mezőt">
+
+                        </div>
+
+                        <div>
+                            <label class="text" for="goodbyepath">goodbyePath :</label>
+
+                             <select style="margin-right: 20px;" class="droptextbox" type="text" id="goodbyepath" name="goodbyepath" [(ngModel)]="resultCampaign.goodbyePath" title="Kérem válasszon">
+                                <ng-container *ngFor="let sound of sounds">
+                                  <option value="{{sound.Name}}">{{sound.Name}}</option>
+                                </ng-container>
+                              </select>
+
+                        </div>
+                        <div>
+                            <label class="text" for="welcomepath">welcomePath :</label>
+
+                            <select style="margin-right: 20px;" class="droptextbox" type="text" id="welcomepath" name="welcomepath" [(ngModel)]="resultCampaign.welcomePath" title="Kérem válasszon">
+                                <ng-container *ngFor="let sound of sounds">
+                                  <option value="{{sound.Name}}">{{sound.Name}}</option>
+                                </ng-container>
+                              </select>
+
+                        </div>
+                    </div>
+
+
+                    <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
+                       
+
+                        <button id="okebutton" (click)="update()" style="z-index: 2; position: relative;">
+                            Update
+                        </button>
+
+
+                       
+                        
+                        <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
+                            <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+                        </div>
+                      </div>  
+
+
+
+
+
+
+
+                </div>
+            </div>

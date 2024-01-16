@@ -28,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { initializeApp } from './init/init';
 import { CampaignComponent } from './components/pages/campaign/campaign.component';
 import { ListComponent } from './components/pages/list/list.component';
+import { NumberupdateComponent } from './components/pages/numberupdate/numberupdate.component';
+import { CampaignupdateComponent } from './components/pages/campaignupdate/campaignupdate.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ListComponent } from './components/pages/list/list.component';
     ReportsComponent,
     AuditlogComponent,
     CampaignComponent,
-    ListComponent
+    ListComponent,
+    NumberupdateComponent,
+    CampaignupdateComponent
   ],
   imports: [
     BrowserModule,

@@ -141,15 +141,15 @@
 
 
                     <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-                        <button id="okebutton" (click)="startCampaign()" style="z-index: 2; position: relative;">
+                        <button id="okebutton" (click)="startCampaign(this.campaignId)" style="z-index: 2; position: relative;">
                             Start
                         </button>
 
-                        <button id="okebutton" (click)="stopCampaign()" style="z-index: 2; position: relative;">
+                        <button id="okebutton" (click)="stopCampaign(this.campaignId)" style="z-index: 2; position: relative;">
                             Stop
                         </button>
 
-                        <button id="okebutton" (click)="updateCampaign()" style="z-index: 2; position: relative;">
+                        <button id="okebutton" (click)="updateCampaign(this.campaignId)" style="z-index: 2; position: relative;">
                             Update
                         </button>
 

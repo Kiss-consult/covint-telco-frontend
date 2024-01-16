@@ -28,7 +28,7 @@ export class ListComponent {
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
 
-  displayedColumns: string[] = ['name', 'other', 'listId','number', 'delete'];
+  displayedColumns: string[] = ['id','name', 'other', 'listId','number', 'update','delete'];
   list: List_of_numbers = new List_of_numbers;
   listId: any = this.list.id;
 
@@ -125,6 +125,16 @@ export class ListComponent {
       });
   }
 
+
+  updateNumber(number: Number) {
+    
+    this.router.navigate(
+        ['/numberupdate', number.id]
+    ); 
+
+
+  }
+
  addToList(number: Number) {
   let localnumbers: Number[] = []; // Valamiert tömbe kell átadni 
   let localnumber = number;
@@ -151,5 +161,27 @@ export class ListComponent {
         window.location.reload();
 
       });
+  }
+
+  public export () {
+   
+  
+  let name = this.list.name;
+    const filename = name + "lista.xlsx";
+    this.backendService.downloadExport(this.list.id).subscribe((result) => {
+      if (result.isErr()) {
+        console.error(result.unwrapErr());
+        return;
+      }
+      let response = result.unwrap();
+      let data = response[0];
+      let dataType = response[1];
+      let downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
+      if (filename)
+        downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    });
   }
 }
