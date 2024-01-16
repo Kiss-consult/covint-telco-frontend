@@ -20,6 +20,7 @@ export class CreatecampaignComponent {
   liveActive: boolean = false;
   origialFromTime: string = "";
   origialToTime: string = "";
+  origialPeriod: string = "";
 
   questionNumber: number = 0;
   minioPath: string = "";
@@ -35,7 +36,7 @@ export class CreatecampaignComponent {
 
   newQuestion: Question = new Question;
   buttonValues : Number[] = [];
-
+  callday: string ="";
   // ngOnInit() {
   // this.initializeButtonValues();
   // }
@@ -69,7 +70,11 @@ export class CreatecampaignComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-
+  addDate() {
+    this.campaign.callDays.push(this.callday);
+    this.callday ="";
+    console.log(this.campaign.callDays)
+  }
 
   constructor(private backendService: BackendService, private location: Location) {
 
@@ -91,7 +96,12 @@ export class CreatecampaignComponent {
     console.log(newtime)
     return newtime;
   }
-
+ private formatpriod(period: string): string[] {
+    console.log(period)
+    const newperiod = this.origialPeriod.split(":", 3);
+    console.log(newperiod)
+    return newperiod;
+  }
   public add() {
     this.answers.push(this.answer);
     console.log(" valasz osszerakas", this.answers)
@@ -122,8 +132,8 @@ export class CreatecampaignComponent {
     this.campaign.toTime = this.formatTime(this.origialToTime);
 
     console.log(this.campaign);
-   
-    
+    this.campaign.period = this.formatpriod(this.origialPeriod)[0] + "h" +this.formatpriod(this.origialPeriod)[1]+"m" +this.formatpriod(this.origialPeriod)[2]+"s" ;
+    console.log(this.campaign.period);
    
     
     this.backendService.createCampaign(this.campaign).subscribe(
