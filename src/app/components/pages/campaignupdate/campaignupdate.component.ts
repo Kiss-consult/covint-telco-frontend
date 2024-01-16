@@ -1,5 +1,3 @@
-
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,14 +10,16 @@ import { Campaign } from 'src/app/models/campaign/campaign';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Question } from 'src/app/models/question/question';
 import { Answer } from 'src/app/models/answer/answer';
+import { Number } from 'src/app/models/list_of_numbers/number';
+import { Sound } from 'src/app/models/sound/sound';
+import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 
 @Component({
-  selector: 'app-campaign',
-  templateUrl: './campaign.component.html',
-  styleUrls: ['./campaign.component.css']
+  selector: 'app-campaignupdate',
+  templateUrl: './campaignupdate.component.html',
+  styleUrls: ['./campaignupdate.component.css']
 })
-export class CampaignComponent {
-
+export class CampaignupdateComponent {
   resultCampaign: ResultCampaign = new ResultCampaign;
 
   dataSource!: MatTableDataSource<ResultCampaign>;
@@ -30,31 +30,28 @@ export class CampaignComponent {
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'started'];
 
-  campaign: Campaign = new Campaign;
+  campaign: ResultCampaign = new ResultCampaign;
+  number: Number = new Number;
+  campaignId: any = this.campaign.id;
+  updateCampaign: UpdateCampaign = new UpdateCampaign;
 
-  campaignId: any = this.resultCampaign.id;
-
+  sound: Sound = new Sound;
+  sounds: Sound[] = [];
 
   question: Question = new Question;
   answer: Answer = new Answer;
   answers: Answer[] = [];
   questions: Question[] = [];
-  getNumbersArray(count: number): number[] {
-    return Array.from({ length: count }, (_, index) => index + 1);
-  }
-
-
 
   goBackToPrevPage(): void {
     this.location.back();
   }
-
   constructor(private backendService: BackendService, private location: Location, private fb: FormBuilder,
     private _Activatedroute: ActivatedRoute, private router: Router) {
 
-
     this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
     console.log("lekerdeztem", this.campaignId);
+
 
     this.backendService.getCampaignById(this.campaignId).subscribe(result => {
 
@@ -75,60 +72,54 @@ export class CampaignComponent {
       console.log("kérdések", this.questions);
 
     });
-  }
 
-  public startCampaign(id: number) { 
-    this.backendService.startCampaignById(id).subscribe(
+    this.backendService.getAllSounds().subscribe(
       result => {
         if (result.isErr()) {
-          alert("kampány sikertelen indítása");
+          alert("hangok lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
         }
-        alert("kampány sikeres indítása");
-        window.location.reload();
+        this.sounds = result.unwrap();
+
+        console.log("hangok lekérdezve az adatbázisból");
+        console.log(this.sounds);
+
+
       });
 
   }
 
-  public stopCampaign(id: number) {
-    this.backendService.stopCampaignById(id).subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("kampány sikertelen leállítása");
-          console.error(result.unwrapErr());
-          return;
+
+
+  public update() {
+
+    this.updateCampaign.id = this.resultCampaign.id;
+    this.updateCampaign.goodbyePath = this.resultCampaign.goodbyePath;
+    this.updateCampaign.welcomePath = this.resultCampaign.welcomePath;
+    this.backendService.updateCampaign(this.updateCampaign).subscribe(result => {
+
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
         }
-        alert("kampány sikeres leállítása");
-        window.location.reload();
-      });
+        else
+          alert("kampány update  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      alert("Kampány sikeres update");
+      console.log("Kampány sikeres update");
 
-   }
 
 
-  public updateCampaign(id : number) { 
+    });
 
-    this.router.navigate(
-      ['/campaignupdate', id]
-  ); 
 
   }
 
 
-  public deleteCampaign(id: number) {
-
-    this.backendService.deleteCampaignById(id).subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("kampány sikertelen törlése");
-          console.error(result.unwrapErr());
-          return;
-        }
-        alert("kampány sikeres törlése");
-        this.router.navigate(
-          ['/managecampaign']
-        );
-      });
-  }
 
 }

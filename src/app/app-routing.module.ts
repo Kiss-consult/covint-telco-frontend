@@ -12,6 +12,8 @@ import { VoicemessagesmanagementComponent } from './components/pages/voicemessag
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { CampaignComponent } from './components/pages/campaign/campaign.component';
 import { ListComponent } from './components/pages/list/list.component';
+import { NumberupdateComponent } from './components/pages/numberupdate/numberupdate.component';
+import { CampaignupdateComponent } from './components/pages/campaignupdate/campaignupdate.component';
 
 
 const routes: Routes = [
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: "voicemessagesmanagement", component: VoicemessagesmanagementComponent },
   { path: "auditlog", component: AuditlogComponent },
   { path: "campaign/:id", component: CampaignComponent },
-  { path: "list/:id", component: ListComponent }
+  { path: "list/:id", component: ListComponent },
+  { path: "numberupdate/:id", component: NumberupdateComponent },
+  { path: "campaignupdate/:id", component: CampaignupdateComponent }
 ];
 
 @NgModule({

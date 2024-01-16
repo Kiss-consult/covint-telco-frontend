@@ -13,6 +13,7 @@ import { Sound } from 'src/app/models/sound/sound';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
 import { Number } from 'src/app/models/list_of_numbers/number';
 import { Filter } from 'src/app/models/filter/filter';
+import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 
 @Injectable({
     providedIn: 'root'
@@ -80,10 +81,10 @@ public getCampaignById(id : number): Observable<Result<ResultCampaign>> {
 
 
 // This function update an given campaign by id  in the database.
-public updateCampaign(id: number , welcomePath: string, goodbyePath:string): Observable<Result<{}>> {
+public updateCampaign(updateCampaign : UpdateCampaign): Observable<Result<{}>> {
   const url = this.url + "/campaign/update";
-  let searchpack = {id, welcomePath, goodbyePath};
-  return this.httpClient.post<Result<{}>>(url, searchpack, { headers: this.getHeaders() }).pipe(
+ 
+  return this.httpClient.post<Result<{}>>(url, updateCampaign, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
   );
@@ -216,7 +217,23 @@ public deleteManyNumbers(ids: number[] = []): Observable<Result<{}>> {
   );
 }
 
-
+public downloadExport(id: number): Observable<Result<[any[], string]>> {
+  const url = this.url + "/list/export/" + id;
+  let options = {
+    headers: this.getHeaders(),
+    responseType: "blob" as "json"
+  };
+  return this.httpClient.get<Blob>(this.url ,  options).pipe(
+    map(response => {
+      let dataType = response.type;
+      let binaryData = [];
+      binaryData.push(response);
+      let result: [any[], string] = [binaryData, dataType]
+      return new Ok(result);
+    }),
+    catchError(error => of(new Err<[any[], string]>(error)))
+  );
+}
 
 // *********************  END OF TELEPHONE FUNCTIONS **************************************
 
