@@ -20,6 +20,7 @@ export class CreatecampaignComponent {
   campaign: Campaign = new Campaign;
   autoActive: boolean = false;
   liveActive: boolean = false;
+  addanswertoggleActive: boolean=false;
   origialFromTime: string = "";
   origialToTime: string = "";
   origialPeriod: string = "";
@@ -44,6 +45,7 @@ export class CreatecampaignComponent {
   list : List_of_numbers = new List_of_numbers;
   lists: List_of_numbers[] = [];
   listID: string ="";
+  
   // ngOnInit() {
   // this.initializeButtonValues();
   // }
@@ -72,6 +74,14 @@ export class CreatecampaignComponent {
       console.log("live választottam:", this.campaign.liveOrAuto)
     }
 
+    if (contentType === 'addanswertoggle') {
+      this.addanswertoggleActive = true;
+      console.log("hozza adtam a valaszt", this.campaign.liveOrAuto)
+
+    }
+
+    
+
   }
 
   goBackToPrevPage(): void {
@@ -80,7 +90,7 @@ export class CreatecampaignComponent {
   addDate() {
     this.campaign.callDays.push(this.callday);
     this.callday ="";
-    console.log(this.campaign.callDays)
+    console.log(this.campaign.callDays)    
   }
 
   constructor(private backendService: BackendService, private location: Location) {
