@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { Answer } from 'src/app/models/answer/answer';
 import { Question } from 'src/app/models/question/question';
+import { Sound } from 'src/app/models/sound/sound';
+import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
 
 
 @Component({
@@ -37,6 +39,11 @@ export class CreatecampaignComponent {
   newQuestion: Question = new Question;
   buttonValues : Number[] = [];
   callday: string ="";
+  sound : Sound= new Sound;
+  sounds : Sound[] = [];
+  list : List_of_numbers = new List_of_numbers;
+  lists: List_of_numbers[] = [];
+  listID: string ="";
   // ngOnInit() {
   // this.initializeButtonValues();
   // }
@@ -77,6 +84,43 @@ export class CreatecampaignComponent {
   }
 
   constructor(private backendService: BackendService, private location: Location) {
+
+
+    this.backendService.getAllSounds().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("hangok lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.sounds = result.unwrap();
+
+        console.log("hangok lekérdezve az adatbázisból");
+        console.log(this.sounds);
+
+
+      });
+
+      this.backendService.getAllList().subscribe(
+        result => {
+          if (result.isErr()) {
+            alert("hanganyagok listája sikertelen betöltés");
+            console.error(result.unwrapErr());
+            return;
+          }
+          this.lists = result.unwrap();
+         
+          // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+          console.log("hanganyagok  listája sikeres betöltés");
+          console.log(this.lists);
+  
+  
+  
+  
+  
+        });
+  
+
 
   }
   // Format date to YYYY-MM-DD - example
@@ -124,9 +168,9 @@ export class CreatecampaignComponent {
     // return;
     //  }
     //this.question.answers.push(this.answers)
-
-  
-
+this.campaign.numberListId = parseInt(this.listID);
+    console.log("listid",  this.campaign.numberListId)
+   
     console.log(this.origialFromTime, this.origialToTime)
     this.campaign.fromTime = this.formatTime(this.origialFromTime);
     this.campaign.toTime = this.formatTime(this.origialToTime);
@@ -207,7 +251,7 @@ export class CreatecampaignComponent {
     
     this.campaign.questions.push(this.newQuestion);
     this.campaign.numberOfQuestions =this.campaign.numberOfQuestions +1;
-    
+    this.buttonValues = [];
     console.log (this.campaign)
     this.newQuestion = new Question;
   }
