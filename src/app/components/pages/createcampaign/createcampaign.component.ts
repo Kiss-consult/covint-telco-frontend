@@ -161,8 +161,8 @@ export class CreatecampaignComponent {
   }
 
   // Function to finish campaign creation. It checks the required fields,
-  // adds the current date to the case, and inserts the campaign into the database.
-  // It also clears the form for the next case.
+  //  and inserts the campaign into the database.
+  // It also clears the form for the next campaign.
   public finish() {
     //if (!this.checkRequiredFields()) {
     // return;
@@ -194,10 +194,10 @@ this.campaign.numberListId = parseInt(this.listID);
       
   }
 
-
+// Function to add  answer  option to the quesion
   public addAnswer() {
     if (this.newAnswer === null) {
-      alert("Kérem adjon meg egy BNO kódot!");
+      alert("Kérem adjon meg egy válasz lehetúséget!");
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
@@ -218,37 +218,20 @@ this.campaign.numberListId = parseInt(this.listID);
   }
 
 
-  // Function to remove bno from the case
+  // Function to remove answer from the quesion
   public removeAnswer(answer: Answer) {
     this.newQuestion.answers = this.newQuestion.answers.filter(m => m !== answer);
   }
 
 
-
+  // Function to add question from campaign
 
   public addQuestion() {
     if (this.newQuestion === null) {
       alert("Kérem adjon meg egy BNO kódot!");
       return;
     }
-    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    
-    //console.log (this.buttonValues)
-
-    /// itt tartok a gondolkodásban  ****************************************************************************************************************
-    //********************************************************************************************************* 
-/*
-
-    if (this.buttonValues.filter((valami) => valami === this.newAnswer.buttonValue).length > 0) {
-      console.log("Marker already exists")
-      alert("a nyomogomb már szerepel ebben a kérdésben")
-      this.removeAnswer(this.newAnswer);
-      return;
-    }
-    this.buttonValues.push(this.newAnswer.buttonValue);
-    this.newQuestion.answers.push(this.newAnswer);
-     */
-    
+        
     this.campaign.questions.push(this.newQuestion);
     this.campaign.numberOfQuestions =this.campaign.numberOfQuestions +1;
     this.buttonValues = [];
@@ -257,9 +240,10 @@ this.campaign.numberListId = parseInt(this.listID);
   }
 
 
-  // Function to remove bno from the case
+  // Function to remove question from campaign
   public removeQuestion(question: Question) {
     this.campaign.questions = this.campaign.questions.filter(m => m !== question);
+    this.campaign.numberOfQuestions = this.campaign.numberOfQuestions -1;
   }
 
 

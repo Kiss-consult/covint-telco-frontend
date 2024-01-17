@@ -28,19 +28,57 @@
 
                             <input class="droptextbox" type="number" id="id" name="id"
                                 [(ngModel)]="id" readonly placeholder="1007"
+                                title="Nem írható mező">
+
+                        </div>
+                        <div>
+                            <label class="text" for="number">Telefonszám :</label>
+
+                            <input class="droptextbox" type="text" id="number" name="number"
+                                [(ngModel)]="update_number.number"  placeholder="1007"
                                 title="Kérem töltse ki a mezőt">
 
                         </div>
-
                      
-                        
+                        <div>
+                            <label class="text" for="other">Egyéb :</label>
+
+                            <input class="droptextbox" type="text" id="other" name="other"
+                                [(ngModel)]="update_number.other"  placeholder="1007"
+                                title="Kérem töltse ki a mezőt">
+
+                        </div>
+                        <div>
+                            <label class="text" for="name">Név :</label>
+
+                            <input class="droptextbox" type="text" id="name" name="name"
+                                [(ngModel)]="update_number.name"  placeholder="1007"
+                                title="Kérem töltse ki a mezőt">
+
+                        </div>
+                        <div>
+                            <label class="text" for="listid">ListId :</label>
+
+                            <input class="droptextbox" type="number" id="listid" name="listid"
+                                [(ngModel)]="number.listId"  readonly placeholder="1007"
+                                title="Nem írható mező">
+
+                        </div>
+                        <div>
+                            <label class="text" for="timestamp">timestamp :</label>
+
+                            <input class="droptextbox" type="text" id="timestamp" name="timestamp"
+                                [(ngModel)]="number.timestamp"  readonly placeholder="1007"
+                                title="Nem írható mező">
+
+                        </div>
                     </div>
 
 
                     <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
                        
 
-                        <button id="okebutton" (click)="update(number)" style="z-index: 2; position: relative;">
+                        <button id="okebutton" (click)="update()" style="z-index: 2; position: relative;">
                             Update
                         </button>
 

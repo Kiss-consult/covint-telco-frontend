@@ -14,6 +14,7 @@ import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers'
 import { Number } from 'src/app/models/list_of_numbers/number';
 import { Filter } from 'src/app/models/filter/filter';
 import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
+import { UpdateNumber } from 'src/app/models/list_of_numbers/update_number';
 
 @Injectable({
     providedIn: 'root'
@@ -190,9 +191,9 @@ public deleteNumberById(id : number): Observable<Result<{}>> {
 }
 
 // This functionupdate a  number ( change number , name or other field, or three of them)
-public updateNumber( number: Number ): Observable<Result<{}>> {
+public updateNumber( update_number: UpdateNumber ): Observable<Result<{}>> {
   const url = this.url + "/number/update";  
-  return this.httpClient.post<Result<{}>>(url, number, { headers: this.getHeaders() }).pipe(
+  return this.httpClient.post<Result<{}>>(url, update_number, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
   );
@@ -232,6 +233,15 @@ public downloadExport(id: number): Observable<Result<[any[], string]>> {
       return new Ok(result);
     }),
     catchError(error => of(new Err<[any[], string]>(error)))
+  );
+}
+
+// This function get a given existing campaign by id from the database.
+public getNumberById(id : number): Observable<Result<Number>> {
+  const url = this.url + "/number/" + id; 
+  return this.httpClient.get<Result<Number>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Number>(JSON.stringify(result))),
+    catchError(error => of(new Err<Number>(error)))
   );
 }
 
