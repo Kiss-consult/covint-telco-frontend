@@ -11,7 +11,7 @@ export class Campaign {
     fromTime: string = "";  // napon belüli kezdet
     toTime: string = "";  // npon belül vége
     period: string = "";  // hivások közötti idő
-    callsPerPeriod: number = 0; // egy periodus alatt hivott számok 
+    callsPerPeriod!: number; // egy periodus alatt hivott számok 
     liveOrAuto: boolean = false;  // automata vagy élőhangos
     numberListId: number = 0; // kötés a telefonszám listához
     numberOfQuestions: number = 0; // kérdések száma

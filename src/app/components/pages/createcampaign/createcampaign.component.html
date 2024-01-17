@@ -127,10 +127,10 @@
         <div id="contentcall" class="content" >
           <div>
             <div>
-              <label class="text">Egy periodus alatt hivott számok  <s>*</s></label>
+              <label class="text">hívott számok ( db) / periódus <s>*</s></label>
             </div>
             <div>
-              <input class="droptextbox" type="number" id="callsPerPeriod" name="institution" [(ngModel)]="campaign.callsPerPeriod" placeholder="???" title="Kérem töltse ki a mezőt">
+              <input class="droptextbox" type="number" id="callsPerPeriod" name="institution" [(ngModel)]="campaign.callsPerPeriod" placeholder="1" title="Kérem töltse ki a mezőt">
             </div>
           </div>
         </div>
@@ -143,8 +143,20 @@
               <label class="text">kötés a telefonszám listához  <s>*</s></label>
             </div>
             <div>
-              <input class="droptextbox" type="number" id="numberListId" name="institution" [(ngModel)]="campaign.numberListId" placeholder="???" title="Kérem töltse ki a mezőt">
-            </div>
+             
+
+              <select style="margin-right: 20px;" class="droptextbox" type="number" id="numberListId" name="institution"  [(ngModel)]="listID" title="Kérem válasszon">
+                  <ng-container *ngFor="let list of lists">
+                    <option value= "{{list.id}}">{{list.id}}  {{list.name}}</option>
+                  </ng-container>
+                </select>
+
+          </div>
+           
+           
+           
+           
+            
           </div>
         </div>  
       </div>
@@ -156,9 +168,18 @@
             <div>
               <label class="text">üdvözlő üzenet<s>*</s></label>
             </div>
+
             <div>
-              <input class="droptextbox" type="url" id="welcomePath" name="institution" [(ngModel)]="campaign.welcomePath" placeholder="???" title="Kérem töltse ki a mezőt">
-            </div>
+             
+
+              <select style="margin-right: 20px;" class="droptextbox" type="text" id="welcomepath" name="welcomepath" [(ngModel)]="campaign.welcomePath" title="Kérem válasszon">
+                  <ng-container *ngFor="let sound of sounds">
+                    <option value="{{sound.Url}}">{{sound.Name}}</option>
+                  </ng-container>
+                </select>
+
+          </div>
+            
           </div>
         </div>
 
@@ -169,9 +190,22 @@
             <div>
               <label class="text">elköszönő üzenet<s>*</s></label>
             </div>
+
+
             <div>
-              <input class="droptextbox" type="url" id="goodbyePath" name="institution" [(ngModel)]="campaign.goodbyePath" placeholder="???" title="Kérem töltse ki a mezőt">
-              </div>
+             
+
+               <select style="margin-right: 20px;" class="droptextbox" type="text" id="goodbyepath" name="goodbyepath" [(ngModel)]="campaign.goodbyePath" title="Kérem válasszon">
+                  <ng-container *ngFor="let sound of sounds">
+                    <option value="{{sound.Url}}">{{sound.Name}}</option>
+                  </ng-container>
+                </select>
+
+          </div>
+
+
+
+           
             </div>
           </div>
         </div>
@@ -203,14 +237,18 @@
               <div>                 
                 <label class="text"> Kérdés felvétel kiválasztása<s>*</s></label>
               </div>
+
               <div>
-                <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.minioPath" title="Kérem válasszon.">
-                  <option value="" disabled selected hidden>Válasszon Felvételt</option>
-                  <option value="valami1">felvétel1</option>
-                  <option value="valami2">felvétel2</option>
-                  <option value="valami3">felvétel3</option>
-                </select>
-              </div>
+             
+
+                <select style="margin-right: 20px;" class="droptextbox" type="text" id="questionpath" name="questionpath" [(ngModel)]="newQuestion.minioPath" title="Kérem válasszon">
+                    <ng-container *ngFor="let sound of sounds">
+                      <option value="{{sound.Url}}">{{sound.Name}}</option>
+                    </ng-container>
+                  </select>
+  
+            </div>
+             
             </div>
           </div>
         </div>
@@ -218,15 +256,19 @@
 
         <div class="content3" >
           <div>                 
-            <label class="text"> Value to set<s>*</s></label>
+            <label class="text">  Hova kerül az adatbazisba?<s>*</s></label>
           </div>
           <div>
             <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.valueToSet" title="Kérem válasszon.">
-              <option value="" disabled selected hidden>Válasszon értéket ( hova kerul az aatbazisba)</option>
-              <option value="valami1">value1</option>
-              <option value="valami2">value2</option>
-              <option value="valami3">value3</option>
+              <option value="" disabled selected hidden>Válasszon értéket </option>
+              <option value="Sex">Nem kiválasztása</option>
+              <option value="Age">Korcsoprt választás</option>
+              <option value="Hospitalized">Kórházi kezelést kapott</option>
+              <option value="Dead">Elhunyt</option>
+              <option value="Illnesses">Társ betegségek</option>
             </select>
+
+        
           </div>
           <div>
             <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>
@@ -273,9 +315,10 @@
         <div style="max-height: 265px; width: auto; overflow-y: auto; margin-bottom: 60px;">
           <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
-              <p style="margin: 0;">{{ newQuestion.minioPath }}</p>
-              <p style="margin: 0;">{{ newQuestion.valueToSet }}</p>
-              <p style="margin: 0;">{{ newQuestion.questionNumber }}</p>
+              <p style="margin: 0;"> Kérdés száma: {{ newQuestion.questionNumber }}</p>
+              <p style="margin: 0;"> Hangfile :{{ newQuestion.minioPath }}</p>
+              <p style="margin: 0;"> Adatbázis: {{ newQuestion.valueToSet }}</p>
+             
             </div>
             <div style="margin-left: auto;">
               <button (click)="removeQuestion(newQuestion)">Törlés</button>
@@ -295,8 +338,8 @@
         <div style="max-height: 265px; overflow-y: auto; width: auto; margin-bottom: 60px;">
           <div *ngFor="let newAnswer of newQuestion.answers; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
-              <p style="margin: 0;">{{ newAnswer.buttonValue }}</p>
-              <p style="margin: 0;">{{ newAnswer.value }}</p>
+              <p style="margin: 0;"> Gomb :{{ newAnswer.buttonValue }}</p>
+              <p style="margin: 0;"> Válasz :{{ newAnswer.value }}</p>
             </div>
             <div style="margin-left: auto;">
               <button (click)="removeAnswer(answer)">Törlés</button>
