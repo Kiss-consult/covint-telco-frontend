@@ -95,8 +95,8 @@ export class CampaignupdateComponent {
   public update() {
 
     this.updateCampaign.id = this.resultCampaign.id;
-    this.updateCampaign.goodbyePath = this.resultCampaign.goodbyePath;
-    this.updateCampaign.welcomePath = this.resultCampaign.welcomePath;
+    //this.updateCampaign.goodbyePath = this.resultCampaign.goodbyeSound;
+    //this.updateCampaign.welcomePath = this.resultCampaign.welcomeSound;
     
     this.backendService.updateCampaign(this.updateCampaign).subscribe(result => {
 
