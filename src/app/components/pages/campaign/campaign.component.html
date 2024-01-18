@@ -1,66 +1,231 @@
-<h1>KAmpány adatai</h1>
+<h1>Kampány </h1>
 
-<h2>Kampány kezelése </h2>
+<h2>Kampány adatai</h2>
+
 
 <div class="container">
-
-
-    <div>
-
-        <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-    </div>
+    <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
     <div class="container2">
-        <div class="content1">
-            <div class="form-group2">
 
-
-                <br>
-                <br>
-                <br>
-                <br>
+        <!--liveOrAuto-->
+        <div id="start" class="container3">
+            <div class="content">
                 <div>
-                    <label class="text" for="name">Név :</label>
+                    <div>
+                        <label class="text">Autómatikus / Élőhangos<s>*</s></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="auto" name="liveOrAuto" [checked]="!resultCampaign.liveOrAuto"><label
+                            for="auto">Automata</label>
+                        <input type="checkbox" id="live" name="liveOrAuto" [checked]="resultCampaign.liveOrAuto"><label
+                            for="live">Élőhangos</label>
+                    </div>
+                </div>
+            </div>
 
-                    <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="resultCampaign.name "
-                        required placeholder="Budapest" title="Kérem töltse ki a mezőt">
+            <!--name-->
+
+            <div class="content">
+                <div>
+                    <div>
+                        <label class="text">Kampány neve <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="text" id="name" name="institution"
+                            [(ngModel)]="resultCampaign.name" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--startDate, endDate-->
+
+        <div class="tab-button">
+            <label>Idővallumok</label>
+        </div>
+
+        <div class="container3">
+
+            <div id="datetime" class="content">
+                <div>
+                    <div>
+                        <label class="text">Kezdés dátuma <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="date" id="startDate" name="institution"
+                            [(ngModel)]="resultCampaign.startDate" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
+                    </div>
                 </div>
 
                 <div>
-                    <label class="text" for="vpbxuuid">VPBX UUID :</label>
+                    <div>
+                        <label class="text">Befejezés dátuma <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="date" id="endDate" name="institution"
+                            [(ngModel)]="resultCampaign.endDate" readonly title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+            </div>
 
-                    <input class="droptextbox" type="text" id="vpbxuuid" name="vpbxuuid"
-                        [(ngModel)]="resultCampaign.VpbxUuid" required placeholder="1007"
-                        title="Kérem töltse ki a mezőt">
+            <!--fromTime, toTime-->
 
+            <div id="datetime" class="content">
+                <div>
+                    <div>
+                        <label class="text">Kezdés ideje <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="time" id="fromTime" name="institution"
+                            [(ngModel)]="resultCampaign.fromTime" placeholder="???" title="Kérem töltse ki a mezőt">
+                    </div>
                 </div>
 
                 <div>
-                    <label class="text" for="startdate">Kezdete :</label>
+                    <div>
+                        <label class="text">Befejezés ideje <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="time" id="toTime" name="institution"
+                            [(ngModel)]="resultCampaign.toTime" placeholder="???" title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+            </div>
 
-                    <input class="droptextbox" type="text" id="startdate" name="startdate"
-                        [(ngModel)]="resultCampaign.startDate" required placeholder="1007"
-                        title="Kérem töltse ki a mezőt">
+
+            <!--callDays-->
+
+            <div id="datetime" class="content">
+                <div>
+                    <label class="text">milyen napokon akarunk hívni<s>*</s></label>
+                </div>
+
+
+                <div class="content2" style="padding-top: 60px;">
+                    <ng-container *ngIf="resultCampaign.callDays">
+
+                        <div style="max-height: 265px; width: auto; overflow-y: auto;">
+                            <div *ngFor="let addDate of this.calldays; let i = index"
+                                style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+                                <div style="flex-grow: 1;">
+                                    <input class="droptextbox" type="date" readonly id="period" name="institution"
+                                    [(ngModel)]="addDate.Date" >
+                                    
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+
+
+            <!--period-->
+
+            <div id="datetime" class="content">
+                <div>
+                    <label class="text">Hivások közötti idő <s>*</s></label>
                 </div>
                 <div>
-                    <label class="text" for="enddate">Vége :</label>
-
-                    <input class="droptextbox" type="text" id="enddate" name="enddate"
-                        [(ngModel)]="resultCampaign.endDate" required placeholder="1007"
-                        title="Kérem töltse ki a mezőt">
+                    <input class="droptextbox" type="text" id="period" name="institution"
+                        [(ngModel)]="resultCampaign.period" placeholder="???" title="Kérem töltse ki a mezőt">
                 </div>
-                <div>
-                    <label class="text" for="questionnumber">Kérdések száma :</label>
+            </div>
+        </div>
 
-                    <input class="droptextbox" type="text" id="questionnumber" name="questionnumber"
-                        [(ngModel)]="resultCampaign.numberOfQuestions" required placeholder="1007"
-                        title="Kérem töltse ki a mezőt">
+        <div id="tabbutton">
+            <div class="tab-button">
+                <label>Hivasok</label>
+            </div>
+            <div class="tab-button">
+                <label>Hangfelvételek</label>
+            </div>
+        </div>
+
+        <!--callsPerPeriod-->
+        <div id="calls" class="container5">
+            <div id="callscontent">
+                <div id="contentcall" class="content">
+                    <div>
+                        <div>
+                            <label class="text">hívott számok ( db) / periódus <s>*</s></label>
+                        </div>
+                        <div>
+                            <input class="droptextbox" type="number" id="callsPerPeriod" name="institution"
+                                [(ngModel)]="resultCampaign.callsPerPeriod" placeholder="1"
+                                title="Kérem töltse ki a mezőt">
+                        </div>
+                    </div>
                 </div>
-                <!--
 
+                <!--numberListId-->
 
-     Az alábbi kódra nagyon büszke vagyok
+                <div class="content">
+                    <div>
+                        <div>
+                            <label class="text">kötés a telefonszám listához <s>*</s></label>
+                        </div>
+                        <div>
+
+                            <input class="droptextbox" type="text" id="listname" name="institution"
+                                [(ngModel)]="list.name" readonly placeholder="lista neve">
+                            <!--
+              <p §type="text" id="numberListname" name="institution"   > {{ getListById(resultCampaign.numberListId)}}</p>
 -->
-                <div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!--welcomePath-->
+            <div id="callscontent">
+                <div id="contentcall" class="content">
+                    <div>
+                        <div>
+                            <label class="text">üdvözlő üzenet<s>*</s></label>
+                        </div>
+
+                        <div>
+                            <input class="droptextbox" type="text" id="welcomepath" name="welcomepath"
+                                [(ngModel)]="resultCampaign.welcomePath" readonly placeholder="lista neve">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--goodbyePath-->
+
+                <div class="content">
+                    <div>
+                        <div>
+                            <label class="text">elköszönő üzenet<s>*</s></label>
+                        </div>
+
+                        <div>
+                            <input class="droptextbox" type="text" id="goodbyepath" name="goodbyapath"
+                                [(ngModel)]="resultCampaign.goodbyePath" readonly placeholder="lista neve">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--
+
+
+                 <div>
                     <div *ngIf="resultCampaign.numberOfQuestions && resultCampaign.numberOfQuestions > 0">
                         <div *ngFor="let i of getNumbersArray(resultCampaign.numberOfQuestions); let index = index">
                             <label class="text" for="questions">Kérdés {{this.questions[index].questionNumber}}:</label>
@@ -70,104 +235,81 @@
                                 title="Kérem töltse ki a mezőt">
 
 
-                            <div *ngFor="let u of this.questions[index].answers; let valami = index">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+<div *ngFor="let u of this.questions[index].answers; let valami = index">
                                 <label class="text" for="questions">válasz
                                     {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
                                 <label class="text" for="questions">
                                     {{this.questions[index].answers[valami].value}}</label>
 
                             </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            
-            <div class="container2">
-                <div class="content2">
-                    <div class="form-group2">
-
-
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div>
-                            <label class="text" for="name">Név :</label>
-
-                            <input class="droptextbox" type="text" id="name" name="name"
-                                [(ngModel)]="resultCampaign.name " required placeholder="Budapest"
-                                title="Kérem töltse ki a mezőt">
-                        </div>
-
-                        <div>
-                            <label class="text" for="vpbxuuid">VPBX UUID :</label>
-
-                            <input class="droptextbox" type="text" id="vpbxuuid" name="vpbxuuid"
-                                [(ngModel)]="resultCampaign.VpbxUuid" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-
-                        </div>
-
-                        <div>
-                            <label class="text" for="startdate">Kezdete :</label>
-
-                            <input class="droptextbox" type="text" id="startdate" name="startdate"
-                                [(ngModel)]="resultCampaign.startDate" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-                        </div>
-                        <div>
-                            <label class="text" for="enddate">Vége :</label>
-
-                            <input class="droptextbox" type="text" id="enddate" name="enddate"
-                                [(ngModel)]="resultCampaign.endDate" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-                        </div>
-                        <div>
-                            <label class="text" for="questionnumber">Kérdések száma :</label>
-
-                            <input class="droptextbox" type="text" id="questionnumber" name="questionnumber"
-                                [(ngModel)]="resultCampaign.numberOfQuestions" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-                        </div>
-                        <div>
-                            <label class="text" for="started">Elindult :</label>
-
-                            <input class="droptextbox" type="text" id="started" name="started"
-                                [(ngModel)]="resultCampaign.started" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-                        </div>
-                    </div>
-
-
-                    <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-                        <button id="okebutton" (click)="startCampaign(this.campaignId)" style="z-index: 2; position: relative;">
-                            Start
-                        </button>
-
-                        <button id="okebutton" (click)="stopCampaign(this.campaignId)" style="z-index: 2; position: relative;">
-                            Stop
-                        </button>
-<!--
-                        <button id="okebutton" (click)="updateCampaign(this.campaignId)" style="z-index: 2; position: relative;">
-                            Update
-                        </button>
 -->
 
-                        <button id="okebutton" (click)="deleteCampaign(this.campaignId)" style="z-index: 2; position: relative;">
-                            Delete
-                        </button>
+    <div class="tab-button">
+        <label>Kérdések-Válaszok</label>
+    </div>
+    <div *ngIf="resultCampaign.numberOfQuestions && resultCampaign.numberOfQuestions > 0">
+        <div *ngFor="let i of getNumbersArray(resultCampaign.numberOfQuestions); let index = index">
+            <label class="text" for="questions"  > <b>Kérdés sorszáma : {{this.questions[index].questionNumber}}  </b></label>
 
-                        
-                        <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
-                            <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+            
+
+            <div class="container5">
+
+                <div id="datetime" class="content">
+                    <div>
+                        <div>
+                            <label class="text">Adatbázis hely: </label>
                         </div>
-                      </div>  
+                        <div>
+                            <input class="droptextbox" type="text" id="questions" name="questions"
+                                [(ngModel)]="this.questions[index].valueToSet">
+                        </div>
+                    </div>
 
-
-
-
-
-
-
+                    <div>
+                        <div>
+                            <label class="text">Hangfile</label>
+                        </div>
+                        <div>
+                            <input class="droptextbox" type="text" id="questions" name="questions"
+                                [(ngModel)]="this.questions[index].minioPath">
+                                <div class="ratestbutton">          
+                                    <button style="margin-bottom: 5px;" (click)="Play(this.questions[index].minioPath)">lejatszas</button>       
+                                  </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!--fromTime, toTime-->
+
+                <div id="datetime" class="content">
+                  
+                    <div>
+                        <div>
+                            <div *ngFor="let u of this.questions[index].answers;let valami = index">
+                            <label class="text">válasz {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
+                            <input class="droptextbox" type="text" id="questions" name="questions"
+                                [(ngModel)]="this.questions[index].answers[valami].value">
+                            
+                            </div> 
+                        </div>
+                       
+                    </div>
+
+                    <div>
+                        
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

@@ -105,10 +105,7 @@
               <div *ngFor="let addDate of campaign.callDays; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
                 <div style="flex-grow: 1;">
                   <p style="margin: 0;"> <p>{{addDate}}</p>                        
-                </div>
-                <div style="margin-left: auto;">
-                  <!--<button (click)="addDate(addDate)">X</button>-->
-                </div>
+                </div>                
               </div>
             </div>
           </ng-container>
@@ -126,7 +123,7 @@
           <label class="text">Hivások közötti idő <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="time" step="1"  min="00:00" id="period" name="institution" [(ngModel)]="origialPeriod" placeholder="???" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="time" step="1"  min="00:00"   id="period" name="institution" [(ngModel)]="origialPeriod" placeholder="???" title="Kérem töltse ki a mezőt">
         </div>      
       </div>
     </div>
