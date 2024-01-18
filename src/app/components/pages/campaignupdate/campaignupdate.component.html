@@ -35,7 +35,7 @@
                         <div>
                             <label class="text" for="goodbyepath">goodbyePath :</label>
 
-                             <select style="margin-right: 20px;" class="droptextbox" type="text" id="goodbyepath" name="goodbyepath" [(ngModel)]="resultCampaign.goodbyePath" title="Kérem válasszon">
+                             <select style="margin-right: 20px;" class="droptextbox" type="text" id="goodbyepath" name="goodbyepath" [(ngModel)]="resultCampaign.goodbyeSound" title="Kérem válasszon">
                                 <ng-container *ngFor="let sound of sounds">
                                   <option value="{{sound.Name}}">{{sound.Name}}</option>
                                 </ng-container>
@@ -45,7 +45,7 @@
                         <div>
                             <label class="text" for="welcomepath">welcomePath :</label>
 
-                            <select style="margin-right: 20px;" class="droptextbox" type="text" id="welcomepath" name="welcomepath" [(ngModel)]="resultCampaign.welcomePath" title="Kérem válasszon">
+                            <select style="margin-right: 20px;" class="droptextbox" type="text" id="welcomepath" name="welcomepath" [(ngModel)]="resultCampaign.welcomeSound" title="Kérem válasszon">
                                 <ng-container *ngFor="let sound of sounds">
                                   <option value="{{sound.Name}}">{{sound.Name}}</option>
                                 </ng-container>

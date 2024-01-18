@@ -1,5 +1,6 @@
 
 import { Question } from "../question/question";
+import { Sound } from "../sound/sound";
 import { CallDay } from "./callday";
 
 
@@ -20,8 +21,8 @@ export class ResultCampaign {
     liveOrAuto: boolean = false;
     numberListId: number = 0;
     numberOfQuestions: number = 0;
-    welcomePath: string = "";
-    goodbyePath: string = "";
+    welcomeSound: Sound = new Sound;
+    goodbyeSound: Sound = new Sound;
     ringGroup: number = 0;
     questions: Question[] = [];
 

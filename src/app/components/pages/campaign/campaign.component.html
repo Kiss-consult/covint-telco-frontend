@@ -195,7 +195,7 @@
 
                         <div>
                             <input class="droptextbox" type="text" id="welcomepath" name="welcomepath"
-                                [(ngModel)]="resultCampaign.welcomePath" readonly placeholder="lista neve">
+                                [(ngModel)]="resultCampaign.welcomeSound.Name" readonly placeholder="lista neve">
                         </div>
 
                     </div>
@@ -211,7 +211,7 @@
 
                         <div>
                             <input class="droptextbox" type="text" id="goodbyepath" name="goodbyapath"
-                                [(ngModel)]="resultCampaign.goodbyePath" readonly placeholder="lista neve">
+                                [(ngModel)]="resultCampaign.goodbyeSound.Name" readonly placeholder="lista neve">
                         </div>
 
                     </div>
@@ -278,9 +278,9 @@
                         </div>
                         <div>
                             <input class="droptextbox" type="text" id="questions" name="questions"
-                                [(ngModel)]="this.questions[index].minioPath">
+                                [(ngModel)]="this.questions[index].Sound.Name">
                                 <div class="ratestbutton">          
-                                    <button style="margin-bottom: 5px;" (click)="Play(this.questions[index].minioPath)">lejatszas</button>       
+                                    <button style="margin-bottom: 5px;" (click)="Play(this.questions[index].Sound.Url)">lejatszas</button>       
                                   </div>
                         </div>
                     </div>

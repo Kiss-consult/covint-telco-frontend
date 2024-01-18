@@ -14,10 +14,12 @@
           <div>
             <label class="text">Autómatikus / Élőhangos<s>*</s></label>
           </div>
+
           <div>            
-            <input type="radio" id="auto" name="liveOrAuto" (click)="toggleContent('auto')" [(ngModel)]="campaign.liveOrAuto" value="false"><label for="auto">Automata</label>
-            <input type="radio" id="live" name="liveOrAuto" (click)="toggleContent('live')" [(ngModel)]="campaign.liveOrAuto" value="true"><label for="live">Élőhangos</label>
+            <input type="radio" id="auto" name="liveOrAuto" (click)="toggleContent('auto')" ><label for="auto">Automata</label>
+            <input type="radio" id="live" name="liveOrAuto" (click)="toggleContent('live')" ><label for="live">Élőhangos</label>
           </div>
+         
         </div>
       </div>    
 
@@ -190,7 +192,7 @@
 
               <select class="droptextbox" type="text" id="welcomepath" name="welcomepath" [(ngModel)]="campaign.welcomePath" title="Kérem válasszon">
                   <ng-container *ngFor="let sound of sounds">
-                    <option value="{{sound.Url}}">{{sound.Name}}</option>
+                    <option value="{{sound.Name}}">{{sound.Name}}</option>
                   </ng-container>
                 </select>
 
@@ -213,7 +215,7 @@
 
                <select class="droptextbox" type="text" id="goodbyepath" name="goodbyepath" [(ngModel)]="campaign.goodbyePath" title="Kérem válasszon">
                   <ng-container *ngFor="let sound of sounds">
-                    <option value="{{sound.Url}}">{{sound.Name}}</option>
+                    <option value="{{sound.Name}}">{{sound.Name}}</option>
                   </ng-container>
                 </select>
 
@@ -257,9 +259,9 @@
               <div>
              
 
-                <select class="droptextbox" type="text" id="questionpath" name="questionpath" [(ngModel)]="newQuestion.minioPath" title="Kérem válasszon">
+                <select class="droptextbox" type="text" id="questionpath" name="questionpath" [(ngModel)]="newQuestion.Sound" title="Kérem válasszon">
                     <ng-container *ngFor="let sound of sounds">
-                      <option value="{{sound.Url}}">{{sound.Name}}</option>
+                      <option value="{{sound.Name}}">{{sound.Name}}</option>
                     </ng-container>
                   </select>
   
@@ -355,7 +357,7 @@
           <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
               <p style="margin: 0;"> Kérdés száma: {{ newQuestion.questionNumber }}</p>
-              <p style="margin: 0;"> Hangfile :{{ newQuestion.minioPath }}</p>
+              <p style="margin: 0;"> Hangfile :{{ newQuestion.Sound }}</p>
               <p style="margin: 0;"> Adatbázis: {{ newQuestion.valueToSet }}</p>
              
             </div>

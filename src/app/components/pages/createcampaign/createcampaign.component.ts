@@ -180,7 +180,7 @@ export class CreatecampaignComponent {
     //this.question.answers.push(this.answers)
 this.campaign.numberListId = parseInt(this.listID);
     console.log("listid",  this.campaign.numberListId)
-   
+    console.log("liveorauto",  this.campaign.liveOrAuto)
     console.log(this.origialFromTime, this.origialToTime)
     this.campaign.fromTime = this.formatTime(this.origialFromTime);
     this.campaign.toTime = this.formatTime(this.origialToTime);
