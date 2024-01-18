@@ -1,5 +1,6 @@
 
 import { Question } from "../question/question";
+import { CallDay } from "./callday";
 
 
 
@@ -24,7 +25,7 @@ export class ResultCampaign {
     ringGroup: number = 0;
     questions: Question[] = [];
 
-    callDays: string[] = [];
+    callDays: CallDay[] = [];
 
     id: number = 0;
     started: boolean = false;

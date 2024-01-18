@@ -64,13 +64,13 @@ export class CreatecampaignComponent {
     if (contentType === 'auto') {
       this.autoActive = true;
       this.liveActive = false;
-      this.campaign.liveOrAuto = true;
+      this.campaign.liveOrAuto = false;
       console.log("auto valsztottam", this.campaign.liveOrAuto)
 
     } else if (contentType === 'live') {
       this.autoActive = false;
       this.liveActive = true;
-      this.campaign.liveOrAuto = false;
+      this.campaign.liveOrAuto = true;
       console.log("live választottam:", this.campaign.liveOrAuto)
     }
 

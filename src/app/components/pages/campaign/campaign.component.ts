@@ -12,6 +12,8 @@ import { Campaign } from 'src/app/models/campaign/campaign';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Question } from 'src/app/models/question/question';
 import { Answer } from 'src/app/models/answer/answer';
+import { List_of_numbers} from 'src/app/models/list_of_numbers/list_of_numbers';
+import { CallDay } from 'src/app/models/result_campaign/callday';
 
 @Component({
   selector: 'app-campaign',
@@ -33,12 +35,16 @@ export class CampaignComponent {
   campaign: Campaign = new Campaign;
 
   campaignId: any = this.resultCampaign.id;
-
-
+  autoActive: boolean = false;
+  liveActive: boolean = false;
+list : List_of_numbers = new List_of_numbers;
   question: Question = new Question;
   answer: Answer = new Answer;
   answers: Answer[] = [];
   questions: Question[] = [];
+
+  calldays : CallDay[] = [];
+  callday : CallDay = new CallDay;
   getNumbersArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index + 1);
   }
@@ -72,9 +78,25 @@ export class CampaignComponent {
       this.resultCampaign = result.unwrap();
       console.log("Kampány sikeres betöltés");
       this.questions = this.resultCampaign.questions;
+      this.calldays = this.resultCampaign.callDays;
       console.log("kérdések", this.questions);
+      this.backendService.getListById(this.resultCampaign.numberListId).subscribe(
+        result => {
+          if (result.isErr()) {
+            alert("lista sikertelen leállítása");
+            console.error(result.unwrapErr());
+            return;
+          }
+          this.list = result.unwrap();
+          console.log(this.list.name)
+        
+         // window.location.reload();
+        });
+
+
 
     });
+    
   }
 
   public startCampaign(id: number) { 
@@ -113,6 +135,22 @@ export class CampaignComponent {
   ); 
 
   }
+  public getListName(id : number) { 
+
+    this.backendService.getListById(id).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("lista sikertelen leállítása");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.list = result.unwrap();
+        console.log(this.list.name)
+        return this.list.name;
+       // window.location.reload();
+      });
+
+  }
 
 
   public deleteCampaign(id: number) {
@@ -129,6 +167,12 @@ export class CampaignComponent {
           ['/managecampaign']
         );
       });
+  }
+
+  public Play(url: string) {
+    console.log(url)
+    let audio: HTMLAudioElement = new Audio(url);
+    audio.play();
   }
 
 }
