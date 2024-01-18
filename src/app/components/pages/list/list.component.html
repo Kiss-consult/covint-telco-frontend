@@ -2,29 +2,32 @@
   telefonszám lista
 
 </h1>
-<h2>Telefonszámok </h2>
+<h2>Telefonszámok listához, lista neve : {{list.name}}, lista id : {{list.id}}</h2>
 <div class="container">
   <!--TABLE-->
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-
   <div class="container2">
+ <!--
+  
+
+   
     <div class="container3">
       <div>
-        <h4><label class="text">Szűrés </label></h4>      
+        <h4><label class="text">Szűrés </label></h4>
       </div>
       <div class="content">
-        <div>
+        <div hidden>
           <label class="text">Név <s>*</s></label>
         </div>
-        <div>
+        <div hidden>
           <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
             title="Kérem töltse ki a mezőt">
         </div>
-      
-        <div>
+
+        <div hidden>
           <label class="text">Lista ID <s>*</s></label>
         </div>
-        <div>
+        <div hidden>
           <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
             value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
@@ -38,7 +41,7 @@
           <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
-      
+
         <div>
           <label class="text">Telefonszám <s>*</s></label>
         </div>
@@ -50,11 +53,59 @@
       <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
         keresés
       </button>
-    </div>        
+    </div>
+  -->
+  <div class="container3">
+    <div>
+      <h4><label class="text">Szűrés </label></h4>
+    </div>
+    <div>
+      <label class="text">Név <s>*</s></label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
+      title="Kérem töltse ki a mezőt">
+    </div>
 
+    <div hidden>
+      <div>
+        <label class="text">Lista ID <s>*</s></label>
+      </div>
+      <div hidden>
+        <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
+          value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label class="text">Egyéb <s>*</s></label>
+      </div>
+      <div>
+        <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
+          placeholder="???" title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label class="text">Telefonszám </label>
+      </div>
+      <div>
+        <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="filter.number" placeholder="???"
+        title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+    <div>
+      <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
+        keresés
+      </button>
+    </div>
+    
+  </div>
     <div class="container3">
       <div>
-        <h4><label class="text">hozzáadás </label></h4>          
+        <h4><label class="text">Telefonszám hozzáadás </label></h4>
       </div>
       <div>
         <label class="text">Név <s>*</s></label>
@@ -64,9 +115,9 @@
           title="Kérem töltse ki a mezőt">
       </div>
 
-      <div>
+      <div hidden>
         <div>
-           <label class="text">Lista ID <s>*</s></label>
+          <label class="text">Lista ID <s>*</s></label>
         </div>
         <div>
           <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="number_.listId"
@@ -98,17 +149,21 @@
           hozzáadás
         </button>
       </div>
-      <div class="content6">
-        <div class="diagrambutton"> 
-          <label>Exportálja listát</label>
-        </div>
-        <div>   
-          <button (click)="export()">Export</button>
-        </div> 
-      </div>        
+      
+      
     </div>
   </div>
 
+  <div class="container3">
+    <div class="content6">
+      <div class="diagrambutton">
+        <label>Exportálja  a listát (.xlsx)</label>
+      </div>
+      <div>
+        <button (click)="export()">Export</button>
+      </div>
+    </div>
+  </div>
   <div class="container4">
 
     <div class="acceptuser">
@@ -117,7 +172,7 @@
         <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
       </mat-form-field>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">          
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
           <td mat-cell *matCellDef="let number">
@@ -179,5 +234,5 @@
       <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
     </div>
   </div>
-  
+
 </div>
