@@ -4,9 +4,13 @@
   }
 
   .container3{    
-    text-align: center;    
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgb(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);
+    padding-bottom: 60px; 
 }
 
 .container4{
@@ -17,17 +21,42 @@
   display: flex;
 }
 
+.container5{
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+
+.tab-button {    
+  color: white;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  background: #646464;
+  margin: 0;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 500;
+  width: 200px;    
+  margin-bottom: 60px;    
+  line-height: 1.2;   
+  text-align: center;
+  justify-content: center;
+}
+
 .container2{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1;
+  justify-content: center;
+  text-align: center;
 }
   .acceptuser{
     background: rgb(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
     padding: 20px;
     padding-bottom: 70px;
-    padding-top: 100px;
+   
     width: 100%;
   }
   

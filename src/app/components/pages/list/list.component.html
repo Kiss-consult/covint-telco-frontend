@@ -6,6 +6,8 @@
 <div class="container">
   <!--TABLE-->
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+
+
   <div class="container2">
  <!--
   
@@ -55,58 +57,65 @@
       </button>
     </div>
   -->
-  <div class="container3">
-    <div>
-      <h4><label class="text">Szűrés </label></h4>
-    </div>
-    <div>
-      <label class="text">Név <s>*</s></label>
-    </div>
-    <div>
-      <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
-      title="Kérem töltse ki a mezőt">
-    </div>
+  
 
-    <div hidden>
-      <div>
-        <label class="text">Lista ID <s>*</s></label>
-      </div>
-      <div hidden>
-        <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
-          value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
+    <div class="container3">
 
-    <div>
-      <div>
-        <label class="text">Egyéb <s>*</s></label>
+      <div class="tab-button">
+        Szűrés
       </div>
-      <div>
-        <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
-          placeholder="???" title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
 
-    <div>
       <div>
-        <label class="text">Telefonszám </label>
+        <label class="text">Név <s>*</s></label>
       </div>
       <div>
-        <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="filter.number" placeholder="???"
+        <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="filter.name" placeholder="???"
         title="Kérem töltse ki a mezőt">
       </div>
-    </div>
-    <div>
-      <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
-        keresés
-      </button>
-    </div>
-    
-  </div>
-    <div class="container3">
-      <div>
-        <h4><label class="text">Telefonszám hozzáadás </label></h4>
+
+      <div hidden>
+        <div>
+          <label class="text">Lista ID <s>*</s></label>
+        </div>
+        <div hidden>
+          <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="filter.listId"
+            value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
       </div>
+
+      <div>
+        <div>
+          <label class="text">Egyéb <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="timestamp" name="timestamp" [(ngModel)]="filter.other"
+            placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label class="text">Telefonszám <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="filter.number" placeholder="???"
+          title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+      <div>
+        <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
+          keresés
+        </button>
+      </div>
+      
+    </div>
+
+    <div class="container3">
+
+      <div style="width: auto;" class="tab-button">
+        Telefonszám hozzáadás
+      </div>
+
       <div>
         <label class="text">Név <s>*</s></label>
       </div>
@@ -121,7 +130,7 @@
         </div>
         <div>
           <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="number_.listId"
-            value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+          value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
 
@@ -148,23 +157,24 @@
         <button id="okebutton" (click)="addToList(number_)" style="z-index: 2; position: relative;">
           hozzáadás
         </button>
-      </div>
-      
-      
+      </div>      
     </div>
-  </div>
+  </div> 
 
-  <div class="container3">
-    <div class="content6">
-      <div class="diagrambutton">
-        <label>Exportálja  a listát (.xlsx)</label>
-      </div>
-      <div>
-        <button (click)="export()">Export</button>
+    <div class="container5">
+      
+      <div class="content6">
+        <div class="diagrambutton">
+          <label>Exportálja  a listát (.xlsx)</label>
+        </div>
+        <div>
+          <button (click)="export()">Export</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container4">
+  
+
+    <div class="container4">
 
     <div class="acceptuser">
       <mat-form-field>

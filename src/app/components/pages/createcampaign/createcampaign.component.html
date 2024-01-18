@@ -98,12 +98,12 @@
           <p>{{campaign.callDays}}</p>
         </div>  
         
-        <div class="content2" style="padding-top: 60px;">
+        <div class="content2">
           <ng-container *ngIf="campaign.callDays">
             
             <div style="max-height: 265px; width: auto; overflow-y: auto;">
               <div *ngFor="let addDate of campaign.callDays; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-                <div style="flex-grow: 1;">
+                <div>
                   <p style="margin: 0;"> <p>{{addDate}}</p>                        
                 </div>                
               </div>
@@ -373,7 +373,19 @@
   </div>
 
 
-
+  
+  <div class="container3"*ngIf="liveActive">
+    <div class="content6" >
+      <div>
+        <div>
+          <label class="text">csöngeés csoport: ha előhangos akkor kell ez a szám<s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

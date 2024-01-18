@@ -4,8 +4,7 @@
     align-items: center;
     text-align: center;
     background: rgb(224,224,224);
-    background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);
-    padding-bottom: 60px;    
+    background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);    
 }
 
 .exportbutton:nth-child(even) {
