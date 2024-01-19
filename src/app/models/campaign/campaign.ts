@@ -20,7 +20,7 @@ export class Campaign {
     ringGroup: number = 0; // csöngeés csoport: ha előhangos akkor kell ez a szám
     questions: Question[] = []; // kérdések-válaszok tömbje
     callDays: string[] = []; // milen napokon akarunk hívni
-
+    recalls!: number;
 
 }
 
