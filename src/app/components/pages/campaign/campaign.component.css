@@ -24,8 +24,7 @@
 
 .content{
     padding-top: 40px;
-    padding-bottom: 80px;
-    
+    padding-bottom: 80px;    
 }
 
 .content2{
@@ -36,8 +35,23 @@
     padding-left: 60px;
 }
 
+.content4{
+    padding-top: 10px;
+    padding-bottom: 80px;    
+}
+
+.content5{
+    padding-top: 60px;
+    padding-bottom: 80px;    
+}
+
 #adddate{
     margin-top: 30px;
+}
+
+.sorszam{
+    justify-content: left;
+    text-align: left;
 }
 
 .container6{
@@ -75,6 +89,11 @@
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     text-align: center; 
+}
+
+.container4{
+    text-align: left;    
+    align-items: center;    
 }
 
 .container4{
@@ -162,21 +181,27 @@
     grid-template-columns: repeat(2, 1fr);    
 }
 
+
 #datetime{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(180deg,rgb(255, 255, 255) 70%, rgba(255,255,255,0) 100%);
+    background: rgb(240,240,240);
+    background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
     padding-bottom: 40px;
     padding-top: 40px;
     border-top: solid 3px #646464;
 }
 
-#datetime:nth-child(even) {
+#datetime1{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
     background: rgb(240,240,240);
     background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
+    padding-bottom: 40px;
+    border-top: solid 3px #646464;
 }
 
 #addQuestionbutton{
