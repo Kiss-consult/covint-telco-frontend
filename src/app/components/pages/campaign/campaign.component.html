@@ -35,11 +35,41 @@
                             [(ngModel)]="resultCampaign.name" readonly placeholder="???"
                             title="Kérem töltse ki a mezőt">
                     </div>
+                    <div  *ngIf="resultCampaign.started">
+                        <div>
+                            <label class="text">A kampány elindult</label>
+                        </div>
+                    </div>
+                    <div  *ngIf="!resultCampaign.started">
+                        <div>
+                            <label class="text">A kampány nem indult el vagy már leállt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div>
+                    
+                    <div>
+                        <button id="addQuestionbutton" (click)="startCampaign(resultCampaign.id)">Start</button> 
+                    </div>
+                    <div>
+                        <button id="addQuestionbutton" (click)="stopCampaign(resultCampaign.id)">Stop</button> 
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div>
+                    
+                    <div>
+                        <button id="addQuestionbutton" (click)="deleteCampaign(resultCampaign.id)">Törlés</button> 
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!--startDate, endDate-->
+        <!--startDate, endDate               <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>                 -->
 
         <div class="tab-button">
             <label>Idővallumok</label>

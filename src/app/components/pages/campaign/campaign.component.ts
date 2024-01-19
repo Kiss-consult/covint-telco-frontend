@@ -80,6 +80,7 @@ list : List_of_numbers = new List_of_numbers;
       this.questions = this.resultCampaign.questions;
       this.calldays = this.resultCampaign.callDays;
       console.log("kérdések", this.questions);
+      
       this.backendService.getListById(this.resultCampaign.numberListId).subscribe(
         result => {
           if (result.isErr()) {
