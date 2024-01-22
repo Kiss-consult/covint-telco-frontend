@@ -13,10 +13,10 @@ export class AppComponent {
   title = 'covint-telco-frontend';
 
   flag: boolean = true;
- /* orvos = Orvos;
-  kutatoorvos = KutatoOrvos;
-  portaladmin = PortalKezelo;
-  portalvezeto = PortalVezeto;*/
+  /* orvos = Orvos;
+   kutatoorvos = KutatoOrvos;
+   portaladmin = PortalKezelo;
+   portalvezeto = PortalVezeto;*/
   isMenuOpen = false;
 
   constructor(public loginService: LoginService, private router: Router) { }
@@ -29,7 +29,10 @@ export class AppComponent {
 
     this.router.navigate(["/changepwd"]);
   }
-  
+  gotoCovint() {
+   
+    window.open("https://www.w3schools.com");
+  }
   getUserAttributes() {
 
     this.router.navigate(["/profile"]);
