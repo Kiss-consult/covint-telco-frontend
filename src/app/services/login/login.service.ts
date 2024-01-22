@@ -42,7 +42,19 @@ export class LoginService {
           }
         }
       });
+
+      if (keycloakService.isLoggedIn()) {
+        this.getUserData();
+      } else {
+        this.loggedIn = false;
+  
+      }
+
     }
+
+
+
+    
     private getUserData() {
         this.loggedIn = true;
         this.keycloakService.getToken().then((token) => {
@@ -55,18 +67,22 @@ export class LoginService {
       }
 
       public login(): void {
-        this.keycloakService.isLoggedIn().then((loggedIn) => {
-          console.log("loggedIn from login", loggedIn)
-          this.loggedIn = loggedIn;
-          if (this.loggedIn === false) {
-            this.keycloakService.login().then(() => {
-              this.loggedIn = true;
-              this.getUserData();
-            });
-          }
+
+        this.loggedIn = this.keycloakService.isLoggedIn();
+        if (this.loggedIn === true) {
           this.getUserData();
+          return;
+        }
+        this.keycloakService.login().then(() => {
+    
+          this.loggedIn = this.keycloakService.isLoggedIn();
+          if (this.loggedIn === true) {
+            this.getUserData();
+          }
         });
       }
+    
+
       private getHeaders(): HttpHeaders {
         return new HttpHeaders({
           "Content-Type": "application/json",
