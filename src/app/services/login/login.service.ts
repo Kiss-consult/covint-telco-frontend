@@ -1,26 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription, catchError, finalize, map, of } from 'rxjs';
-import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
 
-import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import jwt_decode from 'jwt-decode';
-//import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
 
 
 import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
-import { Empty } from 'src/app/models/utils/empty';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
-
-
-
 export class LoginService {
     static hasAnyGroup(groups: string[]) {
       throw new Error('Method not implemented.');
@@ -89,11 +79,11 @@ export class LoginService {
       }
     
       public logout() {
-        
-     
-        this.keycloakService.logout(window.location.origin)
+        let home = window.location.toString().replace(this.router.url, '')
+
+        this.keycloakService.logout(home)
         this.keycloakService.clearToken();
-       
+    
         this.token = "";
       }
 

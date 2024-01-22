@@ -11,7 +11,7 @@ export function initializeKeycloak(
         config: {
           url: configService.config.KeycloakUrl,
           realm: "Covint",
-          clientId: "covint-auth"
+          clientId: "covint-telco-auth"
         },
         initOptions: {
           checkLoginIframe: false,
