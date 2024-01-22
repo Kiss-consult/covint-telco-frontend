@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from './services/login/login.service';
 import { Router } from '@angular/router';
+import { ConfigService } from './services/config/config.service';
 
 
 
@@ -19,7 +20,7 @@ export class AppComponent {
    portalvezeto = PortalVezeto;*/
   isMenuOpen = false;
 
-  constructor(public loginService: LoginService, private router: Router) { }
+  constructor(public loginService: LoginService, private router: Router, private configService: ConfigService) { }
 
   logout() {
     this.loginService.logout();
@@ -31,7 +32,7 @@ export class AppComponent {
   }
   gotoCovint() {
    
-    window.open("https://www.w3schools.com");
+    window.open(this.configService.config.CovintUrl);
   }
   getUserAttributes() {
 

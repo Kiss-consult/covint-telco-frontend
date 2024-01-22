@@ -1,4 +1,6 @@
 {
     "TelcoBackendUrl": "${TELCO_BACKEND_URL}",
-    "KeycloakUrl": "${KEYCLOAK_URL}"
+    "KeycloakUrl": "${KEYCLOAK_URL}",
+    "CaptchaKey": "${CAPTCHA_KEY}",
+    "CovintUrl": "${COVINT_URL}"    
 }
