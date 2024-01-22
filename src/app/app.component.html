@@ -39,7 +39,9 @@
           <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
         </li>
         
-  
+        <li  class="nav-item">
+          <button (click)="gotoCovint()">Covint</button>
+       </li>
         
       </ul>
   
@@ -66,11 +68,17 @@
         <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="" class="nav-link" (click)="getUserAttributes()">Profil</a>
         </li>
+
+         <button (click)="removeAnswer(newAnswer)">Törlés</button>
     -->
         <li class="nav-item" routerLinkActive="active">
           <a [routerLink]="" class="nav-link" (click)="logout()">Kijelentkezés</a>
         </li>    
       
+       
+ <!--
+         <button (click)="removeAnswer(newAnswer)">Törlés</button>
+    -->
       </ul>
     </nav>
   </div>
