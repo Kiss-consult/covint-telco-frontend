@@ -120,7 +120,7 @@
         <label class="text">Név <s>*</s></label>
       </div>
       <div>
-        <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="number_.name" placeholder="???"
+        <input class="droptextbox" type="text" id="name" name="name" [(ngModel)]="data.name" placeholder="???"
           title="Kérem töltse ki a mezőt">
       </div>
 
@@ -129,7 +129,7 @@
           <label class="text">Lista ID <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="number_.listId"
+          <input class="droptextbox" type="number" id="listid" name="listid" [(ngModel)]="data.listId"
           value="{{this.list.id}}" readonly placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
@@ -139,7 +139,7 @@
           <label class="text">Egyéb <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="other" name="other" [(ngModel)]="number_.other" placeholder="???"
+          <input class="droptextbox" type="text" id="other" name="other" [(ngModel)]="data.other" placeholder="???"
             title="Kérem töltse ki a mezőt">
         </div>
       </div>
@@ -149,12 +149,12 @@
           <label class="text">Telefonszám <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="number_.number"
+          <input class="droptextbox" type="text" id="number" name="number" [(ngModel)]="data.number"
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
       <div>
-        <button id="okebutton" (click)="addToList(number_)" style="z-index: 2; position: relative;">
+        <button id="okebutton" (click)="addToList(data)" style="z-index: 2; position: relative;">
           hozzáadás
         </button>
       </div>      
@@ -185,53 +185,53 @@
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-          <td mat-cell *matCellDef="let number">
-            {{ number.id}}
+          <td mat-cell *matCellDef="let data">
+            {{ data.id}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
-          <td mat-cell *matCellDef="let number">
-            {{ number.name}}
+          <td mat-cell *matCellDef="let data">
+            {{ data.name}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="other">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Egyéb</th>
-          <td mat-cell *matCellDef="let number">
-            {{ number.other}}
+          <td mat-cell *matCellDef="let data">
+            {{ data.other}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="listId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Lista Id</th>
-          <td mat-cell *matCellDef="let number">
-            {{ number.listId}}
+          <td mat-cell *matCellDef="let data">
+            {{ data.listId}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="number">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefonszám</th>
-          <td mat-cell *matCellDef="let number">
-            {{ number.number}}
+          <td mat-cell *matCellDef="let data">
+            {{ data.number}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="update">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-          <td mat-cell *matCellDef="let number">
+          <td mat-cell *matCellDef="let data">
             <div class="ratestbutton">
-              <button style="margin-bottom: 5px;" (click)="updateNumber(number)">update</button>
+              <button style="margin-bottom: 5px;" (click)="updateNumber(data)">update</button>
             </div>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-          <td mat-cell *matCellDef="let number">
+          <td mat-cell *matCellDef="let data">
             <div class="ratestbutton">
-              <button style="margin-bottom: 5px;" (click)="deleteNumber(number)">törlés</button>
+              <button style="margin-bottom: 5px;" (click)="deleteNumber(data)">törlés</button>
             </div>
           </td>
         </ng-container>

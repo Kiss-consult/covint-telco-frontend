@@ -51,11 +51,17 @@
             <div class="content">
                 <div>
                     
-                    <div>
-                        <button id="addQuestionbutton" (click)="startCampaign(resultCampaign.id)">Start</button> 
+                    <div  *ngIf="available" >
+                        <button id="addQuestionbutton" (click)="startCampaign(resultCampaign.id)" >Start</button> 
                     </div>
-                    <div>
+                    <div  *ngIf="!available" >
+                        <button id="addQuestionbutton" disabled="disabled" (click)="startCampaign(resultCampaign.id)" title="A kampány ideje már lejárt">Start</button> 
+                    </div>
+                    <div *ngIf="available" >
                         <button id="addQuestionbutton" (click)="stopCampaign(resultCampaign.id)">Stop</button> 
+                    </div>
+                    <div *ngIf="!available" >
+                        <button id="addQuestionbutton" disabled="disabled" (click)="stopCampaign(resultCampaign.id)" title="A kampány ideje már lejárt">Stop</button> 
                     </div>
                 </div>
             </div>

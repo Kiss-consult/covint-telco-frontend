@@ -11,10 +11,11 @@ import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { Empty } from 'src/app/models/utils/empty';
 import { Sound } from 'src/app/models/sound/sound';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
-import { Number } from 'src/app/models/list_of_numbers/number';
+import { Data } from 'src/app/models/list_of_numbers/data';
 import { Filter } from 'src/app/models/filter/filter';
 import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 import { UpdateNumber } from 'src/app/models/list_of_numbers/update_number';
+import { Page } from 'src/app/models/list_of_numbers/page';
 
 @Injectable({
     providedIn: 'root'
@@ -163,18 +164,18 @@ public getListById(id : number): Observable<Result<List_of_numbers>> {
 }
 
 // This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
-public filterList(filter: Filter): Observable<Result<Number[]>> {
+public filterList(filter: Filter): Observable<Result<Page>> {
   const url = this.url + "/list/filter";
-  return this.httpClient.post<Result<Number[]>>(url, filter, { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<Number[]>(JSON.stringify(result))),
-    catchError(error => of(new Err<Number[]>(error)))
+  return this.httpClient.post<Result<Page>>(url, filter, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Page>(JSON.stringify(result))),
+    catchError(error => of(new Err<Page>(error)))
   );
 }
 
 // This function add a new number to the list ( listId), name and other is optional
-public addTolist(listId: number,   numbers: Number[] = [] ): Observable<Result<{}>> {
+public addTolist(listId: number,   datas: Data[] = [] ): Observable<Result<{}>> {
   const url = this.url + "/list/add";
-  let add = {listId, numbers};
+  let add = {listId, datas};
   return this.httpClient.post<Result<{}>>(url, add, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
@@ -237,11 +238,11 @@ public downloadExport(id: number): Observable<Result<[any[], string]>> {
 }
 
 // This function get a given existing campaign by id from the database.
-public getNumberById(id : number): Observable<Result<Number>> {
+public getNumberById(id : number): Observable<Result<Data>> {
   const url = this.url + "/number/" + id; 
-  return this.httpClient.get<Result<Number>>(url,  { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<Number>(JSON.stringify(result))),
-    catchError(error => of(new Err<Number>(error)))
+  return this.httpClient.get<Result<Data>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Data>(JSON.stringify(result))),
+    catchError(error => of(new Err<Data>(error)))
   );
 }
 
