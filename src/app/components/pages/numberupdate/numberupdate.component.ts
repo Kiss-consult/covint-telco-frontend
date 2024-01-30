@@ -13,6 +13,8 @@ import { Answer } from 'src/app/models/answer/answer';
 import { Number } from 'src/app/models/list_of_numbers/number';
 import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 import { UpdateNumber } from 'src/app/models/list_of_numbers/update_number';
+import { Data } from 'src/app/models/list_of_numbers/data';
+import { Page } from 'src/app/models/list_of_numbers/page';
 @Component({
   selector: 'app-numberupdate',
   templateUrl: './numberupdate.component.html',
@@ -30,10 +32,10 @@ export class NumberupdateComponent {
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'started'];
 
   campaign: Campaign = new Campaign;
-  number: Number = new Number;
-  id: any = this.number.id;
+  data: Data = new Data;
+  id: any = this.data.id;
   update_number = new UpdateNumber;
-
+page : Page= new Page;
 
   question: Question = new Question;
   answer: Answer = new Answer;
@@ -63,15 +65,15 @@ export class NumberupdateComponent {
         console.error(result.unwrapErr());
         return;
       }
-      this.number = result.unwrap();
+      this.data = result.unwrap();
 
-      this.update_number.id = this.number.id;
-      this.update_number.name = this.number.name;
-      this.update_number.number = this.number.number;
-      this.update_number.other = this.number.other;
+      this.update_number.id = this.data.id;
+      this.update_number.name = this.data.name;
+      this.update_number.number = this.data.number;
+      this.update_number.other = this.data.other;
       console.log("Telefonszám mező sikeres betöltés");
 
-      console.log("telefonszámmező", this.number);
+      console.log("telefonszámmező", this.data);
 
     });
 

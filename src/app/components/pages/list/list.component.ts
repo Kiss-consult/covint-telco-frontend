@@ -11,7 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
 import { Number } from 'src/app/models/list_of_numbers/number';
 import { Filter } from 'src/app/models/filter/filter';
-
+import { Page } from 'src/app/models/list_of_numbers/page';
+import { Data } from 'src/app/models/list_of_numbers/data';
 
 @Component({
   selector: 'app-list',
@@ -21,9 +22,10 @@ import { Filter } from 'src/app/models/filter/filter';
 export class ListComponent {
 
 
-  number_: Number = new Number;
-  numbers_: Number[] = [];
-  dataSource!: MatTableDataSource<Number>;
+  data :Data = new Data;
+  datas: Data[] = [];
+  page : Page= new Page;
+  dataSource!: MatTableDataSource<Data>;
   @ViewChild('paginator')  paginator!: MatPaginator;
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
@@ -65,13 +67,23 @@ export class ListComponent {
         return;
       }
       this.list = result.unwrap();
-      this.numbers_ = this.list.numbers;
-      this.dataSource = new MatTableDataSource(this.numbers_);
+
+      this.page = this.list.page;
+      this.datas = this.page.data;
+      
+     
+      console.log("ellenorzes list:" , this.list,);
+      console.log("ellenorzes page:" , this.page,);
+      console.log("ellenorzes page.data:" , this.page.data);
+     // console.log("ellenorzes data:" , this.list);
+     // alert("elenorzes");
+      
+      this.dataSource = new MatTableDataSource(this.datas);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.empTbSort;
       console.log("telefonszám lista sikeres betöltés");
 
-      console.log("számok", this.numbers_);
+      console.log("számok", this.data);
 
     });
 
@@ -93,12 +105,13 @@ export class ListComponent {
           return;
         }
        let result_filter = result.unwrap();
-       this.numbers_ = result_filter;
-        this.dataSource = new MatTableDataSource(this.numbers_);
+       this.page = result_filter;
+       this.datas = this.page.data;
+        this.dataSource = new MatTableDataSource(this.datas);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-        this.dataSource.data = this.numbers_; // Az adatforrás frissítése
+       this.dataSource.data = this.page.data; // Az adatforrás frissítése
         console.log("Kampányok keresése sikeres betöltés");
         console.log("filter eredmeny",result_filter);
       });
@@ -113,13 +126,13 @@ export class ListComponent {
           return;
         }
         alert("telefonszám sikeres törlése");
-        //this.dataSource = new MatTableDataSource(this.sounds);
+        this.dataSource = new MatTableDataSource(this.datas);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-        this.dataSource.data = this.numbers_; // Az adatforrás frissítése
-        console.log("hanganyag sikeres törlése");
-        console.log(this.numbers_);
+       this.dataSource.data = this.datas; // Az adatforrás frissítése
+        console.log("telefonszám sikeres törlése");
+      console.log(this.data);
         window.location.reload();
 
       });
@@ -135,14 +148,14 @@ export class ListComponent {
 
   }
 
- addToList(number: Number) {
-  let localnumbers: Number[] = []; // Valamiert tömbe kell átadni 
-  let localnumber = number;
+ addToList(data: Data) {
+  let localnumbers: Data[] = []; // Valamiert tömbe kell átadni 
+  let localnumber = data;
   let listId = this.list.id;
   
   localnumbers.push(localnumber)
   
-  this.numbers_.push(number);
+ // this.numbers_.push(number);
     this.backendService.addTolist(listId, localnumbers).subscribe(
       result => {
         if (result.isErr()) {
@@ -155,9 +168,9 @@ export class ListComponent {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-        this.dataSource.data = this.numbers_; // Az adatforrás frissítése
+       // this.dataSource.data = this.numbers_; // Az adatforrás frissítése
         console.log("hanganyag sikeres hozzáadása");
-        console.log(this.numbers_);
+       // console.log(this.numbers_);
         window.location.reload();
 
       });

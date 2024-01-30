@@ -13,9 +13,9 @@ export class HomeComponent {
 
 
   constructor( public loginService: LoginService, public backendService : BackendService) {
-    this.backendService.hello().subscribe((data) => {
-      console.log(data);
-    });
+    //this.backendService.hello().subscribe((data) => {
+    //  console.log(data);
+   // });
     this.loginService.isLoggedIn()
   }
 
