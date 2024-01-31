@@ -92,7 +92,7 @@
 
       <div id="datetime" class="content" >        
         <div>
-          <label class="text">milyen napokon akarunk hívni<s>*</s></label>
+          <label class="text">Hívás napjainak kiválasztása<s>*</s></label>
         </div>
         <div>
           <input class="droptextbox" type="date" id="callDays" name="institution" [(ngModel)]="callday" ringGroup="???" title="Kérem töltse ki a mezőt">
@@ -153,7 +153,7 @@
         <div id="contentcall" class="content" >
           <div>
             <div>
-              <label class="text">hívott számok ( db) / periódus <s>*</s></label>
+              <label class="text">Hívott számok ( db) / periódus <s>*</s></label>
             </div>
             <div>
               <input class="droptextbox" type="number" id="callsPerPeriod" name="institution" [(ngModel)]="campaign.callsPerPeriod" placeholder="1" title="Kérem töltse ki a mezőt">
@@ -166,7 +166,7 @@
         <div class="content" >
           <div>
             <div>
-              <label class="text">kötés a telefonszám listához  <s>*</s></label>
+              <label class="text">Kötés a telefonszám listához  <s>*</s></label>
             </div>
             <div>
              
@@ -192,7 +192,7 @@
         <div id="contentcall" class="content">
           <div>
             <div>
-              <label class="text">üdvözlő üzenet<s>*</s></label>
+              <label class="text">Üdvözlő üzenet<s>*</s></label>
             </div>
 
             <div>
@@ -214,7 +214,7 @@
         <div class="content">
           <div>
             <div>
-              <label class="text">elköszönő üzenet<s>*</s></label>
+              <label class="text">Elköszönő üzenet<s>*</s></label>
             </div>
 
 
@@ -253,7 +253,7 @@
       <div id="callscontent">
         <div id="contentcall" class="content3" >
           <div>
-            <label class="text" for="bno">Kérdés sorszáma</label>
+            <label class="text" for="bno">Kérdés sorszáma<s>*</s></label>
           </div>
           <div id="questionsclass">
             <div>
@@ -301,13 +301,13 @@
       <div id="callscontent2">
         <div id="contentcall" class="content3" >
           <div>
-            <label class="text" for="bno">Válaszok száma</label>
+            <label class="text" for="bno">Válaszok száma<s>*</s></label>
           </div>          
           <div>
             <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
           </div>      
           <div>
-            <label class="text" for="bno">Válasz megadása</label>
+            <label class="text" for="bno">Válasz megadása<s>*</s></label>
           </div> 
           <div>
             <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
@@ -388,7 +388,7 @@
     <div class="content6" >
       <div>
         <div>
-          <label class="text">csöngeés csoport: ha előhangos akkor kell ez a szám<s>*</s></label>
+          <label class="text">Csengés csoport: Élőhangos kampány esetén<s>*</s></label>
         </div>
         <div>
           <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???" title="Kérem töltse ki a mezőt">

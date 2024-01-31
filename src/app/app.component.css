@@ -17,6 +17,21 @@
     color: #ffffff;
 }
   
+#covint{
+  background-color: white;
+  color: #000000;
+  border: none;
+  width: auto;
+}
+
+#covint:hover{
+  background-color:#9dc3ff ;
+  border-top-right-radius:7px;
+  border-top-left-radius: 7px;
+  color: white;
+  margin: 0;    
+  cursor: pointer;
+}
 
   .nav-item p{
     color: black;
