@@ -87,11 +87,7 @@ export class CreatecampaignComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  addDate() {
-    this.campaign.callDays.push(this.callday);
-    this.callday ="";
-    console.log(this.campaign.callDays)    
-  }
+ 
 
   constructor(private backendService: BackendService, private location: Location) {
 
@@ -214,7 +210,7 @@ this.campaign.numberListId = parseInt(this.listID);
     
     console.log (this.buttonValues)
     if (this.buttonValues.filter((valami) => valami === this.newAnswer.buttonValue).length > 0) {
-      console.log("Marker already exists")
+      console.log("The button  already exists")
       alert("a nyomogomb már szerepel ebben a kérdésben")
       this.removeAnswer(this.newAnswer);
       return;
@@ -231,6 +227,20 @@ this.campaign.numberListId = parseInt(this.listID);
   // Function to remove answer from the quesion
   public removeAnswer(answer: Answer) {
     this.newQuestion.answers = this.newQuestion.answers.filter(m => m !== answer);
+  }
+
+  addDate() {
+
+    this.campaign.callDays.push(this.callday);    
+    
+    this.callday ="";
+
+    console.log(this.campaign.callDays)   
+
+  }    
+
+ removeDate(date: string) {
+    this.campaign.callDays = this.campaign.callDays.filter(m => m !== date);
   }
 
 
@@ -256,6 +266,6 @@ this.campaign.numberListId = parseInt(this.listID);
     this.campaign.numberOfQuestions = this.campaign.numberOfQuestions -1;
   }
 
-
+ 
 }
 
