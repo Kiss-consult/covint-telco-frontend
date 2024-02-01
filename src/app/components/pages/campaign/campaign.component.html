@@ -12,7 +12,7 @@
             <div class="content">
                 <div>
                     <div>
-                        <label class="text">Autómatikus / Élőhangos<s>*</s></label>
+                        <label class="text">Autómatikus / Élőhangos</label>
                     </div>
                     <div>
                         <input type="checkbox" id="auto" name="liveOrAuto" [checked]="!resultCampaign.liveOrAuto"><label
@@ -28,7 +28,7 @@
             <div class="content">
                 <div>
                     <div>
-                        <label class="text">Kampány neve <s>*</s></label>
+                        <label class="text">Kampány neve </label>
                     </div>
                     <div>
                         <input class="droptextbox" type="text" id="name" name="institution"
@@ -97,7 +97,7 @@
 
                 <div>
                     <div>
-                        <label class="text">Befejezés dátuma <s>*</s></label>
+                        <label class="text">Befejezés dátuma </label>
                     </div>
                     <div>
                         <input class="droptextbox" type="date" id="endDate" name="institution"
@@ -111,21 +111,21 @@
             <div id="datetime" class="content">
                 <div>
                     <div>
-                        <label class="text">Kezdés ideje <s>*</s></label>
+                        <label class="text">Kezdés ideje </label>
                     </div>
                     <div>
                         <input class="droptextbox" type="time" id="fromTime" name="institution"
-                            [(ngModel)]="resultCampaign.fromTime" placeholder="???" title="Kérem töltse ki a mezőt">
+                            [(ngModel)]="resultCampaign.fromTime"readonly placeholder="???" title="Kérem töltse ki a mezőt">
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <label class="text">Befejezés ideje <s>*</s></label>
+                        <label class="text">Befejezés ideje </label>
                     </div>
                     <div>
                         <input class="droptextbox" type="time" id="toTime" name="institution"
-                            [(ngModel)]="resultCampaign.toTime" placeholder="???" title="Kérem töltse ki a mezőt">
+                            [(ngModel)]="resultCampaign.toTime" readonly placeholder="???" title="Kérem töltse ki a mezőt">
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
 
             <div id="datetime" class="content">
                 <div>
-                    <label class="text">milyen napokon akarunk hívni<s>*</s></label>
+                    <label class="text">milyen napokon akarunk hívni</label>
                 </div>
 
 
@@ -163,11 +163,11 @@
 
             <div id="datetime" class="content">
                 <div>
-                    <label class="text">Hivások közötti idő <s>*</s></label>
+                    <label class="text">Hivások közötti idő </label>
                 </div>
                 <div>
                     <input class="droptextbox" type="text" id="period" name="institution"
-                        [(ngModel)]="resultCampaign.period" placeholder="???" title="Kérem töltse ki a mezőt">
+                        [(ngModel)]="resultCampaign.period" readonly placeholder="???" title="Kérem töltse ki a mezőt">
                 </div>
             </div>
         </div>
@@ -187,11 +187,11 @@
                 <div id="contentcall" class="content">
                     <div>
                         <div>
-                            <label class="text">hívott számok ( db) / periódus <s>*</s></label>
+                            <label class="text">hívott számok ( db) / periódus </label>
                         </div>
                         <div>
                             <input class="droptextbox" type="number" id="callsPerPeriod" name="institution"
-                                [(ngModel)]="resultCampaign.callsPerPeriod" placeholder="1"
+                                [(ngModel)]="resultCampaign.callsPerPeriod"  readonly placeholder="1"
                                 title="Kérem töltse ki a mezőt">
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                 <div class="content">
                     <div>
                         <div>
-                            <label class="text">kötés a telefonszám listához <s>*</s></label>
+                            <label class="text">kötés a telefonszám listához </label>
                         </div>
                         <div>
 
@@ -226,7 +226,7 @@
                 <div id="contentcall" class="content">
                     <div>
                         <div>
-                            <label class="text">üdvözlő üzenet<s>*</s></label>
+                            <label class="text">üdvözlő üzenet</label>
                         </div>
 
                         <div>
@@ -242,7 +242,7 @@
                 <div class="content">
                     <div>
                         <div>
-                            <label class="text">elköszönő üzenet<s>*</s></label>
+                            <label class="text">elköszönő üzenet</label>
                         </div>
 
                         <div>
@@ -258,33 +258,6 @@
 
 
 
-    <!--
-
-
-                 <div>
-                    <div *ngIf="resultCampaign.numberOfQuestions && resultCampaign.numberOfQuestions > 0">
-                        <div *ngFor="let i of getNumbersArray(resultCampaign.numberOfQuestions); let index = index">
-                            <label class="text" for="questions">Kérdés {{this.questions[index].questionNumber}}:</label>
-
-                            <input class="droptextbox" type="text" id="questions" name="questions"
-                                [(ngModel)]="this.questions[index].questionNumber" required placeholder="1007"
-                                title="Kérem töltse ki a mezőt">
-
-
-                            
-                        </div>
-                    </div>
-
-                </div>
-
-<div *ngFor="let u of this.questions[index].answers; let valami = index">
-                                <label class="text" for="questions">válasz
-                                    {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
-                                <label class="text" for="questions">
-                                    {{this.questions[index].answers[valami].value}}</label>
-
-                            </div>
--->
 
     <div class="tab-button">
         <label>Kérdések-Válaszok</label>
@@ -315,7 +288,7 @@
                             <label class="text">Adatbázis hely: </label>
                         </div>
                         <div>
-                            <input class="droptextbox" type="text" id="questions" name="questions"
+                            <input class="droptextbox" type="text" id="questions" name="questions" readonly
                                 [(ngModel)]="this.questions[index].valueToSet">
                         </div>
                     </div>
@@ -325,7 +298,7 @@
                             <label class="text">Hangfile</label>
                         </div>
                         <div>
-                            <input class="droptextbox" type="text" id="questions" name="questions"
+                            <input class="droptextbox" type="text" id="questions" name="questions" readonly
                                 [(ngModel)]="this.questions[index].Sound.Name">
                                 <div class="ratestbutton">          
                                     <button style="margin-bottom: 5px;" (click)="Play(this.questions[index].Sound.Url)">lejatszas</button>       
@@ -342,7 +315,7 @@
                         <div>
                             <div *ngFor="let u of this.questions[index].answers;let valami = index">
                             <label class="text">válasz {{this.questions[index].answers[valami].buttonValue}} - gombra:</label>
-                            <input class="droptextbox" type="text" id="questions" name="questions"
+                            <input class="droptextbox" type="text" id="questions" name="questions" readonly
                                 [(ngModel)]="this.questions[index].answers[valami].value">
                             
                             </div> 

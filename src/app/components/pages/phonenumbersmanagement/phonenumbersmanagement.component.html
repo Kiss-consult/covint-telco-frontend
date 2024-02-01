@@ -19,10 +19,21 @@
           </div>
         </div>
 
+
+       
+        <div>
+          <div >
+            <button (click)="DownloadCSVtemplate()"> Minta CSV Letöltés</button>
+           
+          </div>
+        </div>
+
+
       <div class="file-upload">
         <div class="exportbutton2">
           <div>
             <label class="text"> Adjon nevet a listának! <s>*</s></label>
+            <p>telefonszám formátum: +36xxxxxxxxx , feltöltésnél ellnőrizzük a file tartalmát! </p>
           </div>
           <div>
             <input class="droptextbox" type="text" id="listname" name="listname" [(ngModel)]="listname" placeholder="345667..." title="Kérem töltse ki a mezőt">

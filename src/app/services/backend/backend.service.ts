@@ -143,6 +143,24 @@ reset() {
   this.uploadProgress = 0;
   this.uploadSub = Subscription.EMPTY;
 }
+public downloadCSVTemplate(): Observable<Result<[any[], string]>> {
+  let options = {
+    headers: this.getHeaders(),
+   // params: this.getParams(f),
+    responseType: "blob" as "json"
+  };
+  return this.httpClient.get<Blob>(this.url + "/list/examplecsv", options).pipe(
+    map(response => {
+      let dataType = response.type;
+      let binaryData = [];
+      binaryData.push(response);
+      let result: [any[], string] = [binaryData, dataType]
+      console.log(result);
+      return new Ok(result);
+    }),
+    catchError(error => of(new Err<[any[], string]>(error)))
+  );
+}
 
 
 // This function get all existing list from the database. the numbers array is null , you can use get list by id to achive the numbers
