@@ -1,8 +1,11 @@
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { HomeComponent } from './components/pages/home/home.component';
 import { CreatecampaignComponent } from './components/pages/createcampaign/createcampaign.component';
 import { ManagecampaignComponent } from './components/pages/managecampaign/managecampaign.component';
@@ -10,6 +13,7 @@ import { PhonenumbersmanagementComponent } from './components/pages/phonenumbers
 import { VoicemessagesmanagementComponent } from './components/pages/voicemessagesmanagement/voicemessagesmanagement.component';
 import { ReportsComponent } from './components/pages/reports/reports.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
+
 import { ConfigService } from './services/config/config.service';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { SafePipe } from './pipes/Safepipe';
@@ -44,7 +48,8 @@ import { CampaignupdateComponent } from './components/pages/campaignupdate/campa
     CampaignComponent,
     ListComponent,
     NumberupdateComponent,
-    CampaignupdateComponent
+    CampaignupdateComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
