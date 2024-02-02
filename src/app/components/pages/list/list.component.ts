@@ -37,9 +37,9 @@ export class ListComponent {
 
   campaign: Campaign = new Campaign;
   filter: Filter = new Filter;
-  pageIndex: number = 1;
+  pageIndex: number = 0;
   pageSize: number = 5;
-  length: number;
+  length: number= 10;
 
   Filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -57,89 +57,102 @@ export class ListComponent {
     this.listId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
     console.log("lekerdeztem", this.listId);
 
-    this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
-
-      if (result.isErr()) {
-        let mess = result.unwrapErr().error.Error;
-        if (mess === "You are not allowed to interact the data of this user") {
-          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
-          console.log("jogosultsági probléma")
-        }
-        else
-          alert("telefonszám lista lekérdezése  sikertelen ");
-        console.error(result.unwrapErr());
-        return;
-      }
-      this.list = result.unwrap();
-
-      this.page = this.list.page;
-      this.datas = this.page.data;
-      this.pageIndex = this.page.page;
-      this.pageSize = this.page.pageSize;
-      this.length= this.page.total;
-    
-
-      console.log("ellenorzes list:", this.list,);
-      console.log("ellenorzes page:", this.page,);
-      console.log("ellenorzes page.data:", this.page.data);
-      // console.log("ellenorzes data:" , this.list);
-      // alert("elenorzes");
-
-      this.dataSource = new MatTableDataSource(this.datas);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.empTbSort;
-      console.log("telefonszám lista sikeres betöltés");
-
-      console.log("számok", this.data);
-
-    });
+    this.getlists();
 
   }
+public getlists () {
+  console.log("ellenorzes page1:", this.page,);
+  console.log("ellenorzes page1:", this.paginator,);
 
+  this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
+
+    if (result.isErr()) {
+      let mess = result.unwrapErr().error.Error;
+      if (mess === "You are not allowed to interact the data of this user") {
+        alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+        console.log("jogosultsági probléma")
+      }
+      else
+        alert("telefonszám lista lekérdezése  sikertelen ");
+      console.error(result.unwrapErr());
+      return;
+    }
+    this.list = result.unwrap();
+
+    this.page = this.list.page;
+    this.datas = this.page.data;
+    this.pageIndex = this.page.page;
+    this.pageSize = this.page.pageSize;
+    this.length = this.page.total;
+    console.log("ellenorzes page2:", this.paginator.length);
+    console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
+    console.log("ellenorzes list:", this.list,);
+    console.log("ellenorzes page:", this.page,);
+    console.log("ellenorzes page.data:", this.page.data);
+    // console.log("ellenorzes data:" , this.list);
+    // alert("elenorzes");
+
+    this.dataSource = new MatTableDataSource(this.datas);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.empTbSort;
+    console.log("telefonszám lista sikeres betöltés");
+
+    console.log("számok", this.data);
+    console.log("paginator", this.paginator);
+    console.log("ellenorzes page3:", this.paginator.length);
+  });
+}
 
   public getServerData(event: PageEvent) {
 
     console.log("event", event);
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
-/*
-    if (event = undefined) {
-      this.pageSize = 5;
-    }
-    else {
-      this.pageSize = event?.pageSize;
-    }
-*/
-    this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
-
-      if (result.isErr()) {
-        let mess = result.unwrapErr().error.Error;
-        if (mess === "You are not allowed to interact the data of this user") {
-          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
-          console.log("jogosultsági probléma")
+    /*
+        if (event = undefined) {
+          this.pageSize = 5;
         }
-        else
-          alert("telefonszám lista lekérdezése  sikertelen ");
-        console.error(result.unwrapErr());
-        return;
-      }
-      this.list = result.unwrap();
-      this.page = this.list.page;
-      this.datas = this.page.data;
-      this.pageIndex = this.page.page;
-      this.pageSize = this.page.pageSize;
-      this.length = this.page.total;
+        else {
+          this.pageSize = event?.pageSize;
+        }
+    */
+        this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
 
-
-      this.dataSource = new MatTableDataSource(this.datas);
+          if (result.isErr()) {
+            let mess = result.unwrapErr().error.Error;
+            if (mess === "You are not allowed to interact the data of this user") {
+              alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+              console.log("jogosultsági probléma")
+            }
+            else
+              alert("telefonszám lista lekérdezése  sikertelen ");
+            console.error(result.unwrapErr());
+            return;
+          }
+          this.list = result.unwrap();
       
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.empTbSort;
-      console.log("telefonszám lista sikeres betöltés");
-
-      console.log("számok", this.list);
-
-    });
+          this.page = this.list.page;
+          this.datas = this.page.data;
+          this.pageIndex = this.page.page;
+          this.pageSize = this.page.pageSize;
+          this.length = this.page.total;
+          console.log("ellenorzes page2:", this.paginator.length);
+          console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
+          console.log("ellenorzes list:", this.list,);
+          console.log("ellenorzes page:", this.page,);
+          console.log("ellenorzes page.data:", this.page.data);
+          // console.log("ellenorzes data:" , this.list);
+          // alert("elenorzes");
+      
+          this.dataSource = new MatTableDataSource(this.datas);
+          //this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.empTbSort;
+          console.log("telefonszám lista sikeres betöltés");
+      
+          console.log("számok", this.data);
+          console.log("paginator", this.paginator);
+          console.log("ellenorzes page3:", this.paginator.length);
+        });
 
 
   }
@@ -185,7 +198,7 @@ export class ListComponent {
         this.dataSource.data = this.datas; // Az adatforrás frissítése
         console.log("telefonszám sikeres törlése");
         console.log(this.data);
-        window.location.reload();
+        this.getlists();
 
       });
   }
@@ -223,7 +236,7 @@ export class ListComponent {
         // this.dataSource.data = this.numbers_; // Az adatforrás frissítése
         console.log("hanganyag sikeres hozzáadása");
         // console.log(this.numbers_);
-        window.location.reload();
+        this.getlists();
 
       });
   }
