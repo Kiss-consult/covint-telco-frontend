@@ -223,7 +223,8 @@ public filterList(filter: Filter): Observable<Result<Page>> {
 // This function add a new number to the list ( listId), name and other is optional
 public addTolist(listId: number,   datas: Data[] = [] ): Observable<Result<{}>> {
   const url = this.url + "/list/add";
-  let add = {listId, datas};
+  let numbers = datas;
+    let add = {listId, numbers};
   return this.httpClient.post<Result<{}>>(url, add, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
