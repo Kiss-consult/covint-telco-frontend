@@ -97,7 +97,7 @@
         <div>
           <input class="droptextbox" type="date" id="callDays" name="institution" [(ngModel)]="callday" ringGroup="???" title="Kérem töltse ki a mezőt">
           <button id="adddate" (click)="addDate()">Dátum hozzáadása</button>
-          <p>{{campaign.callDays}}</p>
+          
         </div>  
         
         <div class="content2">
@@ -107,7 +107,11 @@
               <div *ngFor="let addDate of campaign.callDays; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
                 <div>
                   <p style="margin: 0;"> <p>{{addDate}}</p>                        
-                </div>                
+                </div>  
+                <div style="margin-left: auto;">
+                  <button (click)="removeDate(addDate)">Törlés</button>
+                </div>
+                  
               </div>
             </div>
           </ng-container>
@@ -315,7 +319,7 @@
         </div>
         <div class="content3" >
           <div>
-            <button id="addanswerbutton" (click)="addAnswer()" (click)="toggleContent('addanswertoggle')">Válasz Hozzáadás</button>
+            <button id="addanswerbutton" (click)="addAnswer()" (click)="toggleContent('addanswertoggle')">Válasz ( Gomb) Hozzáadás</button>
           </div> 
         </div>                        
       </div>

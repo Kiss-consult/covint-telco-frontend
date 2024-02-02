@@ -143,6 +143,24 @@ reset() {
   this.uploadProgress = 0;
   this.uploadSub = Subscription.EMPTY;
 }
+public downloadCSVTemplate(): Observable<Result<[any[], string]>> {
+  let options = {
+    headers: this.getHeaders(),
+   // params: this.getParams(f),
+    responseType: "blob" as "json"
+  };
+  return this.httpClient.get<Blob>(this.url + "/list/examplecsv", options).pipe(
+    map(response => {
+      let dataType = response.type;
+      let binaryData = [];
+      binaryData.push(response);
+      let result: [any[], string] = [binaryData, dataType]
+      console.log(result);
+      return new Ok(result);
+    }),
+    catchError(error => of(new Err<[any[], string]>(error)))
+  );
+}
 
 
 // This function get all existing list from the database. the numbers array is null , you can use get list by id to achive the numbers
@@ -154,10 +172,40 @@ public getAllList(): Observable<Result<[List_of_numbers]>> {
   );
 }
 
+
+
+  private getParams(pagesize: number, page: number): HttpParams {
+    return new HttpParams().set('pageSize', pagesize,).set('page', page);
+
+    ;
+  }
+  /*
+  // This function inserts the new user into the Auth.
+  public getAuditlogs(): Observable<Result<Auditlog[]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams()
+    };
+    const url = this.url + "/auditlog";
+    return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
+      map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<Auditlog[]>(error)))
+    );
+
+  }
+
+*/
+
+
+
 // This function get a given list by id from the database.
-public getListById(id : number): Observable<Result<List_of_numbers>> {
+public getListById(id : number,  pagesize: number ,pageindex: number): Observable<Result<List_of_numbers>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize, pageindex)
+  };  
   const url = this.url + "/list/" + id; 
-  return this.httpClient.get<Result<List_of_numbers>>(url,  { headers: this.getHeaders() }).pipe(
+  return this.httpClient.get<Result<List_of_numbers>>(url, options).pipe(
     map(result => fromJSON<List_of_numbers>(JSON.stringify(result))),
     catchError(error => of(new Err<List_of_numbers>(error)))
   );

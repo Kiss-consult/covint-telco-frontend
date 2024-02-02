@@ -121,7 +121,7 @@ export class CampaignComponent {
 
 
 
-      this.backendService.getListById(this.resultCampaign.numberListId).subscribe(
+      this.backendService.getListById(this.resultCampaign.numberListId,1,1).subscribe(
         result => {
           if (result.isErr()) {
             alert("lista sikertelen leállítása");
@@ -186,7 +186,7 @@ export class CampaignComponent {
   }
   public getListName(id: number) {
 
-    this.backendService.getListById(id).subscribe(
+    this.backendService.getListById(id,1, 1).subscribe(
       result => {
         if (result.isErr()) {
           alert("lista sikertelen leállítása");
