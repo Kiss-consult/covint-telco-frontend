@@ -6,6 +6,7 @@
     display: flex;
     height: auto;
     flex-direction: column;
+    padding-bottom: 60px;
 }
 
 .droptextbox{
@@ -33,10 +34,11 @@
 }
 
 .container2{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
     justify-content: center; 
     margin-top: 60px;
+    background: rgb(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgb(255, 255, 255) 70%);
+    padding-bottom: 40px;
 }
 
 .form-group {
@@ -93,10 +95,6 @@
 
 #intezmenybutton{
     margin-left: 10px;
-}
-
-h3{
-    margin-top: 5px;
 }
 
 #qonq{
