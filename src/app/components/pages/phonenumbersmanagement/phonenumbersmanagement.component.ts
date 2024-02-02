@@ -102,7 +102,7 @@ export class PhonenumbersmanagementComponent {
   }
 public DownloadCSVtemplate () {
 
-  let filename = "telefon_lista_example.xlsx"
+  let filename = "telefon_lista_example.csv"
   this.backendService.downloadCSVTemplate().subscribe((result) => {
     if (result.isErr()) {
       console.error(result.unwrapErr());
