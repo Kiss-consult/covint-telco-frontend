@@ -212,7 +212,13 @@ public getListById(id : number,  pagesize: number ,pageindex: number): Observabl
 }
 
 // This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
-public filterList(filter: Filter): Observable<Result<Page>> {
+public filterList(filter: Filter, pagesize: number ,pageindex: number): Observable<Result<Page>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize, pageindex)
+  }; 
+
+
   const url = this.url + "/list/filter";
   return this.httpClient.post<Result<Page>>(url, filter, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<Page>(JSON.stringify(result))),
