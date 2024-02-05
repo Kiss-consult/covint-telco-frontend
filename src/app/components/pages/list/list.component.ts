@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { Number } from 'src/app/models/list_of_numbers/number';
 import { Filter } from 'src/app/models/filter/filter';
 import { Page } from 'src/app/models/list_of_numbers/page';
 import { Data } from 'src/app/models/list_of_numbers/data';
+//import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-list',
@@ -22,20 +23,23 @@ import { Data } from 'src/app/models/list_of_numbers/data';
 export class ListComponent {
 
 
-  data :Data = new Data;
+  data: Data = new Data;
   datas: Data[] = [];
-  page : Page= new Page;
+  page: Page = new Page;
   dataSource!: MatTableDataSource<Data>;
-  @ViewChild('paginator')  paginator!: MatPaginator;
+  @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
-
-  displayedColumns: string[] = ['id','name', 'other', 'listId','number', 'update','delete'];
+  pageEvent: PageEvent;
+  displayedColumns: string[] = ['id', 'name', 'other', 'listId', 'number', 'update', 'delete'];
   list: List_of_numbers = new List_of_numbers;
   listId: any = this.list.id;
 
   campaign: Campaign = new Campaign;
   filter: Filter = new Filter;
+  pageIndex: number = 0;
+  pageSize: number = 5;
+  length: number = 10;
 
   Filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -53,7 +57,16 @@ export class ListComponent {
     this.listId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
     console.log("lekerdeztem", this.listId);
 
-    this.backendService.getListById(this.listId).subscribe(result => {
+    this.getlists();
+
+
+  }
+
+  public getlists() {
+    console.log("ellenorzes page1:", this.page,);
+    console.log("ellenorzes page1:", this.paginator,);
+
+    this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
 
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
@@ -70,50 +83,113 @@ export class ListComponent {
 
       this.page = this.list.page;
       this.datas = this.page.data;
-      
-     
-      console.log("ellenorzes list:" , this.list,);
-      console.log("ellenorzes page:" , this.page,);
-      console.log("ellenorzes page.data:" , this.page.data);
-     // console.log("ellenorzes data:" , this.list);
-     // alert("elenorzes");
-      
+      this.pageIndex = this.page.page;
+      this.pageSize = this.page.pageSize;
+      this.length = this.page.total;
+
+      console.log("ellenorzes page2:", this.paginator.length);
+      console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
+      console.log("ellenorzes list:", this.list,);
+      console.log("ellenorzes page:", this.page,);
+      console.log("ellenorzes page.data:", this.page.data);
+      // console.log("ellenorzes data:" , this.list);
+      // alert("elenorzes");
+
       this.dataSource = new MatTableDataSource(this.datas);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.empTbSort;
       console.log("telefonszám lista sikeres betöltés");
 
       console.log("számok", this.data);
-
+      console.log("paginator", this.paginator);
+      console.log("ellenorzes page3:", this.paginator.length);
     });
-
   }
 
+  public getServerData(event: PageEvent) {
+
+    console.log("event", event);
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    /*
+        if (event = undefined) {
+          this.pageSize = 5;
+        }
+        else {
+          this.pageSize = event?.pageSize;
+        }
+    */
+    this.backendService.getListById(this.listId, this.pageSize, this.pageIndex).subscribe(result => {
+
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
+        }
+        else
+          alert("telefonszám lista lekérdezése  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.list = result.unwrap();
+
+      this.page = this.list.page;
+      this.datas = this.page.data;
+      this.pageIndex = this.page.page;
+      this.pageSize = this.page.pageSize;
+      this.length = this.page.total;
+
+      console.log("ellenorzes page2:", this.paginator.length);
+      console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
+      console.log("ellenorzes list:", this.list,);
+      console.log("ellenorzes page:", this.page,);
+      console.log("ellenorzes page.data:", this.page.data);
+      // console.log("ellenorzes data:" , this.list);
+      // alert("elenorzes");
+
+      this.dataSource = new MatTableDataSource(this.datas);
+      //this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.empTbSort;
+      console.log("telefonszám lista sikeres betöltés");
+
+      console.log("számok", this.data);
+      console.log("paginator", this.paginator);
+      console.log("ellenorzes page3:", this.paginator.length);
+    });
 
 
+  }
 
 
 
   public filterList() {
     console.log("filter", this.filter)
     this.filter.listId = this.list.id;
-    this.backendService.filterList(this.filter).subscribe(
+    this.backendService.filterList(this.filter, this.pageSize, this.pageIndex).subscribe(
       result => {
         if (result.isErr()) {
           alert("Kampányok keresése sikertelen betöltés");
           console.error(result.unwrapErr());
           return;
         }
-       let result_filter = result.unwrap();
-       this.page = result_filter;
-       this.datas = this.page.data;
+        let result_filter = result.unwrap();
+
+        this.page = result_filter;
+        this.datas = this.page.data;
+        this.pageIndex = this.page.page;
+        this.pageSize = this.page.pageSize;
+        this.length = this.page.total;
+
+        this.page = result_filter;
+        this.datas = this.page.data;
         this.dataSource = new MatTableDataSource(this.datas);
-        this.dataSource.paginator = this.paginator;
+        //this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-       this.dataSource.data = this.page.data; // Az adatforrás frissítése
+        //this.dataSource.data = this.page.data; // Az adatforrás frissítése
         console.log("Kampányok keresése sikeres betöltés");
-        console.log("filter eredmeny",result_filter);
+        console.log("filter eredmeny", result_filter);
       });
   }
 
@@ -130,32 +206,32 @@ export class ListComponent {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-       this.dataSource.data = this.datas; // Az adatforrás frissítése
+        this.dataSource.data = this.datas; // Az adatforrás frissítése
         console.log("telefonszám sikeres törlése");
-      console.log(this.data);
-        window.location.reload();
+        console.log(this.data);
+        this.getlists();
 
       });
   }
 
 
   updateNumber(number: Number) {
-    
+
     this.router.navigate(
-        ['/numberupdate', number.id]
-    ); 
+      ['/numberupdate', number.id]
+    );
 
 
   }
 
- addToList(data: Data) {
-  let localnumbers: Data[] = []; // Valamiert tömbe kell átadni 
-  let localnumber = data;
-  let listId = this.list.id;
-  
-  localnumbers.push(localnumber)
-  
- // this.numbers_.push(number);
+  addToList(data: Data) {
+    let localnumbers: Data[] = []; // Valamiert tömbe kell átadni 
+    let localnumber = data;
+    let listId = this.list.id;
+
+    localnumbers.push(localnumber)
+
+    // this.numbers_.push(number);
     this.backendService.addTolist(listId, localnumbers).subscribe(
       result => {
         if (result.isErr()) {
@@ -168,18 +244,18 @@ export class ListComponent {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
 
-       // this.dataSource.data = this.numbers_; // Az adatforrás frissítése
+        // this.dataSource.data = this.numbers_; // Az adatforrás frissítése
         console.log("hanganyag sikeres hozzáadása");
-       // console.log(this.numbers_);
-        window.location.reload();
+        // console.log(this.numbers_);
+        this.getlists();
 
       });
   }
 
-  public export () {
-   
-  
-  let name = this.list.name;
+  public export() {
+
+
+    let name = this.list.name;
     const filename = name + "lista.xlsx";
     this.backendService.downloadExport(this.list.id).subscribe((result) => {
       if (result.isErr()) {

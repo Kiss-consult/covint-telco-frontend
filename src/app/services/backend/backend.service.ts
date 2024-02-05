@@ -135,6 +135,7 @@ uploadFile(file: File, name: string): Observable<Result<Empty>> {
     ).subscribe();
   return of(new Ok<Empty>(new Empty()));
 }
+
 cancelUpload() {
   this.uploadSub.unsubscribe();
   this.reset();
@@ -142,6 +143,24 @@ cancelUpload() {
 reset() {
   this.uploadProgress = 0;
   this.uploadSub = Subscription.EMPTY;
+}
+public downloadCSVTemplate(): Observable<Result<[any[], string]>> {
+  let options = {
+    headers: this.getHeaders(),
+   // params: this.getParams(f),
+    responseType: "blob" as "json"
+  };
+  return this.httpClient.get<Blob>(this.url + "/list/examplecsv", options).pipe(
+    map(response => {
+      let dataType = response.type ;
+      let binaryData = [];
+      binaryData.push(response);
+      let result: [any[], string] = [binaryData, dataType  ]
+      console.log(result);
+      return new Ok(result);
+    }),
+    catchError(error => of(new Err<[any[], string]>(error)))
+  );
 }
 
 
@@ -154,17 +173,53 @@ public getAllList(): Observable<Result<[List_of_numbers]>> {
   );
 }
 
+
+
+  private getParams(pagesize: number, page: number): HttpParams {
+    return new HttpParams().set('pageSize', pagesize,).set('page', page);
+
+    ;
+  }
+  /*
+  // This function inserts the new user into the Auth.
+  public getAuditlogs(): Observable<Result<Auditlog[]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams()
+    };
+    const url = this.url + "/auditlog";
+    return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
+      map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<Auditlog[]>(error)))
+    );
+
+  }
+
+*/
+
+
+
 // This function get a given list by id from the database.
-public getListById(id : number): Observable<Result<List_of_numbers>> {
+public getListById(id : number,  pagesize: number ,pageindex: number): Observable<Result<List_of_numbers>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize, pageindex)
+  };  
   const url = this.url + "/list/" + id; 
-  return this.httpClient.get<Result<List_of_numbers>>(url,  { headers: this.getHeaders() }).pipe(
+  return this.httpClient.get<Result<List_of_numbers>>(url, options).pipe(
     map(result => fromJSON<List_of_numbers>(JSON.stringify(result))),
     catchError(error => of(new Err<List_of_numbers>(error)))
   );
 }
 
 // This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
-public filterList(filter: Filter): Observable<Result<Page>> {
+public filterList(filter: Filter, pagesize: number ,pageindex: number): Observable<Result<Page>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize, pageindex)
+  }; 
+
+
   const url = this.url + "/list/filter";
   return this.httpClient.post<Result<Page>>(url, filter, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<Page>(JSON.stringify(result))),
@@ -175,7 +230,8 @@ public filterList(filter: Filter): Observable<Result<Page>> {
 // This function add a new number to the list ( listId), name and other is optional
 public addTolist(listId: number,   datas: Data[] = [] ): Observable<Result<{}>> {
   const url = this.url + "/list/add";
-  let add = {listId, datas};
+  let numbers = datas;
+    let add = {listId, numbers};
   return this.httpClient.post<Result<{}>>(url, add, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
