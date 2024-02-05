@@ -90,26 +90,27 @@
 
       <!--callDays-->
 
-      <div id="datetime" class="content" >        
-        <div>
-          <label class="text">Hívás napjainak kiválasztása<s>*</s></label>
-        </div>
-        <div>
-          <input class="droptextbox" type="date" id="callDays" name="institution" [(ngModel)]="callday" ringGroup="???" title="Kérem töltse ki a mezőt">
-          <button id="adddate" (click)="addDate()">Dátum hozzáadása</button>
-          
-        </div>  
-        
+      <div id="datetime" class="content" > 
+        <div>      
+          <div>
+            <label class="text">Hívás napjainak kiválasztása<s>*</s></label>
+          </div>
+          <div>
+            <input class="droptextbox" type="date" id="callDays" name="institution" [(ngModel)]="callday" ringGroup="???" title="Kérem töltse ki a mezőt">
+            <button id="adddate" (click)="addDate()">Dátum hozzáadása</button>        
+          </div>  
+        </div> 
+      
         <div class="content2">
           <ng-container *ngIf="campaign.callDays">
             
             <div style="max-height: 265px; width: auto; overflow-y: auto;">
               <div *ngFor="let addDate of campaign.callDays; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
                 <div>
-                  <p style="margin: 0;"> <p>{{addDate}}</p>                        
+                  <p style="margin: 0;">{{addDate}}</p>                        
                 </div>  
-                <div style="margin-left: auto;">
-                  <button (click)="removeDate(addDate)">Törlés</button>
+                <div style="margin-left: auto; margin-left: 20px;">
+                  <button style="width: auto;" (click)="removeDate(addDate)">X</button>
                 </div>
                   
               </div>
@@ -267,62 +268,64 @@
               <div>                 
                 <label class="text"> Kérdés felvétel kiválasztása<s>*</s></label>
               </div>
-
-              <div>
-             
-
-                <select class="droptextbox" type="text" id="questionpath" name="questionpath" [(ngModel)]="newQuestion.Sound" title="Kérem válasszon">
-                    <ng-container *ngFor="let sound of sounds">
-                      <option value="{{sound.Name}}">{{sound.Name}}</option>
-                    </ng-container>
-                  </select>
-  
-            </div>
-             
-            </div>
+            <div>
+              <select class="droptextbox" type="text" id="questionpath" name="questionpath" [(ngModel)]="newQuestion.Sound" title="Kérem válasszon">
+                <ng-container *ngFor="let sound of sounds">
+                  <option value="{{sound.Name}}">{{sound.Name}}</option>
+                </ng-container>
+              </select>  
+            </div>             
           </div>
         </div>
+      </div>      
+
+      <div class="content3" >
+        <div>                 
+          <label class="text">  Hova kerül az adatbazisba?<s>*</s></label>
+        </div>
+        <div>
+          <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.valueToSet" title="Kérem válasszon.">
+            <option value="" disabled selected hidden>Válasszon értéket </option>
+            <option value="Sex">Nem kiválasztása</option>
+            <option value="Age">Korcsoprt választás</option>
+            <option value="Hospitalized">Kórházi kezelést kapott</option>
+            <option value="Dead">Elhunyt</option>
+            <option value="Illnesses">Társ betegségek</option>
+          </select>        
+        </div>           
+      </div>
+    </div>      
       
-
-        <div class="content3" >
-          <div>                 
-            <label class="text">  Hova kerül az adatbazisba?<s>*</s></label>
-          </div>
-          <div>
-            <select class="droptextbox" id="soundselect" [(ngModel)]="newQuestion.valueToSet" title="Kérem válasszon.">
-              <option value="" disabled selected hidden>Válasszon értéket </option>
-              <option value="Sex">Nem kiválasztása</option>
-              <option value="Age">Korcsoprt választás</option>
-              <option value="Hospitalized">Kórházi kezelést kapott</option>
-              <option value="Dead">Elhunyt</option>
-              <option value="Illnesses">Társ betegségek</option>
-            </select>        
-          </div>           
-        </div>
-              
-      </div>
        
-      <div id="callscontent2">
-        <div id="contentcall" class="content3" >
+      <div class="callscontent2">
+        <div id="contentcall2" class="content3" >
           <div>
-            <label class="text" for="bno">Válaszok száma<s>*</s></label>
-          </div>          
+            <div>
+              <label class="text" for="bno">Válaszok száma<s>*</s></label>
+            </div>
+            <div>
+              <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
+            </div> 
+          </div>   
           <div>
-            <input class="droptextbox" type="number" id="answerbutton" name="answerbutton" [(ngModel)]="newAnswer.buttonValue" placeholder="1" title="Kérem töltse ki a mezőt">
-          </div>      
-          <div>
-            <label class="text" for="bno">Válasz megadása<s>*</s></label>
-          </div> 
-          <div>
-            <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
+            <div>
+              <label class="text" for="bno">Válasz megadása<s>*</s></label>
+            </div>
+            <div>
+              <input class="droptextbox" type="text" id="answervalue" name="answervalue" [(ngModel)]="newAnswer.value" placeholder="Válasz..." title="Kérem töltse ki a mezőt">
+            </div>
           </div>
         </div>
-        <div class="content3" >
+        <div>
           <div>
-            <button id="addanswerbutton" (click)="addAnswer()" (click)="toggleContent('addanswertoggle')">Válasz ( Gomb) Hozzáadás</button>
+            <label class="text" for="bno">Válasz ( Gomb)<s>*</s></label>
+          </div>
+          <div>
+            <button id="addanswerbutton" (click)="addAnswer()" (click)="toggleContent('addanswertoggle')"> Hozzáadás</button>
           </div> 
-        </div>                        
-      </div>
+        </div> 
+      </div>                       
+    
     
   </div>  
 
@@ -333,9 +336,9 @@
         <p class="markerbno2" style="margin-bottom: 60px;">Hozzáadott válaszok</p>
         <div style="max-height: 265px; overflow-y: auto; width: auto; margin-bottom: 60px;">
           <div *ngFor="let newAnswer of newQuestion.answers; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-            <div style="flex-grow: 1;">
-              <p style="margin: 0;"> Gomb :{{ newAnswer.buttonValue }}</p>
-              <p style="margin: 0;"> Válasz :{{ newAnswer.value }}</p>
+            <div style="flex-grow: 1; display: flex;">
+              <p style="margin-right: 20px; border-left: solid 3px #0080ff;"> Gomb :{{ newAnswer.buttonValue }}</p>
+              <p style=" border-left: solid 3px #0080ff;"> Válasz :{{ newAnswer.value }}</p>
             </div>
             <div style="margin-left: auto;">
               <button (click)="removeAnswer(newAnswer)">Törlés</button>
@@ -367,10 +370,10 @@
         
         <div style="max-height: 265px; width: auto; overflow-y: auto; margin-bottom: 60px;">
           <div *ngFor="let newQuestion of campaign.questions; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-            <div style="flex-grow: 1;">
-              <p style="margin: 0;"> Kérdés száma: {{ newQuestion.questionNumber }}</p>
-              <p style="margin: 0;"> Hangfile :{{ newQuestion.Sound }}</p>
-              <p style="margin: 0;"> Adatbázis: {{ newQuestion.valueToSet }}</p>
+            <div style="flex-grow: 1; display: flex;">
+              <p style="margin-right: 20px; border-left: solid 3px #0080ff;"> Kérdés száma: {{ newQuestion.questionNumber }}</p>
+              <p style="margin-right: 20px; border-left: solid 3px #0080ff;"> Hangfile :{{ newQuestion.Sound }}</p>
+              <p style="border-left: solid 3px #0080ff;"> Adatbázis: {{ newQuestion.valueToSet }}</p>
              
             </div>
             <div style="margin-left: auto;">

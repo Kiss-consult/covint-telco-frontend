@@ -1,6 +1,7 @@
 .container{
   padding: 15px;
   padding-top: 0;
+  min-width: 1140px;
 }
 .container3{
   padding-top: 100px;
@@ -59,6 +60,10 @@ margin-top: 30px;
 @media (max-width: 1400px){
   .container{
     padding-left:165px
+  }
+
+  #eredmenyek{
+    width: auto;
   }
 
   .container3{

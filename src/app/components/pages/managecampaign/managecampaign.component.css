@@ -1,6 +1,7 @@
 .container{
     padding: 15px;
     padding-top: 0;
+    min-width: 1120px;
   }
   .container3{
     padding-top: 100px;
@@ -70,5 +71,9 @@
     justify-content: center;
     text-align: center;
 }
+
+  #ratesbutton{
+    width: auto;
+  }
 
   }
