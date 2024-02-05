@@ -102,7 +102,7 @@
           title="Kérem töltse ki a mezőt">
         </div>
       </div>
-      <div>
+      <div style="z-index: 0;">
         <button id="okebutton" (click)="filterList()" style="z-index: 2; position: relative;">
           Keresés
         </button>
@@ -153,7 +153,7 @@
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-      <div>
+      <div style="z-index: 0;">
         <button id="okebutton" (click)="addToList(data)" style="z-index: 2; position: relative;">
           Hozzáadás
         </button>
@@ -167,7 +167,7 @@
         <div class="diagrambutton">
           <label>Exportálja  a listát (.xlsx)</label>
         </div>
-        <div>
+        <div style="z-index: 0;">
           <button (click)="export()">Export</button>
         </div>
       </div>
@@ -222,7 +222,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let data">
             <div class="ratestbutton">
-              <button style="margin-bottom: 5px;" (click)="updateNumber(data)">Frissítés</button>
+              <button id="ratesbutton" style="margin-bottom: 5px;" (click)="updateNumber(data)">Frissítés</button>
             </div>
           </td>
         </ng-container>
@@ -231,7 +231,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let data">
             <div class="ratestbutton">
-              <button style="margin-bottom: 5px;" (click)="deleteNumber(data)">Törlés</button>
+              <button id="ratesbutton" style="margin-bottom: 5px;" (click)="deleteNumber(data)">Törlés</button>
             </div>
           </td>
         </ng-container>
