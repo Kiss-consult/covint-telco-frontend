@@ -135,6 +135,7 @@ uploadFile(file: File, name: string): Observable<Result<Empty>> {
     ).subscribe();
   return of(new Ok<Empty>(new Empty()));
 }
+
 cancelUpload() {
   this.uploadSub.unsubscribe();
   this.reset();
@@ -151,10 +152,10 @@ public downloadCSVTemplate(): Observable<Result<[any[], string]>> {
   };
   return this.httpClient.get<Blob>(this.url + "/list/examplecsv", options).pipe(
     map(response => {
-      let dataType = response.type;
+      let dataType = response.type ;
       let binaryData = [];
       binaryData.push(response);
-      let result: [any[], string] = [binaryData, dataType]
+      let result: [any[], string] = [binaryData, dataType  ]
       console.log(result);
       return new Ok(result);
     }),
