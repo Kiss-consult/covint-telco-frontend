@@ -14,6 +14,8 @@ import { CampaignComponent } from './components/pages/campaign/campaign.componen
 import { ListComponent } from './components/pages/list/list.component';
 import { NumberupdateComponent } from './components/pages/numberupdate/numberupdate.component';
 import { CampaignupdateComponent } from './components/pages/campaignupdate/campaignupdate.component';
+import { ResultCampaign } from './models/result_campaign/result_campaign';
+import { ResultComponent } from './components/pages/result/result.component';
 
 
 const routes: Routes = [
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: "campaign/:id", component: CampaignComponent },
   { path: "list/:id", component: ListComponent },
   { path: "numberupdate/:id", component: NumberupdateComponent },
-  { path: "campaignupdate/:id", component: CampaignupdateComponent }
+  { path: "campaignupdate/:id", component: CampaignupdateComponent },
+  { path: "result/:VpbxUuid", component: ResultComponent }
 ];
 
 @NgModule({

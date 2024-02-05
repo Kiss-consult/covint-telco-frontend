@@ -91,10 +91,10 @@ public searchCampaign() {
 
 public callCampaignResult(campaign: ResultCampaign){
   console.log("result campaign",campaign)
-  console.log("id",campaign.id)
-   let id = campaign.id;
+  console.log("VpbxUuid",campaign.VpbxUuid)
+   let VpbxUuid = campaign.VpbxUuid;
     this.router.navigate(
-        ['/campaign', id]
+        ['/result', VpbxUuid]
     ); 
 }
 
