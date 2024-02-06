@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 
 
 import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
+import { jwtDecode } from 'jwt-decode';
+import { AccessToken } from 'src/app/models/token/accesstoken';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +54,14 @@ export class LoginService {
 
     }
 
-
+    public hasAnyGroup(expectedGroups: string[]): boolean {
+      /*if (!this.isLoggedIn()) {
+        this.router.navigate(['/login']);
+        return false;
+      }*/
+      const decoded = jwtDecode<AccessToken>(this.token);
+      return decoded.groups.some(group => expectedGroups.includes(group));
+    }
 
     
     private getUserData() {
@@ -65,7 +74,7 @@ export class LoginService {
           this.userId = profile.id as string;
         });
       }
-
+      
       public login(): void {
 
         this.loggedIn = this.keycloakService.isLoggedIn();
