@@ -70,7 +70,11 @@ export class PhonenumbersmanagementComponent {
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    console.log( this.listname)
+    this.listname = this.listname.split(" ").join("");
 
+
+   
 
     if (file) {
       if (file.name.endsWith(".csv") === false) {
@@ -78,6 +82,7 @@ export class PhonenumbersmanagementComponent {
         return;
       }
       console.log("eredeti", file.name);
+
 
 
       this.fileName = file.name;
@@ -111,6 +116,8 @@ public DownloadCSVtemplate () {
     let response = result.unwrap();
     let data = response[0];
     let dataType = response[1];
+    console.log("letoltesnel data"  + data )
+    console.log("letoltesnel datatype"  + dataType )
     let downloadLink = document.createElement('a');
     downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
 
