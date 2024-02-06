@@ -35,12 +35,13 @@
         <div class="exportbutton2">
           <div>
             <label class="text"> Adjon nevet a listának! <s>*</s></label>
-            <p>telefonszám formátum: +36xxxxxxxxx , feltöltésnél ellnőrizzük a file tartalmát! </p>
+            <p>A név ne tartalmazzon space-t,ill. feltöltéskor kivesszük a névből!  </p>
           </div>
           <div>
             <input class="droptextbox" type="text" id="listname" name="listname" [(ngModel)]="listname" placeholder="lista név" title="Kérem töltse ki a mezőt">
           </div>
           <div>
+            <p>telefonszám formátum: +36xxxxxxxxx , feltöltésnél ellnőrizzük a file tartalmát! </p>
             <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
             attach_file</mat-icon></button>
           </div>      
