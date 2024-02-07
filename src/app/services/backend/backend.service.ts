@@ -16,6 +16,7 @@ import { Filter } from 'src/app/models/filter/filter';
 import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 import { UpdateNumber } from 'src/app/models/list_of_numbers/update_number';
 import { Page } from 'src/app/models/list_of_numbers/page';
+import { ResultFilter } from 'src/app/models/filter/resultfilter';
 
 @Injectable({
     providedIn: 'root'
@@ -346,7 +347,33 @@ public deleteSound(filename : string): Observable<Result<{}>> {
 
 
 // *********************  END OF SOUND FUNCTIONS **************************************
+
+// *********************  RESULT FUNCTIONS **************************************
+
+
+
+// This function filter a list by any fields ( name, other, number or listId) . you can filter with a part of the name or number...
+public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: number): Observable<Result<Page>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize, pageindex)
+  }; 
+  const url = this.url + "/callresults/filter";
+  return this.httpClient.post<Result<Page>>(url, resultfilter, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Page>(JSON.stringify(result))),
+    catchError(error => of(new Err<Page>(error)))
+  );
 }
+
+
+
+
+
+
+
+// *********************  END OF RESULT FUNCTIONS **************************************
+}
+
 
 
 

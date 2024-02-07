@@ -1,1 +1,296 @@
-<p>result works!</p>
+<h1>Kampány </h1>
+
+<h2>Kampány adatai</h2>
+
+
+<div class="container">
+    <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+    <div class="container2">
+
+        <!--liveOrAuto-->
+        <div id="start" class="container3">
+            <div class="content">
+                <div>
+                    <div>
+                        <label class="text">Autómatikus / Élőhangos</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="auto" name="liveOrAuto" [checked]="!resultCampaign.liveOrAuto"><label
+                            for="auto">Automata</label>
+                        <input type="checkbox" id="live" name="liveOrAuto" [checked]="resultCampaign.liveOrAuto"><label
+                            for="live">Élőhangos</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--name-->
+
+            <div class="content">
+                <div>
+                    <div>
+                        <label class="text">Kampány neve </label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="text" id="name" name="institution"
+                            [(ngModel)]="resultCampaign.name" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
+                    </div>
+                    <div  *ngIf="resultCampaign.started">
+                        <div>
+                            <label class="text">A kampány elindult</label>
+                        </div>
+                    </div>
+                    <div  *ngIf="!resultCampaign.started">
+                        <div>
+                            <label class="text">A kampány nem indult el vagy már leállt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                
+            </div>
+            <div class="content">
+                
+            </div>
+        </div>
+
+        <!--startDate, endDate               <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>                 -->
+
+        <div class="tab-button">
+            <label>Idővallumok</label>
+        </div>
+
+        <div class="container3">
+
+            <div id="datetime" class="content">
+                <div>
+                    <div>
+                        <label class="text">Kezdés dátuma <s>*</s></label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="date" id="startDate" name="institution"
+                            [(ngModel)]="resultCampaign.startDate" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label class="text">Befejezés dátuma </label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="date" id="endDate" name="institution"
+                            [(ngModel)]="resultCampaign.endDate" readonly title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+            </div>
+
+            <!--fromTime, toTime-->
+
+            <div id="datetime" class="content">
+                <div>
+                    <div>
+                        <label class="text">Kezdés ideje </label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="time" id="fromTime" name="institution"
+                            [(ngModel)]="resultCampaign.fromTime"readonly placeholder="???" title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label class="text">Befejezés ideje </label>
+                    </div>
+                    <div>
+                        <input class="droptextbox" type="time" id="toTime" name="institution"
+                            [(ngModel)]="resultCampaign.toTime" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+                    </div>
+                </div>
+            </div>
+
+
+            <!--callDays-->
+
+            <div id="datetime" class="content">
+                <div>
+                    <label class="text">milyen napokon akarunk hívni</label>
+                </div>
+
+
+                <div class="content2" style="padding-top: 60px;">
+                    <ng-container *ngIf="resultCampaign.callDays">
+
+                        <div style="max-height: 265px; width: auto; overflow-y: auto;">
+                            <div *ngFor="let addDate of this.calldays; let i = index"
+                                style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+                                <div style="flex-grow: 1;">
+                                    <input class="droptextbox" type="date" readonly id="period" name="institution"
+                                    [(ngModel)]="addDate.Date" >
+                                    
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+
+
+            <!--period-->
+
+            
+        </div>
+
+        <div id="tabbutton">
+            <div class="tab-button">
+                <label>Hivasok</label>
+            </div>
+            <div class="tab-button">
+                <label>Hangfelvételek</label>
+            </div>
+        </div>
+
+        <!--callsPerPeriod-->
+        <div id="calls" class="container5">
+            <div id="callscontent">
+                
+
+                <!--numberListId-->
+
+                <div class="content">
+                    <div>
+                        <div>
+                            <label class="text">kötés a telefonszám listához </label>
+                        </div>
+                        <div>
+
+                            <input class="droptextbox" type="text" id="listname" name="institution"
+                                [(ngModel)]="list.name" readonly placeholder="lista neve">
+                            <!--
+              <p §type="text" id="numberListname" name="institution"   > {{ getListById(resultCampaign.numberListId)}}</p>
+-->
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!--welcomePath-->
+            <div id="callscontent">
+                <div id="contentcall" class="content">
+                    <div>
+                        <div>
+                            <label class="text">üdvözlő üzenet</label>
+                        </div>
+
+                        <div>
+                            <input class="droptextbox" type="text" id="welcomepath" name="welcomepath"
+                                [(ngModel)]="resultCampaign.welcomeSound.Name" readonly placeholder="lista neve">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--goodbyePath-->
+
+                <div class="content">
+                    <div>
+                        <div>
+                            <label class="text">elköszönő üzenet</label>
+                        </div>
+
+                        <div>
+                            <input class="droptextbox" type="text" id="goodbyepath" name="goodbyapath"
+                                [(ngModel)]="resultCampaign.goodbyeSound.Name" readonly placeholder="lista neve">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="acceptuser"  >
+        <mat-form-field>
+          <mat-label>Keresés</mat-label>
+          <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
+        </mat-form-field>
+    
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">        
+    
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Kampány neve</th>
+            <td mat-cell *matCellDef="let resultCampaing">
+                {{ resultCampaing.name}}
+            </td>
+          </ng-container>     
+        
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Kezdete</th>
+            <td mat-cell *matCellDef="let resultCampaing">
+                {{ resultCampaing.startDate}}
+            </td>
+            </ng-container>    
+    
+            <ng-container matColumnDef="endDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Vége</th>
+              <td mat-cell *matCellDef="let resultCampaing">
+              {{ resultCampaing.endDate}}
+              </td>
+            </ng-container> 
+    
+            <ng-container matColumnDef="liveOrAuto">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Élő/Auto</th>
+              <td mat-cell *matCellDef="let resultCampaing">
+              {{ resultCampaing.liveOrAuto}}
+              </td>
+            </ng-container>  
+    
+            <ng-container matColumnDef="numberOfQuestions">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Kérdésszám</th>
+              <td mat-cell *matCellDef="let resultCampaing">
+              {{ resultCampaing.numberOfQuestions}}
+              </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="VpbxUuid">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>VPBX UUID</th>
+              <td mat-cell *matCellDef="let resultCampaing">
+              {{ resultCampaing.VpbxUuid}}
+              </td>          
+            </ng-container>
+    
+    
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td mat-cell *matCellDef="let resultCampaing">
+              {{ resultCampaing.id}}
+              </td>          
+            </ng-container>
+              <ng-container matColumnDef="started">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Elindult</th>
+                <td mat-cell *matCellDef="let resultCampaing">
+                {{ resultCampaing.started}}
+                </td>
+            </ng-container>
+           
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    
+          
+          
+          
+        </table>
+    
+        <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
+      </div>
+
