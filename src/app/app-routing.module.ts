@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: "list/:id", component: ListComponent,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] } },
   { path: "numberupdate/:id", component: NumberupdateComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }},
   { path: "campaignupdate/:id", component: CampaignupdateComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }},
-  { path: "result/:VpbxUuid", component: ResultComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }}
+  { path: "result/:id", component: ResultComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }}
 ];
 
 @NgModule({

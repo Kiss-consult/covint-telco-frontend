@@ -34,6 +34,7 @@ import { CampaignComponent } from './components/pages/campaign/campaign.componen
 import { ListComponent } from './components/pages/list/list.component';
 import { NumberupdateComponent } from './components/pages/numberupdate/numberupdate.component';
 import { CampaignupdateComponent } from './components/pages/campaignupdate/campaignupdate.component';
+import { ResultComponent } from './components/pages/result/result.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CampaignupdateComponent } from './components/pages/campaignupdate/campa
     ListComponent,
     NumberupdateComponent,
     CampaignupdateComponent,
+    ResultComponent,
     SafePipe,
   ],
   imports: [
