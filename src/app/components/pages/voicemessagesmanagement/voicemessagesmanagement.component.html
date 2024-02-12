@@ -67,7 +67,12 @@
               </td>
             </ng-container>    
 
-
+            <ng-container matColumnDef="UploadDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>feltöltés ideje </th>
+              <td mat-cell *matCellDef="let sound">
+                {{ sound.UploadDate}}
+              </td>
+            </ng-container>
             <ng-container matColumnDef="delete">
               <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
               <td mat-cell *matCellDef="let sound">

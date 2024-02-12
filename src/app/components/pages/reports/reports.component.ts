@@ -25,7 +25,9 @@ import { Campaign } from 'src/app/models/campaign/campaign';
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent {
-
+  DateFrom: string = "";
+  DateTo: string = "";
+  RelativeDate: string = "";
   resultCampaing: ResultCampaign = new ResultCampaign;
   resultCampaings: ResultCampaign[] = [];
   dataSource!: MatTableDataSource<ResultCampaign>;
@@ -71,7 +73,7 @@ export class ReportsComponent {
 
 
 public searchCampaign() {
-  this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate).subscribe(
+  this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
     result => {
       if (result.isErr()) {
         alert("Kampányok keresése sikertelen betöltés");
