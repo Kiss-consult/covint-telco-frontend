@@ -78,7 +78,9 @@ export class ResultComponent {
     let today: number = Date.now();
     this.changeFormat(today);
 
-    this.getFilteredResult()
+    this.loadData(this.campaignId);
+
+    
 
   }
 
@@ -86,7 +88,7 @@ export class ResultComponent {
 
 
   public getFilteredResult() {
-   
+   this.resultFilter.VpbxUuid = this.resultCampaign.VpbxUuid;
 
     this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex ).subscribe(result => {
 
@@ -128,6 +130,42 @@ export class ResultComponent {
     });
   }
 
+
+
+  private loadData(id: number) {
+    this.campaignId = id;
+
+    this.backendService.getCampaignById(this.campaignId).subscribe(result => {
+
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
+        }
+        else
+          alert("kampány lekérdezése  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.resultCampaign = result.unwrap();
+      console.log("Kampány sikeres betöltés");
+      this.questions = this.resultCampaign.questions;
+      this.calldays = this.resultCampaign.callDays;
+      console.log("kérdések", this.questions);
+      console.log(this.changedDate);
+      console.log(this.resultCampaign.endDate);
+      if (this.resultCampaign.endDate < this.changedDate) {
+        this.available = false;
+        console.log(this.available);
+      }
+      else {
+        this.available = true;
+        console.log(this.available);
+      }
+      this.getFilteredResult();
+    });
+  }
 
   goBackToPrevPage(): void {
     this.location.back();

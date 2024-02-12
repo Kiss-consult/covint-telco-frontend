@@ -30,7 +30,7 @@ export class VoicemessagesmanagementComponent {
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
 
-  displayedColumns: string[] = ['Name', 'Url', 'delete', 'play'];
+  displayedColumns: string[] = ['Name', 'Url','UploadDate' , 'delete', 'play'];
 
   Filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

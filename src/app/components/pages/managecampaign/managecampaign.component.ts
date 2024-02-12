@@ -15,8 +15,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ManagecampaignComponent {
 
-
-
+ DateFrom: string = "";
+ DateTo: string = "";
+ RelativeDate: string = "";
+ timeActive: boolean = false;
+ relativtimeActive: boolean = false;
   resultCampaing: ResultCampaign = new ResultCampaign;
   resultCampaings: ResultCampaign[] = [];
   dataSource!: MatTableDataSource<ResultCampaign>;
@@ -34,9 +37,29 @@ export class ManagecampaignComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
+  toggleContent(contentType: string) {
+  if (contentType === 'time') {
+    this.timeActive = true;
+    this.relativtimeActive = false;
+    console.log("Dátumot választottam");
+  } else if (contentType === 'relativtime') {
+    this.timeActive = false;
+    this.relativtimeActive = true;
+    console.log("Relativ dátumot választottam");
+  }
+
+}
+
+
+
+
+
+
   goBackToPrevPage(): void {
     this.location.back();
   }
+  
   constructor(private backendService: BackendService, private location: Location, private router: Router,private _Activatedroute:ActivatedRoute) {
 
 
@@ -62,7 +85,8 @@ export class ManagecampaignComponent {
 
 
 public searchCampaign() {
-  this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate).subscribe(
+ 
+  this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
     result => {
       if (result.isErr()) {
         alert("Kampányok keresése sikertelen betöltés");

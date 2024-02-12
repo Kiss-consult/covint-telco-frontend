@@ -4,9 +4,19 @@
       
       <ul class="navbar-nav mr-auto" *ngIf="loginService.isLoggedIn()">
         
-        <li class="nav-item" routerLinkActive="active">
-          <a href="/home" class="nav-link"  routerLink="home">Kezdőlap</a>
-        </li>
+        <nav>
+          <ul class="nav"   >
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link">Kampányok kezelése</a>
+              <ul class="dropdown">
+                <li><p class="nav-link" [routerLink]="['/managecampaign']" routerLinkActive="active">Kampány kezelése</p></li>
+                <li><p class="nav-link" [routerLink]="['/createcampaign']" routerLinkActive="active">Új kampány létrehozása</p></li>
+               
+               
+              </ul>
+            </li>
+          </ul>
+        </nav>
         
         <li class="nav-item" routerLinkActive="active" >
           <a href="/phonenumbersmanagement" class="nav-link"    routerLink="phonenumbersmanagement">Telefonszámok kezelése</a>
@@ -19,20 +29,12 @@
         <li class="nav-item"  routerLinkActive="active">
           <a href="/reports" class="nav-link"  routerLink="reports">Riportok</a>
         </li>
+        <li class="nav-item"  routerLinkActive="active">
+          <a href="/auditlog" class="nav-link"  routerLink="auditlog">Auditlog</a>
+        </li>
         
   
-        <nav>
-          <ul class="nav"   >
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link">Kampányok kezelése</a>
-              <ul class="dropdown">
-                <li><p class="nav-link" [routerLink]="['/createcampaign']" routerLinkActive="active">Új kampány létrehozása</p></li>
-                <li><p class="nav-link" [routerLink]="['/managecampaign']" routerLinkActive="active">Kampány kezelése</p></li>
-               
-              </ul>
-            </li>
-          </ul>
-        </nav>
+      
         
   <!--
         <li class="nav-item" routerLinkActive="active">

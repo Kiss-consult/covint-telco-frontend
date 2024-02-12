@@ -36,6 +36,40 @@
         <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate" placeholder="???" title="Kérem töltse ki a mezőt">
       </div>
     </div>
+    <div class="container2 container-width">
+      <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
+        <label for="timeradioTime">Szűrés dátumra <s>*</s></label>
+        <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
+      
+        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">  
+          <div>   
+          <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="DateFrom" placeholder="" title="Kérem válasszon"> - tól       
+          </div> 
+          <div>
+          <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"  [(ngModel)]="DateTo" title="Kérem válasszon"> - ig
+          </div>
+        </form>
+      </div>
+    
+      <div class="relativeclass" [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
+        <div>
+          <label for="timeradioRelative">Szűrés relativ időre <s>*</s></label>
+          <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')" >
+        </div>
+        <div [ngStyle]="{'opacity': relativtimeActive ? '1' : '0.3'}">
+          <select class="droptextbox" name="relative" id="relative" [disabled]="timeActive" [(ngModel)]="RelativeDate" title="Kérem válasszon">
+            <option value="" disabled selected hidden>Válasszon...</option>
+            <option value="yesterday">tegnap</option>
+            <option value="this_week">ez a hét</option>
+            <option value="last_week">múlt hét</option>
+            <option value="last_month">múlt hónap</option>
+            <option value="last_3_months">utolsó 3 hónap</option>
+            <option value="this_year">ez az év</option>
+          </select>
+          
+        </div>
+      </div>
+    </div>
 
     <div class="content">
       <button id="okebutton" (click)="searchCampaign()" style="z-index: 2; position: relative;">

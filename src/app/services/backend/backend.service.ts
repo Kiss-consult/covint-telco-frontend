@@ -17,6 +17,7 @@ import { UpdateCampaign } from 'src/app/models/campaign/update_campaign';
 import { UpdateNumber } from 'src/app/models/list_of_numbers/update_number';
 import { Page } from 'src/app/models/list_of_numbers/page';
 import { ResultFilter } from 'src/app/models/filter/resultfilter';
+import { Auditlog } from 'src/app/models/auditlog/auditlog';
 
 @Injectable({
     providedIn: 'root'
@@ -55,9 +56,9 @@ import { ResultFilter } from 'src/app/models/filter/resultfilter';
   }
 
 // This function search an given campaign by name or start and end date from the database.
-public searchCampaign(name: string, startDate: string, endDate:string): Observable<Result<[ResultCampaign]>> {
+public searchCampaign(name: string, startDate: string, endDate:string, DateFrom: string, DateTo: string, RelativeDate :string): Observable<Result<[ResultCampaign]>> {
   const url = this.url + "/campaign/search";
-  let searchpack = {name, startDate, endDate};
+  let searchpack = {name, startDate, endDate, DateFrom, DateTo, RelativeDate};
   return this.httpClient.post<Result<[ResultCampaign]>>(url, searchpack, { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<[ResultCampaign]>(JSON.stringify(result))),
     catchError(error => of(new Err<[ResultCampaign]>(error)))
@@ -359,7 +360,7 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
     params: this.getParams(pagesize, pageindex)
   }; 
   const url = this.url + "/callresults/filter";
-  return this.httpClient.post<Result<Page>>(url, resultfilter, { headers: this.getHeaders() }).pipe(
+  return this.httpClient.post<Result<Page>>(url, resultfilter,options).pipe(
     map(result => fromJSON<Page>(JSON.stringify(result))),
     catchError(error => of(new Err<Page>(error)))
   );
@@ -372,7 +373,26 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
 
 
 // *********************  END OF RESULT FUNCTIONS **************************************
+
+
+// This function inserts the new user into the Auth.
+public getAuditlogs(pagesize: number ,pageindex: number): Observable<Result<Auditlog[]>> {
+  let options = {
+    headers: this.getHeaders(),
+    params: this.getParams(pagesize ,pageindex)
+  };
+  const url = this.url + "/auditlog";
+  return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
+    map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
+    catchError(error => of(new Err<Auditlog[]>(error)))
+  );
+
 }
+}
+
+
+
+
 
 
 
