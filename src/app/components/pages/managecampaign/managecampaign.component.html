@@ -38,7 +38,7 @@
     </div>
     <div class="container2 container-width">
       <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
-        <label for="timeradioTime">Szűrés dátumra <s>*</s></label>
+        <label for="timeradioTime">Szűrés dátumra</label>
         <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
       
         <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">  
@@ -53,7 +53,7 @@
     
       <div class="relativeclass" [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
         <div>
-          <label for="timeradioRelative">Szűrés relativ időre <s>*</s></label>
+          <label for="timeradioRelative">Szűrés relativ időre </label>
           <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')" >
         </div>
         <div [ngStyle]="{'opacity': relativtimeActive ? '1' : '0.3'}">
