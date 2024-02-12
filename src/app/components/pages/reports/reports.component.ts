@@ -28,6 +28,9 @@ export class ReportsComponent {
   DateFrom: string = "";
   DateTo: string = "";
   RelativeDate: string = "";
+
+  timeActive: boolean = false;
+  relativtimeActive: boolean = false;
   resultCampaing: ResultCampaign = new ResultCampaign;
   resultCampaings: ResultCampaign[] = [];
   dataSource!: MatTableDataSource<ResultCampaign>;
@@ -44,7 +47,19 @@ export class ReportsComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  toggleContent(contentType: string) {
+    if (contentType === 'time') {
+      this.timeActive = true;
+      this.relativtimeActive = false;
+      console.log("Dátumot választottam");
+    } else if (contentType === 'relativtime') {
+      this.timeActive = false;
+      this.relativtimeActive = true;
+      console.log("Relativ dátumot választottam");
+    }
+  
+  }
+  
   goBackToPrevPage(): void {
     this.location.back();
   }
