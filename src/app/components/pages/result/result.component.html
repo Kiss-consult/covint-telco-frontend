@@ -48,12 +48,6 @@
                 </div>
             </div>
             
-            <div class="content">
-                
-            </div>
-            <div class="content">
-                
-            </div>
         </div>
 
         <!--startDate, endDate               <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>                 -->
@@ -120,12 +114,11 @@
                 </div>
 
 
-                <div class="content2" style="padding-top: 60px;">
+                <div class="content2">
                     <ng-container *ngIf="resultCampaign.callDays">
 
                         <div style="max-height: 265px; width: auto; overflow-y: auto;">
-                            <div *ngFor="let addDate of this.calldays; let i = index"
-                                style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+                            <div *ngFor="let addDate of this.calldays; let i = index" style="margin-bottom: 30px;">
                                 <div style="flex-grow: 1;">
                                     <input class="droptextbox" type="date" readonly id="period" name="institution"
                                     [(ngModel)]="addDate.Date" >
@@ -149,8 +142,10 @@
             <div class="tab-button">
                 <label>Hivasok</label>
             </div>
-            <div class="tab-button">
-                <label>Hangfelvételek</label>
+            <div id="tab-button-hang">
+                <div  class="tab-button">
+                    <label>Hangfelvételek</label>
+                </div>
             </div>
         </div>
 
@@ -217,6 +212,88 @@
             </div>
         </div>
     </div>
+
+    <div id="tabbutton">
+        <div id="tab-button-filter">
+            <div class="tab-button">
+                <label>Filter</label>
+            </div>
+        </div>
+        <div id="üres">
+            <label></label>
+        </div>
+    </div>
+    
+    <div id="filter" class="container3">
+
+        <div id="filter2" class="content">
+            <div>
+                <label class="text">Kampány neve </label>
+            </div>
+            <div>
+                <input class="droptextbox" type="text" id="name" name="institution" [(ngModel)]="campaign.name" placeholder="???" title="Kérem töltse ki a mezőt">
+            </div>
+        </div>
+    
+        <div id="filter2" class="content">
+            <div>
+                <label class="text">Kezdés dátuma </label>
+            </div>
+            <div>
+                <input class="droptextbox" type="date" id="startDate" name="institution" [(ngModel)]="campaign.startDate" placeholder="???" title="Kérem töltse ki a mezőt">
+            </div>
+        </div>
+    
+        <div id="filter2" class="content">
+            <div>
+                <label class="text">Befejezés dátuma</label>
+            </div>
+            <div>
+                <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate" placeholder="???" title="Kérem töltse ki a mezőt">
+            </div>
+        </div>
+    
+        <div id="filter2" class="content">
+            <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
+                <label for="timeradioTime">Szűrés dátumra</label>
+                <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
+        
+                <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">  
+                    <div>   
+                        <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="DateFrom" placeholder="" title="Kérem válasszon"> - tól       
+                    </div> 
+                    <div>
+                        <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"  [(ngModel)]="DateTo" title="Kérem válasszon"> - ig
+                    </div>
+                </form>
+            </div>
+    
+            <div class="relativeclass" [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
+                <div>
+                    <label for="timeradioRelative">Szűrés relativ időre </label>
+                    <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')" >
+                </div>
+                <div [ngStyle]="{'opacity': relativtimeActive ? '1' : '0.3'}">
+                    <select class="droptextbox" name="relative" id="relative" [disabled]="timeActive" [(ngModel)]="RelativeDate" title="Kérem válasszon">
+                    <option value="" disabled selected hidden>Válasszon...</option>
+                    <option value="yesterday">tegnap</option>
+                    <option value="this_week">ez a hét</option>
+                    <option value="last_week">múlt hét</option>
+                    <option value="last_month">múlt hónap</option>
+                    <option value="last_3_months">utolsó 3 hónap</option>
+                    <option value="this_year">ez az év</option>
+                    </select>            
+                </div>
+            </div>
+        </div>
+    
+        <div id="okebutton" id="filter3" class="content">
+            <button  (click)="searchCampaign()" style="z-index: 2; position: relative;">
+                Szürés
+            </button>
+        </div>
+    </div>
+
 
     <div class="acceptuser"  >
         <mat-form-field>
@@ -292,5 +369,7 @@
         </table>
     
         <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
-      </div>
+    </div>
+
+</div>
 

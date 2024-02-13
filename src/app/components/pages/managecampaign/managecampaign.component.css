@@ -57,23 +57,51 @@
     transform: rotate(90deg);
   }
 
-  @media (max-width: 1400px){
-    .container{
-      padding-left:165px
-    }
+#timeradioTime{
+  margin-left: 10px;
+}
 
-    .container3{
-      display: grid;
-      grid-template-columns: repeat(2, 2fr);  
+#timeradioRelative{
+  margin-left: 10px;
+}
+
+#relative{
+  margin-right: 25px;
+}
+
+#dateto{
+  margin-right: 5px;
+}
+
+@media (max-width: 1400px){
+  .container{
+    padding-left:165px
+  }
+
+  .container3{
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);  
   }
 
   .content{
     justify-content: center;
     text-align: center;
-}
+  }
 
   #ratesbutton{
     width: auto;
   }
 
+  #relative{
+    margin-left: 30px;
   }
+  
+  #dateto{
+    margin-left: 30px;
+  }
+
+  #datefrom{
+    margin-left: 30px;
+  }
+
+}

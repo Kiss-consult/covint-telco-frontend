@@ -1,5 +1,6 @@
 .container{
     padding-top: 0;
+
 }
 
 #addanswerbutton{
@@ -48,11 +49,10 @@
 .container6{
     text-align: center;
     border-top: solid 3px #646464;
-    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgb(255, 255, 255) 90%);
     padding-bottom: 100px;
 }
 .container7{    
-    background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
+    background: rgba(224,224,224,1);
     text-align: center;
     padding-bottom: 40px;
     padding-top: 40px;
@@ -69,10 +69,9 @@
 .container2{
     display: flex;
     flex-direction: column;
-    background: rgb(224,224,224);
-    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgb(255, 255, 255) 90%);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 70%, rgb(255, 255, 255) 100%);
     justify-content: space-between;   
-    padding-top: 40px;
+    padding-top: 100px;
 }
 
 .container3{
@@ -105,8 +104,8 @@
 }
 
 #calls{
-    background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
     border-top: solid 3px #646464;
+    background: rgb(240,240,240);
 }
 
 #callscontent{
@@ -114,16 +113,28 @@
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     text-align: center;
-    background: rgb(255, 255, 255);
+    background: rgba(224,224,224,1)
 }
 
 #callscontent:nth-child(even) {
     background: rgb(240,240,240);
-    background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
 
 }
 
 #callscontent2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: white;
+}
+
+.callscontent2{
+    background: rgba(224,224,224,1);
+
+}
+
+#callscontent3{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -136,6 +147,11 @@
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     text-align: center;
+    padding-top: 0;
+}
+
+#start2{
+    padding-top: 0;
 }
 
 #auto{
@@ -164,8 +180,11 @@
 
 #tabbutton{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);    
+    grid-template-columns: repeat(2, 1fr);  
+    background: white;  
 }
+
+
 
 #datetime{
     display: block;
@@ -173,16 +192,12 @@
     align-items: center;
     text-align: center;
     background: rgb(255, 255, 255);
-    background: linear-gradient(180deg,rgb(255, 255, 255) 70%, rgba(255,255,255,0) 100%);
     padding-bottom: 40px;
     padding-top: 40px;
     border-top: solid 3px #646464;
 }
 
-#datetime:nth-child(even) {
-    background: rgb(240,240,240);
-    background: linear-gradient(180deg, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
-}
+
 
 #addQuestionbutton{
     margin-top: 30px;
@@ -208,6 +223,21 @@
     padding-bottom: 80px;
     padding-right: 60px;
     padding-left: 60px;
+}
+
+#tab-button_válasz{
+    background: rgb(240,240,240);
+
+}
+
+#tab-button-kérdések{
+    background: rgba(224,224,224,1);
+}
+
+#tab-button-készkérdesek{
+    margin-top: 0;
+    background: rgba(224,224,224,1);
+
 }
 
 @media (max-width: 1400px){

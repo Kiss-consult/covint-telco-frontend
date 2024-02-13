@@ -9,7 +9,7 @@
 
       <!--liveOrAuto-->
     <div id="start" class="container3">      
-      <div class="content">        
+      <div id="start2" class="content">        
         <div>
           <div>
             <label class="text">Automatikus / Élőhangos<s>*</s></label>
@@ -25,7 +25,7 @@
 
       <!--name-->
     
-      <div class="content">
+      <div id="start2" class="content">
         <div>
           <div>
             <label class="text">Kampány neve <s>*</s></label>
@@ -245,17 +245,21 @@
   
     
     <div id="tabbutton">
-      <div class="tab-button" *ngIf="autoActive">
-        <label>Kérdések</label>
+      <div id="tab-button-kérdések">
+        <div class="tab-button" *ngIf="autoActive">
+          <label>Kérdések</label>
+        </div>
       </div>
-      <div class="tab-button" *ngIf="autoActive">
-        <label>Válaszok</label>
-      </div>
+      <div id="tab-button_válasz">
+        <div class="tab-button"  *ngIf="autoActive">
+          <label>Válaszok</label>
+        </div>
+    </div>
     </div>
 
 
     <div id="calls" class="container5"*ngIf="autoActive">
-      <div id="callscontent">
+      <div id="callscontent3">
         <div id="contentcall" class="content3" >
           <div>
             <label class="text" for="bno">Kérdés sorszáma<s>*</s></label>
@@ -357,9 +361,10 @@
 
   </div>
 
-  
-  <div class="tab-button" *ngIf="autoActive">
-    <label>A kész kérdések</label>
+  <div id="tab-button-készkérdesek">
+    <div class="tab-button" style="margin-top: 0;" *ngIf="autoActive">
+      <label>A kész kérdések</label>
+    </div>
   </div>
   
 

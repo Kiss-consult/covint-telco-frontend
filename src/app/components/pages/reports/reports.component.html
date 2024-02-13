@@ -37,7 +37,7 @@
     </div>
   </div>
   
-  <div class="container2 container-width">
+  <div class="content">
     <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
       <label for="timeradioTime">Szűrés dátumra</label>
       <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
@@ -74,7 +74,7 @@
 
   <div class="content">
     <button id="okebutton" (click)="searchCampaign()" style="z-index: 2; position: relative;">
-      keresés
+      Szürés
     </button>
   </div>
 

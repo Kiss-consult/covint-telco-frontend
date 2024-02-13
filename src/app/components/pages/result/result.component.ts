@@ -26,7 +26,12 @@ import { Page } from 'src/app/models/list_of_numbers/page';
 })
 export class ResultComponent {
   
+  DateFrom: string = "";
+  DateTo: string = "";
+  RelativeDate: string = "";
+
   resultCampaign: ResultCampaign = new ResultCampaign; 
+  resultCampaings: ResultCampaign[] = [];
   campaign: Campaign = new Campaign;
   campaignId: any = this.resultCampaign.id;
   autoActive: boolean = false;
@@ -36,7 +41,8 @@ export class ResultComponent {
   answer: Answer = new Answer;
   answers: Answer[] = [];
   questions: Question[] = [];
-
+  timeActive: boolean = false;
+  relativtimeActive: boolean = false;
   calldays: CallDay[] = [];
   callday: CallDay = new CallDay;
   datePipe = new DatePipe('en');
@@ -84,7 +90,18 @@ export class ResultComponent {
 
   }
 
-
+  toggleContent(contentType: string) {
+    if (contentType === 'time') {
+      this.timeActive = true;
+      this.relativtimeActive = false;
+      console.log("Dátumot választottam");
+    } else if (contentType === 'relativtime') {
+      this.timeActive = false;
+      this.relativtimeActive = true;
+      console.log("Relativ dátumot választottam");
+    }
+  
+  }
 
 
   public getFilteredResult() {
@@ -177,6 +194,25 @@ export class ResultComponent {
         });
       this.getFilteredResult();
     });
+  }
+
+  public searchCampaign() {
+    this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Kampányok keresése sikertelen betöltés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.resultCampaings = result.unwrap();
+        this.dataSource = new MatTableDataSource(this.datas);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+  
+        this.dataSource.data = this.datas; // Az adatforrás frissítése
+        console.log("Kampányok keresése sikeres betöltés");
+        console.log(this.resultCampaings);
+      });
   }
 
   goBackToPrevPage(): void {
