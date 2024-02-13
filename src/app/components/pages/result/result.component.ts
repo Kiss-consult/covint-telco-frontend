@@ -163,6 +163,18 @@ export class ResultComponent {
         this.available = true;
         console.log(this.available);
       }
+      this.backendService.getListById(this.resultCampaign.numberListId,1,1).subscribe(
+        result => {
+          if (result.isErr()) {
+            alert("lista sikertelen leállítása");
+            console.error(result.unwrapErr());
+            return;
+          }
+          this.list = result.unwrap();
+          console.log(this.list.name)
+
+          // window.location.reload();
+        });
       this.getFilteredResult();
     });
   }
