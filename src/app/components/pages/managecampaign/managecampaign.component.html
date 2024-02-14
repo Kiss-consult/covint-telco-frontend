@@ -12,7 +12,7 @@
 
       <div class="content">
         <div>
-          <label class="text">Kampány neve </label>
+          <label class="text"> Szűrő: Kampány neve </label>
         </div>
         <div>
           <input class="droptextbox" type="text" id="name" name="institution" [(ngModel)]="campaign.name" placeholder="???" title="Kérem töltse ki a mezőt">
@@ -21,7 +21,7 @@
 
       <div class="content">
       <div>
-        <label class="text">Kezdés dátuma </label>
+        <label class="text">Szűrő: Kezdés dátuma </label>
       </div>
       <div>
         <input class="droptextbox" type="date" id="startDate" name="institution" [(ngModel)]="campaign.startDate" placeholder="???" title="Kérem töltse ki a mezőt">
@@ -31,7 +31,7 @@
     
     <div class="content">
       <div>
-        <label class="text">Befejezés dátuma</label>
+        <label class="text">Szűrő: Befejezés dátuma</label>
       </div>
       <div>
         <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate" placeholder="???" title="Kérem töltse ki a mezőt">
@@ -77,7 +77,7 @@
 
     <div class="content">
       <button id="okebutton" (click)="searchCampaign()" style="z-index: 2; position: relative;">
-        keresés
+        Szűrés
       </button>
     </div>
 
