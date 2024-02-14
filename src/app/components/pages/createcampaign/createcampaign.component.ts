@@ -257,6 +257,7 @@ this.campaign.numberListId = parseInt(this.listID);
     this.buttonValues = [];
     console.log (this.campaign)
     this.newQuestion = new Question;
+    this.newAnswer = new Answer;
   }
 
 

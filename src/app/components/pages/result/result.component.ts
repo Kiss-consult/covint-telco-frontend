@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DatePipe, Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -73,7 +73,7 @@ export class ResultComponent {
   datas: Data[] = [];
   page: Page = new Page;
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid','id', 'started'];
+  displayedColumns: string[] = ['HangUpCode', 'Number', 'Name', 'Other'];
   constructor(private backendService: BackendService, private location: Location, private fb: FormBuilder,
     private _Activatedroute: ActivatedRoute, private router: Router) {
 
@@ -146,8 +146,50 @@ export class ResultComponent {
       console.log("ellenorzes page3:", this.paginator.length);
     });
   }
+  public getServerData(event: PageEvent) {
+    console.log("event", event);
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
 
+    this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex ).subscribe(result => {
 
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
+        }
+        else
+          alert("telefonszám lista lekérdezése  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.page = result.unwrap();
+
+  
+      this.datas = this.page.data;
+      this.pageIndex = this.page.page;
+      this.pageSize = this.page.pageSize;
+      this.length = this.page.total;
+
+      console.log("ellenorzes page2:", this.paginator.length);
+      console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
+      console.log("ellenorzes list:", this.list,);
+      console.log("ellenorzes page:", this.page,);
+      console.log("ellenorzes page.data:", this.page.data);
+      // console.log("ellenorzes data:" , this.list);
+      // alert("elenorzes");
+
+      this.dataSource = new MatTableDataSource(this.datas);
+      //this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.empTbSort;
+      console.log("telefonszám lista sikeres betöltés");
+
+      console.log("számok", this.data);
+      console.log("paginator", this.paginator);
+      console.log("ellenorzes page3:", this.paginator.length);
+    });
+  }
 
   private loadData(id: number) {
     this.campaignId = id;
