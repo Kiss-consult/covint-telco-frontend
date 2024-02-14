@@ -14,9 +14,9 @@ import { Answer } from 'src/app/models/answer/answer';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
 import { CallDay } from 'src/app/models/result_campaign/callday';
 import { ResultFilter } from 'src/app/models/filter/resultfilter';
-import { Data } from 'src/app/models/list_of_numbers/data';
+import { Data } from 'src/app/models/respons/data';
 import { Page } from 'src/app/models/list_of_numbers/page';
-
+import { Respons } from 'src/app/models/respons/respons';
 
 
 @Component({
@@ -25,12 +25,12 @@ import { Page } from 'src/app/models/list_of_numbers/page';
   styleUrl: './result.component.css'
 })
 export class ResultComponent {
-  
+
   DateFrom: string = "";
   DateTo: string = "";
   RelativeDate: string = "";
-
-  resultCampaign: ResultCampaign = new ResultCampaign; 
+  respons: Respons = new Respons;
+  resultCampaign: ResultCampaign = new ResultCampaign;
   resultCampaings: ResultCampaign[] = [];
   campaign: Campaign = new Campaign;
   campaignId: any = this.resultCampaign.id;
@@ -65,7 +65,7 @@ export class ResultComponent {
   paginator!: MatPaginator;
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
-  resultFilter : ResultFilter = new ResultFilter;
+  resultFilter: ResultFilter = new ResultFilter;
   pageIndex: number = 0;
   pageSize: number = 5;
   length: number = 10;
@@ -73,7 +73,7 @@ export class ResultComponent {
   datas: Data[] = [];
   page: Page = new Page;
 
-  displayedColumns: string[] = ['HangUpCode', 'Number', 'Name', 'Other'];
+  displayedColumns: string[] = ['HangupCode', 'Number', 'Name', 'Other', 'CallLength','DialStatus','Result'];
   constructor(private backendService: BackendService, private location: Location, private fb: FormBuilder,
     private _Activatedroute: ActivatedRoute, private router: Router) {
 
@@ -86,7 +86,7 @@ export class ResultComponent {
 
     this.loadData(this.campaignId);
 
-    
+
 
   }
 
@@ -100,14 +100,15 @@ export class ResultComponent {
       this.relativtimeActive = true;
       console.log("Relativ dátumot választottam");
     }
-  
+
   }
 
 
   public getFilteredResult() {
-   this.resultFilter.VpbxUuid = this.resultCampaign.VpbxUuid;
+    this.resultFilter.VpbxUuid = this.resultCampaign.VpbxUuid;
+    console.log(this.resultFilter)
 
-    this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex ).subscribe(result => {
+    this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex).subscribe(result => {
 
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
@@ -120,19 +121,18 @@ export class ResultComponent {
         console.error(result.unwrapErr());
         return;
       }
-      this.page = result.unwrap();
+      this.respons = result.unwrap();
 
-  
-      this.datas = this.page.data;
-      this.pageIndex = this.page.page;
-      this.pageSize = this.page.pageSize;
-      this.length = this.page.total;
+
+      this.datas = this.respons.data;
+      this.pageIndex = this.respons.page;
+      this.pageSize = this.respons.pageSize;
+      this.length = this.respons.total;
 
       console.log("ellenorzes page2:", this.paginator.length);
       console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
-      console.log("ellenorzes list:", this.list,);
-      console.log("ellenorzes page:", this.page,);
-      console.log("ellenorzes page.data:", this.page.data);
+      console.log("ellenorzes list:", this.respons,);
+
       // console.log("ellenorzes data:" , this.list);
       // alert("elenorzes");
 
@@ -151,7 +151,7 @@ export class ResultComponent {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
 
-    this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex ).subscribe(result => {
+    this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex).subscribe(result => {
 
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
@@ -164,19 +164,19 @@ export class ResultComponent {
         console.error(result.unwrapErr());
         return;
       }
-      this.page = result.unwrap();
+      this.respons = result.unwrap();
 
-  
-      this.datas = this.page.data;
-      this.pageIndex = this.page.page;
-      this.pageSize = this.page.pageSize;
-      this.length = this.page.total;
+
+      this.datas = this.respons.data;
+      this.pageIndex = this.respons.page;
+      this.pageSize = this.respons.pageSize;
+      this.length = this.respons.total;
 
       console.log("ellenorzes page2:", this.paginator.length);
       console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
-      console.log("ellenorzes list:", this.list,);
-      console.log("ellenorzes page:", this.page,);
-      console.log("ellenorzes page.data:", this.page.data);
+      console.log("ellenorzes list:", this.respons,);
+
+      console.log("ellenorzes page.data:", this.respons.data);
       // console.log("ellenorzes data:" , this.list);
       // alert("elenorzes");
 
@@ -222,7 +222,7 @@ export class ResultComponent {
         this.available = true;
         console.log(this.available);
       }
-      this.backendService.getListById(this.resultCampaign.numberListId,1,1).subscribe(
+      this.backendService.getListById(this.resultCampaign.numberListId, 1, 1).subscribe(
         result => {
           if (result.isErr()) {
             alert("lista sikertelen leállítása");
@@ -250,7 +250,7 @@ export class ResultComponent {
         this.dataSource = new MatTableDataSource(this.datas);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.empTbSort;
-  
+
         this.dataSource.data = this.datas; // Az adatforrás frissítése
         console.log("Kampányok keresése sikeres betöltés");
         console.log(this.resultCampaings);
@@ -261,5 +261,5 @@ export class ResultComponent {
     this.location.back();
   }
 
-  
+
 }
