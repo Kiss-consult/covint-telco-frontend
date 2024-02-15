@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "covint": {
+    "covint-telco-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/covint",
+            "outputPath": "dist/covint-telco-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -69,13 +69,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "prod": {
-              "browserTarget": "covint:build:prod"
+              "browserTarget": "covint-telco-frontend:build:prod"
             },
             "dev": {
-              "browserTarget": "covint:build:dev"
+              "browserTarget": "covint-telco-frontend:build:dev"
             },
             "test": {
-              "browserTarget": "covint:build:test"
+              "browserTarget": "covint-telco-frontend:build:test"
             }
           },
           "defaultConfiguration": "dev"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "covint:build"
+            "browserTarget": "covint-telco-frontend:build"
           }
         },
         "test": {
