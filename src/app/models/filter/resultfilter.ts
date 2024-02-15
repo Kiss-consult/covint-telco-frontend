@@ -3,5 +3,6 @@ export class ResultFilter {
     Number: string = "";
     Name: string = "";
     Other: string = "";
+    MinCallLength: number = 0;
     HangupCode: string = "";
 }
