@@ -371,9 +371,10 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
   );
 }
 
-public getResultDiagramById(id : number): Observable<Result<Diagram>> {
+public getResultDiagramById(id: number): Observable<Result<Diagram>> {
  
-  id = 23;
+  
+
   const url = this.teszturl + "/diagram/get/" + id; 
   return this.httpClient.get<Result<Diagram>>(url,  { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<Diagram>(JSON.stringify(result))),
@@ -381,7 +382,22 @@ public getResultDiagramById(id : number): Observable<Result<Diagram>> {
   );
 }
 
-
+ public downloadResults(vpbxuuid: string): Observable<Result<[any[], string]>> {
+    let options = {
+      headers: this.getHeaders(),
+      responseType: "blob" as "json"
+    };
+    return this.httpClient.post<Blob>(this.url + "/callresults/export/" + vpbxuuid, options).pipe(
+      map(response => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let result: [any[], string] = [binaryData, dataType]
+        return new Ok(result);
+      }),
+      catchError(error => of(new Err<[any[], string]>(error)))
+    );
+  }
 
 
 
