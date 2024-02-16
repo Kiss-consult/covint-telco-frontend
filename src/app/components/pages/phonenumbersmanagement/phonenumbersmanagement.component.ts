@@ -93,18 +93,45 @@ export class PhonenumbersmanagementComponent {
     try {
       let result = this.backendService.uploadFile(file, this.listname);
 
-      console.log(result)
-
-
-
+      console.log(result)   
     }
     catch (error) {
-
       alert(`File feltölts sikertelen`)
     }
+    
+
     event.target.value = null;
+   
 
   }
+
+public refreshList() {
+
+
+
+  this.backendService.getAllList().subscribe(
+    result => {
+      if (result.isErr()) {
+        alert("hanganyagok listája sikertelen betöltés");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.lists = result.unwrap();
+      this.dataSource = new MatTableDataSource(this.lists);
+     this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.empTbSort;
+
+      // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+      console.log("hanganyagok  listája sikeres betöltés ujra");
+      console.log(this.lists);
+
+    });
+
+    }
+
+
+
+   
 public Downloadtemplate () {
 
   let filename = "telefon_lista_example.xlsx"

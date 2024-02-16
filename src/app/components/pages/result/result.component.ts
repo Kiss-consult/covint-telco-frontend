@@ -294,6 +294,26 @@ public getDiagrams(id : number) {
   goBackToPrevPage(): void {
     this.location.back();
   }
+ 
+  public rates() {
 
+    const filename = "eredmenyek_teljes.xlsx";
+    this.backendService.downloadResults(this.resultCampaign.VpbxUuid).subscribe((result) => {
+      if (result.isErr()) {
+        console.error("error",result.unwrapErr());
+        return;
+      }
+      let response = result.unwrap();
+      console.log("respons",response);
+      let data = response[0];
+      let dataType = response[1];
+      let downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
+      if (filename)
+        downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    });
+  }
 
 }

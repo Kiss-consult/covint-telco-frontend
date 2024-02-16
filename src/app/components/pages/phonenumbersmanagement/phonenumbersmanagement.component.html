@@ -44,7 +44,14 @@
             <p>telefonszám formátum: +36xxxxxxxxx , feltöltésnél ellnőrizzük a file tartalmát! </p>
             <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
             attach_file</mat-icon></button>
-          </div>      
+          </div>     
+          <br>
+          <br>
+          <div>
+            
+            <button  color="primary" (click)="refreshList()" > Lista frissítése 
+           </button>
+          </div>    
         </div>
         <div class="nofile">
           {{uploadedMessage|| noFileMessage}}
