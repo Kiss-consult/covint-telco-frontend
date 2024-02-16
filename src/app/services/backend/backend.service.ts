@@ -19,12 +19,14 @@ import { Page } from 'src/app/models/list_of_numbers/page';
 import { ResultFilter } from 'src/app/models/filter/resultfilter';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { Respons } from 'src/app/models/respons/respons';
+import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
 
 @Injectable({
     providedIn: 'root'
   })
   export class BackendService {
     private url: string = "";
+    private teszturl: string = "";
     markers: string[] = [];
     username: string = "";
     uploadProgress!: number;
@@ -34,6 +36,7 @@ import { Respons } from 'src/app/models/respons/respons';
     constructor(private httpClient: HttpClient, private config: ConfigService,
       private loginService: LoginService) {
       this.url = this.config.config.TelcoBackendUrl;
+      this.teszturl = this.config.config.tesztDiagramUrl;
     }
   
     public hello(): Observable<string> {
@@ -367,7 +370,15 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
   );
 }
 
-
+public getResultDiagramById(id : number): Observable<Result<ResultDiagram>> {
+ 
+  id = 23;
+  const url = this.teszturl + "/diagram/get/" + id; 
+  return this.httpClient.get<Result<ResultDiagram>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<ResultDiagram>(JSON.stringify(result))),
+    catchError(error => of(new Err<ResultDiagram>(error)))
+  );
+}
 
 
 
@@ -377,15 +388,15 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
 
 
 // This function inserts the new user into the Auth.
-public getAuditlogs(pagesize: number ,pageindex: number): Observable<Result<Auditlog[]>> {
+public getAuditlogs(pagesize: number ,pageindex: number): Observable<Result<Auditlog>> {
   let options = {
     headers: this.getHeaders(),
     params: this.getParams(pagesize ,pageindex)
   };
   const url = this.url + "/auditlog";
-  return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
-    map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
-    catchError(error => of(new Err<Auditlog[]>(error)))
+  return this.httpClient.get<Result<Auditlog>>(url, options).pipe(
+    map(result => fromJSON<Auditlog>(JSON.stringify(result))),
+    catchError(error => of(new Err<Auditlog>(error)))
   );
 
 }

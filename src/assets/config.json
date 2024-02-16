@@ -2,5 +2,6 @@
     "TelcoBackendUrl": "http://localhost:8093",
     "KeycloakUrl": "http://localhost:8084",
     "CaptchaKey": "6Ld0LFcpAAAAADf3_nXe5RTQ1eHAyvjJ9Klzzh7I",
-    "CovintUrl": "http://localhost:8091"
+    "CovintUrl": "http://localhost:8091",
+    "tesztDiagramUrl" : "https://teszt.covint.hu/covint/telco/backend"
 }

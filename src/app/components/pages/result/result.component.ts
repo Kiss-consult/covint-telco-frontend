@@ -17,6 +17,7 @@ import { ResultFilter } from 'src/app/models/filter/resultfilter';
 import { Data } from 'src/app/models/respons/data';
 import { Page } from 'src/app/models/list_of_numbers/page';
 import { Respons } from 'src/app/models/respons/respons';
+import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class ResultComponent {
   autoActive: boolean = false;
   liveActive: boolean = false;
   list: List_of_numbers = new List_of_numbers;
+  resultdiagrams: ResultDiagram = new ResultDiagram;
   question: Question = new Question;
   answer: Answer = new Answer;
   answers: Answer[] = [];
@@ -235,6 +237,8 @@ export class ResultComponent {
           // window.location.reload();
         });
       this.getFilteredResult();
+      this.getDiagrams(this.campaignId);
+      
     });
   }
 
@@ -256,6 +260,35 @@ export class ResultComponent {
         console.log(this.resultCampaings);
       });
   }
+
+public getDiagrams(id : number) {
+  this.campaignId = id;
+  this.backendService.getResultDiagramById(this.campaignId).subscribe(
+    result => {
+      if (result.isErr()) {
+        alert("diagramok sikertelen betöltése");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.resultdiagrams = result.unwrap();
+      console.log(this.resultdiagrams)
+
+      // window.location.reload();
+    });
+}
+ public openCallLengthDiagram(){
+
+  window.open(this.resultdiagrams.CallLengthDiagram.Url,  "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
+ }
+ public getIframeCallLengthDiagram(){
+
+  return this.resultdiagrams.CallLengthDiagram.Iframe
+ }
+ public getUrlCallLengthDiagram(){
+  
+ console.log(this.resultdiagrams)
+  return this.resultdiagrams.CallLengthDiagram.Url
+ }
 
   goBackToPrevPage(): void {
     this.location.back();

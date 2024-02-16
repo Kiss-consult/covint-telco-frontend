@@ -1,12 +1,10 @@
+import { Data } from "./data";
+
 export class Auditlog {
-    "Message": string = "";
-    "Date": string = "";
-    "Level": string = "";
-    "Time": string = "";
-    "@timestamp": string = "";
 
-    constructor() {
+    data: Data[] = [];
+    total: number = 0;
+    pageSize: number = 0;
+    page: number = 0;
 
-
-    }
 }
