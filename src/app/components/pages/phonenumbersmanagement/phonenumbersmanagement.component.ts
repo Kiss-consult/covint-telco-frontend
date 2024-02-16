@@ -77,7 +77,7 @@ export class PhonenumbersmanagementComponent {
    
 
     if (file) {
-      if (file.name.endsWith(".csv") === false) {
+      if (file.name.endsWith(".xlsx") === false) {
         alert(`:Wrong file format error message:Wrong file format. Please upload a csv file.`)
         return;
       }
@@ -107,8 +107,8 @@ export class PhonenumbersmanagementComponent {
   }
 public DownloadCSVtemplate () {
 
-  let filename = "telefon_lista_example.csv"
-  this.backendService.downloadCSVTemplate().subscribe((result) => {
+  let filename = "telefon_lista_example.xlsx"
+  this.backendService.downloadTemplate().subscribe((result) => {
     if (result.isErr()) {
       console.error(result.unwrapErr());
       return;

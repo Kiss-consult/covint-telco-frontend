@@ -150,13 +150,13 @@ reset() {
   this.uploadProgress = 0;
   this.uploadSub = Subscription.EMPTY;
 }
-public downloadCSVTemplate(): Observable<Result<[any[], string]>> {
+public downloadTemplate(): Observable<Result<[any[], string]>> {
   let options = {
     headers: this.getHeaders(),
    // params: this.getParams(f),
     responseType: "blob" as "json"
   };
-  return this.httpClient.get<Blob>(this.url + "/list/examplecsv", options).pipe(
+  return this.httpClient.get<Blob>(this.url + "/list/examplefile", options).pipe(
     map(response => {
       let dataType = response.type ;
       let binaryData = [];
