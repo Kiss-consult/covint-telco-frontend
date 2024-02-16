@@ -387,12 +387,12 @@ public getResultDiagramById(id: number): Observable<Result<Diagram>> {
       headers: this.getHeaders(),
       responseType: "blob" as "json"
     };
-    return this.httpClient.post<Blob>(this.url + "/callresults/export/" + vpbxuuid, options).pipe(
+    return this.httpClient.post<Blob>(this.url + "/callresults/export/" + vpbxuuid,null, options).pipe(
       map(response => {
         let dataType = response.type;
         let binaryData = [];
         binaryData.push(response);
-        let result: [any[], string] = [binaryData, dataType]
+        let result: [any[], string] = [binaryData, dataType];
         return new Ok(result);
       }),
       catchError(error => of(new Err<[any[], string]>(error)))

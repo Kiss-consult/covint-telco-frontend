@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
   { path: "createcampaign", component: CreatecampaignComponent,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] } },
-  { path: "managecampaign", component: ManagecampaignComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }},
+  { path: "managecampaign", component: ManagecampaignComponent, canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] } },
   { path: "phonenumbersmanagement", component: PhonenumbersmanagementComponent,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] } },
   { path: "reports", component: ReportsComponent ,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] }},
   { path: "voicemessagesmanagement", component: VoicemessagesmanagementComponent,canActivate: [AuthGuard] , data: { roles: [ PortalVezeto] } },
