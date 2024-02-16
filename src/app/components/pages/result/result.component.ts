@@ -18,6 +18,7 @@ import { Data } from 'src/app/models/respons/data';
 import { Page } from 'src/app/models/list_of_numbers/page';
 import { Respons } from 'src/app/models/respons/respons';
 import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
+import { Diagram } from 'src/app/models/diagram/diagram';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class ResultComponent {
   autoActive: boolean = false;
   liveActive: boolean = false;
   list: List_of_numbers = new List_of_numbers;
-  resultdiagrams: ResultDiagram = new ResultDiagram;
+  resultdiagram: Diagram = new Diagram;
   question: Question = new Question;
   answer: Answer = new Answer;
   answers: Answer[] = [];
@@ -270,24 +271,24 @@ public getDiagrams(id : number) {
         console.error(result.unwrapErr());
         return;
       }
-      this.resultdiagrams = result.unwrap();
-      console.log(this.resultdiagrams)
+      this.resultdiagram = result.unwrap();
+      console.log(this.resultdiagram)
 
       // window.location.reload();
     });
 }
  public openCallLengthDiagram(){
 
-  window.open(this.resultdiagrams.CallLengthDiagram.Url,  "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
+  window.open(this.resultdiagram.Url,  "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
  }
  public getIframeCallLengthDiagram(){
 
-  return this.resultdiagrams.CallLengthDiagram.Iframe
+  return this.resultdiagram.Iframe
  }
  public getUrlCallLengthDiagram(){
   
- console.log(this.resultdiagrams)
-  return this.resultdiagrams.CallLengthDiagram.Url
+ console.log(this.resultdiagram)
+  return this.resultdiagram.Url
  }
 
   goBackToPrevPage(): void {

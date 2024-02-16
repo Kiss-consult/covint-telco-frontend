@@ -20,6 +20,7 @@ import { ResultFilter } from 'src/app/models/filter/resultfilter';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { Respons } from 'src/app/models/respons/respons';
 import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
+import { Diagram } from 'src/app/models/diagram/diagram';
 
 @Injectable({
     providedIn: 'root'
@@ -370,13 +371,13 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
   );
 }
 
-public getResultDiagramById(id : number): Observable<Result<ResultDiagram>> {
+public getResultDiagramById(id : number): Observable<Result<Diagram>> {
  
   id = 23;
   const url = this.teszturl + "/diagram/get/" + id; 
-  return this.httpClient.get<Result<ResultDiagram>>(url,  { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<ResultDiagram>(JSON.stringify(result))),
-    catchError(error => of(new Err<ResultDiagram>(error)))
+  return this.httpClient.get<Result<Diagram>>(url,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Diagram>(JSON.stringify(result))),
+    catchError(error => of(new Err<Diagram>(error)))
   );
 }
 
