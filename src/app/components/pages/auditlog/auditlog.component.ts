@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { DatePipe, Location } from '@angular/common';
-import { Data } from 'src/app/models/list_of_numbers/data';
+import { Data } from 'src/app/models/auditlog/data';
 import { Page } from 'src/app/models/list_of_numbers/page';
 
 @Component({
@@ -17,10 +17,11 @@ export class AuditlogComponent {
 
 
   auditlog : Auditlog = new Auditlog;
-  auditlogs: Auditlog[] = [];
+  
+ 
+  dataSource!: MatTableDataSource<Data>;
   
   
-  dataSource: MatTableDataSource<Auditlog>; 
   
   @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild('empTbSort') empTbSort = new MatSort();
@@ -53,14 +54,21 @@ export class AuditlogComponent {
             console.error(result.unwrapErr());
             return;
           }
-          this.auditlogs = result.unwrap();
-          this.dataSource = new MatTableDataSource(this.auditlogs);
+          this.auditlog = result.unwrap();
+          
+          this.datas = this.auditlog.data;
+          this.pageIndex = this.page.page;
+          this.pageSize = this.page.pageSize;
+          this.length = this.page.total;
+
+
+          this.dataSource = new MatTableDataSource(this.datas);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.empTbSort;
     
          // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
           console.log("Auditlog sikeres betöltés");
-          console.log(this.auditlogs);
+          console.log(this.datas);
           
   
           

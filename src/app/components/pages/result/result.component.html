@@ -273,13 +273,27 @@
        
     
         <div id="okebutton" id="filter3" class="content">
+            <div>
+                <label class="text"></label>
+            </div>
             <button  (click)="getFilteredResult()" style="z-index: 2; position: relative;">
                 Szürés
             </button>
         </div>
+        
+        <div id="okebutton" id="filter3" class="content">
+            <div>
+                <label class="text"></label>
+            </div>
+            <button  (click)="openCallLengthDiagram()" style="z-index: 2; position: relative;">
+                Diagram1
+            </button>
+        </div>
     </div>
-
-
+<div>
+    <iframe src="https://teszt.covint.hu/covint/grafana/goto/ty2VRwhSR?orgId=1 | safe"  showToolbar={false} height="500"  width=100% frameborder="0">
+    </iframe>
+</div>
     <div class="acceptuser"  >
         <mat-form-field>
           <mat-label>Keresés</mat-label>

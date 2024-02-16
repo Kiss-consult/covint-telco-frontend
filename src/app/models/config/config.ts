@@ -3,4 +3,5 @@ export class Config {
     KeycloakUrl: string = "";
     CaptchaKey: string = "";
     CovintUrl: string = "";
+    tesztDiagramUrl: string = "";
 }

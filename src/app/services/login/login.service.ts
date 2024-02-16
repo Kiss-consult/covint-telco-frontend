@@ -60,6 +60,7 @@ export class LoginService {
         return false;
       }*/
       const decoded = jwtDecode<AccessToken>(this.token);
+      console.log("after decode " ,this.token)
       return decoded.groups.some(group => expectedGroups.includes(group));
     }
 
@@ -68,6 +69,7 @@ export class LoginService {
         this.loggedIn = true;
         this.keycloakService.getToken().then((token) => {
           this.token = token;
+          console.log("back from keycloak", this.token)
         });
         this.keycloakService.loadUserProfile().then((profile) => {
           this.username = profile.username as string;
