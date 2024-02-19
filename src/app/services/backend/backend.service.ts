@@ -372,10 +372,9 @@ public filterResults(resultfilter: ResultFilter, pagesize: number ,pageindex: nu
 }
 
 public getResultDiagramById(id: number): Observable<Result<Diagram>> {
- 
   
 
-  const url = this.teszturl + "/diagram/get/" + id; 
+  const url = this.url + "/diagram/get/" + id; 
   return this.httpClient.get<Result<Diagram>>(url,  { headers: this.getHeaders() }).pipe(
     map(result => fromJSON<Diagram>(JSON.stringify(result))),
     catchError(error => of(new Err<Diagram>(error)))
@@ -390,6 +389,7 @@ public getResultDiagramById(id: number): Observable<Result<Diagram>> {
     return this.httpClient.post<Blob>(this.url + "/callresults/export/" + vpbxuuid,null, options).pipe(
       map(response => {
         let dataType = response.type;
+        console.log(dataType)
         let binaryData = [];
         binaryData.push(response);
         let result: [any[], string] = [binaryData, dataType];

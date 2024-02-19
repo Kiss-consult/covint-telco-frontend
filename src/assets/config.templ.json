@@ -3,4 +3,5 @@
     "KeycloakUrl": "${KEYCLOAK_URL}",
     "CaptchaKey": "${CAPTCHA_KEY}",
     "CovintUrl": "${COVINT_URL}"    
+   
 }

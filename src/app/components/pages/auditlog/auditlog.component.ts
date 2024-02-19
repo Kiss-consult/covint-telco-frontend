@@ -57,9 +57,9 @@ export class AuditlogComponent {
           this.auditlog = result.unwrap();
           
           this.datas = this.auditlog.data;
-          this.pageIndex = this.page.page;
-          this.pageSize = this.page.pageSize;
-          this.length = this.page.total;
+          this.pageIndex = this.auditlog.page;
+          this.pageSize = this.auditlog.pageSize;
+          this.length = this.auditlog.total;
 
 
           this.dataSource = new MatTableDataSource(this.datas);
