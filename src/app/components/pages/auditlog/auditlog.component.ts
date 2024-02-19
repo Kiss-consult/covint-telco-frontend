@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
@@ -77,4 +77,46 @@ export class AuditlogComponent {
         });
         
     }
+
+
+
+    public getServerData(event: PageEvent) {
+      console.log("event", event);
+      this.pageSize = event.pageSize;
+      this.pageIndex = event.pageIndex;
+  
+          
+      this.backendService.getAuditlogs(this.pageSize,this.pageIndex).subscribe(
+        result => {
+          if (result.isErr()) {
+            alert("Auditlog sikertelen betöltés");
+            console.error(result.unwrapErr());
+            return;
+          }
+          this.auditlog = result.unwrap();
+          
+          this.datas = this.auditlog.data;
+          this.pageIndex = this.auditlog.page;
+          this.pageSize = this.auditlog.pageSize;
+          this.length = this.auditlog.total;
+
+  
+  
+       
+        console.log("ellenorzes page2:", this.paginator.length);
+        console.log("ellenorzes page2:", this.paginator.getNumberOfPages())       
+        console.log("ellenorzes page.data:", this.auditlog.data);
+      
+  
+        this.dataSource = new MatTableDataSource(this.datas);
+        //this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+        console.log("auditlog lista sikeres betöltés");
+  
+        console.log("számok", this.data);
+        console.log("paginator", this.paginator);
+        console.log("ellenorzes page3:", this.paginator.length);
+      });
+    }
+  
   }
