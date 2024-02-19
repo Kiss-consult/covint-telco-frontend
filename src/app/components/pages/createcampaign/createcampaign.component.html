@@ -39,11 +39,11 @@
 
       <!--startDate, endDate-->
     
-    <div class="tab-button" *ngIf="autoActive">
+    <div class="tab-button" >
       <label>Idővallumok</label>
     </div>    
 
-    <div class="container3" *ngIf="autoActive">
+    <div class="container3">
       
       <div id="datetime" class="content" >
         <div>
@@ -144,16 +144,19 @@
     </div>
 
     <div id="tabbutton">
-      <div class="tab-button" *ngIf="autoActive">
+      <div class="tab-button">
         <label>Hivasok</label>
       </div>
       <div class="tab-button" *ngIf="autoActive">
         <label>Hangfelvételek</label>
       </div>
+      <div class="tab-button"*ngIf="liveActive">
+        <label>Csengetési csoport</label>
+      </div>
     </div>
 
       <!--callsPerPeriod-->
-    <div id="calls" class="container5"*ngIf="autoActive">
+    <div id="calls" class="container5">
       <div id="callscontent">
         <div id="contentcall" class="content" >
           <div>
@@ -194,7 +197,7 @@
 
         <!--welcomePath-->
       <div id="callscontent">
-        <div id="contentcall" class="content">
+        <div id="contentcall" class="content" *ngIf="autoActive">
           <div>
             <div>
               <label class="text">Üdvözlő üzenet<s>*</s></label>
@@ -216,7 +219,7 @@
 
           <!--goodbyePath-->
 
-        <div class="content">
+        <div class="content" *ngIf="autoActive">
           <div>
             <div>
               <label class="text">Elköszönő üzenet<s>*</s></label>
@@ -238,8 +241,34 @@
 
            
             </div>
-          </div>
+          
         </div>
+
+        <div class="content" *ngIf="liveActive">
+          
+         
+              <div>
+                <div>
+                  <label class="text">Csengetési csoport: Élőhangos kampány esetén<s>*</s></label>
+                </div>
+                <div>
+                  <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???"   placeholder="enter first 4 digits: 09XX"
+                  ng-minlength="4" 
+                  ng-maxlength="4" 
+                  min="0001" 
+                  max="9999" title="Kérem töltse ki a mezőt">
+                </div>
+              </div>
+            
+          
+        </div>
+
+
+
+
+
+
+
       </div>      
     </div>
   
@@ -396,116 +425,9 @@
 
 
   
-  <div class="container3"*ngIf="liveActive">
-    <div class="content6" >
-      <div>
-        <div>
-          <label class="text">Csengetési csoport: Élőhangos kampány esetén<s>*</s></label>
-        </div>
-        <div>
-          <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???"   placeholder="enter first 4 digits: 09XX"
-          ng-minlength="4" 
-          ng-maxlength="4" 
-          min="0001" 
-          max="9999" title="Kérem töltse ki a mezőt">
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
 
-
-
-
-          <!--question-->
-      <!--numberOfQuestions
-
-    <div class="container4" *ngIf="autoActive">
-      
-      
-      <div class="content">
-        <div>
-          <div>
-            <label class="text">kérdések száma<s>*</s></label>
-          </div>
-          <div>
-            <input class="droptextbox" type="number" id="numberOfQuestions" name="institution" [(ngModel)]="campaign.numberOfQuestions" placeholder="???" title="Kérem töltse ki a mezőt">
-          </div>
-        </div>
-      </div>
-
-      <div class="container3" id="qonq">
-        <div *ngIf="campaign.numberOfQuestions && campaign.numberOfQuestions > 0">
-          <div *ngFor="let i of getNumbersArray(campaign.numberOfQuestions); let index = index">                
-                    
-
-            <div class="content2">
-              <div>
-                <div>                 
-                  <label class="text"> Kérdés felvétel kiválasztása<s>*</s></label>
-                </div>
-                <div>
-                  <select class="droptextbox" id="soundselect" [(ngModel)]="question.minioPath" title="Kérem válasszon.">
-                    <option value="" disabled selected hidden>Válasszon Felvételt</option>
-                    <option value="valami1">felvétel1</option>
-                    <option value="valami2">felvétel2</option>
-                    <option value="valami3">felvétel3</option>
-                  </select>
-                </div>
-              </div>
-
-
-              <div class="question">
-                <div class="telefon">
-                  
-                  <label class="text">nyomógomb száma<s>*</s></label>
-                  <input class="droptextbox" type="number" id="answerbutton{{index}}" [(ngModel)]="answer.buttonValue" >
-
-                  <label class="text">értéke<s>*</s></label>
-                  <input class="droptextbox" type="text" id="answervalue{{index}}" [(ngModel)]="answer.value">
-                  <div> 
-                  <button id="okebutton" (click)="add()" style="z-index: 2; position: relative;">  add</button>
-
-                  
-                  <p style="margin: 0;">{{ answer.buttonValue }}  - {{ answer.value }}</p>
-                </div>
-
-
-                  <button id="okebutton" (click)="questionDone()" style="z-index: 2; position: relative;"> Kérdés kész</button>
-                </div>                
-              </div>
-            </div>                               
-          </div>
-        </div>
-      </div>
-
-     
-
-      ringGroup
-    <div class="container3"*ngIf="liveActive">
-      <div class="content" >
-        <div>
-          <div>
-            <label class="text">csöngeés csoport: ha előhangos akkor kell ez a szám<s>*</s></label>
-          </div>
-          <div>
-            <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???" title="Kérem töltse ki a mezőt">
-          </div>
-        </div>
-      </div>
-    </div>
-
-  
-
-    <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-      <button id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
-          Kész
-      </button>
-      <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
-          <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
-      </div>
-    </div>  
-  </div>-->
   
   <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
     <button id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">

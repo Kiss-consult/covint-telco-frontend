@@ -267,51 +267,51 @@ this.campaign.numberListId = parseInt(this.listID);
     this.campaign.numberOfQuestions = this.campaign.numberOfQuestions -1;
   }
   private checkRequiredFields(): boolean {
-    if (this.campaign.liveOrAuto = false  && (this.campaign.name === null || this.campaign.name=== "" )) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.name === null || this.campaign.name=== "" )) {
       alert("A 'Kampány neve' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.startDate === null || this.campaign.startDate === "")) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.startDate === null || this.campaign.startDate === "")) {
       alert("A 'Kezdés  dátuma' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.endDate === null ||  this.campaign.endDate === "" ) ){
+    if (this.campaign.liveOrAuto === false  && (this.campaign.endDate === null ||  this.campaign.endDate === "" ) ){
       alert("A 'Befejezés dátuma' mező kitöltése kötelező, és nem lehet korábbi mint a 'Kezdés dátuma'");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.fromTime === null ||  this.campaign.fromTime === "")) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.fromTime === null ||  this.campaign.fromTime === "")) {
       alert("A 'Kezdés ideje' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.toTime === null ||  this.campaign.toTime <  this.campaign.fromTime)) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.toTime === null ||  this.campaign.toTime <  this.campaign.fromTime)) {
       alert("A 'Befejezés ideje' mező kitöltése kötelező és nem lehet korábbi mint a 'Kezdés ideje'");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.callDays === null || ( this.campaign.callDays.length = 0)) ){
+    if (this.campaign.liveOrAuto === false  && (this.campaign.callDays === null || ( this.campaign.callDays.length = 0)) ){
       alert("A Kérem adjon meg minimum egy hívási napot, ami a kezdés dátuma és a befejezés dátuma közé esik!");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && this.campaign.callsPerPeriod === null ) {
+    if (this.campaign.liveOrAuto === false  && this.campaign.callsPerPeriod === null ) {
       alert("A 'Hyások közötti idő' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.goodbyePath === null || this.campaign.goodbyePath === "") ){
+    if (this.campaign.liveOrAuto === false  && (this.campaign.goodbyePath === null || this.campaign.goodbyePath === "") ){
       alert("A 'Elköszönő üzenet' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.welcomePath === null || this.campaign.welcomePath === "")) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.welcomePath === null || this.campaign.welcomePath === "")) {
       alert("A 'Üdvözlő üzenet' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && this.campaign.numberListId === null ) {
+    if (this.campaign.liveOrAuto === false  && this.campaign.numberListId === null ) {
       alert("A 'Kötés telefonszám listához' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = false  && (this.campaign.period === null || this.campaign.period=== "") ) {
+    if (this.campaign.liveOrAuto === false  && (this.campaign.period === null || this.campaign.period=== "") ) {
       alert("A 'Hívások közötti idő' mező kitöltése kötelező");
       return false;
     }
-    if (this.campaign.liveOrAuto = true  && (this.campaign.ringGroup === null ) ) {
+    if (this.campaign.liveOrAuto === true  && (this.campaign.ringGroup === null ) ) {
       alert("A 'Csengetési csoport ' mező kitöltése kötelező");
       return false;
     }
