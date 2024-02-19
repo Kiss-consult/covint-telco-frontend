@@ -277,7 +277,7 @@ public getDiagrams(id : number) {
       // window.location.reload();
     });
 }
- public openCallLengthDiagram(){
+ public openDiagram(){
 
   window.open(this.resultdiagram.Url,  "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
  }
