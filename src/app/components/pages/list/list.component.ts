@@ -74,8 +74,12 @@ export class ListComponent {
           alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
           console.log("jogosultsági probléma")
         }
+        if (mess === "Cannot get list by id: sql: Scan error on column index 3, name \"id\": converting NULL to int is unsupported") {
+          alert("Sikertelen adatlekérés \nA kért lista üres!")
+          console.log("üres lista")
+        }
         else
-          alert("telefonszám lista lekérdezése  sikertelen ");
+          alert("telefonszám lista lekérdezése sikertelen ");
         console.error(result.unwrapErr());
         return;
       }
