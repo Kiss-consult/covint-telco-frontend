@@ -400,10 +400,14 @@
     <div class="content6" >
       <div>
         <div>
-          <label class="text">Csengés csoport: Élőhangos kampány esetén<s>*</s></label>
+          <label class="text">Csengetési csoport: Élőhangos kampány esetén<s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="number" id="ringGroup" name="institution" [(ngModel)]="campaign.ringGroup" ringGroup="???"   placeholder="enter first 4 digits: 09XX"
+          ng-minlength="4" 
+          ng-maxlength="4" 
+          min="0001" 
+          max="9999" title="Kérem töltse ki a mezőt">
         </div>
       </div>
     </div>
