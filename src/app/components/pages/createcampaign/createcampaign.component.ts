@@ -170,9 +170,7 @@ export class CreatecampaignComponent {
   //  and inserts the campaign into the database.
   // It also clears the form for the next campaign.
   public finish() {
-    if (!this.checkRequiredFields()) {
-    return;
-     }
+   
     //this.question.answers.push(this.answers)
 this.campaign.numberListId = parseInt(this.listID);
     console.log("listid",  this.campaign.numberListId)
