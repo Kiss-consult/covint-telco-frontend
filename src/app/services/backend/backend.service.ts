@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subscription, catchError, finalize, map, of } from 'rxjs';
-
-
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { LoginService } from '../login/login.service';
 import { ConfigService } from '../config/config.service';
@@ -19,7 +17,6 @@ import { Page } from 'src/app/models/list_of_numbers/page';
 import { ResultFilter } from 'src/app/models/filter/resultfilter';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { Respons } from 'src/app/models/respons/respons';
-import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
 import { Diagram } from 'src/app/models/diagram/diagram';
 
 @Injectable({
@@ -187,24 +184,6 @@ export class BackendService {
 
     ;
   }
-  /*
-  // This function inserts the new user into the Auth.
-  public getAuditlogs(): Observable<Result<Auditlog[]>> {
-    let options = {
-      headers: this.getHeaders(),
-      params: this.getParams()
-    };
-    const url = this.url + "/auditlog";
-    return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
-      map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
-      catchError(error => of(new Err<Auditlog[]>(error)))
-    );
-
-  }
-
-*/
-
-
 
   // This function get a given list by id from the database.
   public getListById(id: number, pagesize: number, pageindex: number): Observable<Result<List_of_numbers>> {
@@ -347,11 +326,6 @@ export class BackendService {
     );
   }
 
-
-
-
-
-
   // *********************  END OF SOUND FUNCTIONS **************************************
 
   // *********************  RESULT FUNCTIONS **************************************
@@ -377,8 +351,6 @@ export class BackendService {
     this.url = this.teszturl;
     id = 23;
 */
-
-
 
     const url = this.url + "/diagram/get/" + id;
     return this.httpClient.get<Result<Diagram>>(url, { headers: this.getHeaders() }).pipe(

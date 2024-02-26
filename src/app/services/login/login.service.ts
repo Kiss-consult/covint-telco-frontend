@@ -13,26 +13,18 @@ import { AccessToken } from 'src/app/models/token/accesstoken';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-    static hasAnyGroup(groups: string[]) {
-      throw new Error('Method not implemented.');
-    }
-    url: string = "";
-  
+export class LoginService {   
+
+    url: string = "";  
     token: string = "";
     id: string = "";
-    email: string = "";
-    //uploadProgress: number;
-    //uploadSub: Subscription;
-  
-  
+    email: string = "";   
     username: string = "";
     loggedIn: boolean = false;
     userId: string = "";
   
   
-    constructor(private httpClient: HttpClient, private config: ConfigService,
-      private router: Router, private keycloakService: KeycloakService) {
+    constructor(private router: Router, private keycloakService: KeycloakService) {
       //this.url = this.config.config.AuthUrl;
       keycloakService.keycloakEvents$.subscribe({
         next: (e) => {
@@ -44,21 +36,14 @@ export class LoginService {
           }
         }
       });
-
       if (keycloakService.isLoggedIn()) {
         this.getUserData();
       } else {
-        this.loggedIn = false;
-  
+        this.loggedIn = false;  
       }
-
     }
 
-    public hasAnyGroup(expectedGroups: string[]): boolean {
-      /*if (!this.isLoggedIn()) {
-        this.router.navigate(['/login']);
-        return false;
-      }*/
+    public hasAnyGroup(expectedGroups: string[]): boolean {     
       const decoded = jwtDecode<AccessToken>(this.token);
       console.log("after decode " ,this.token)
       return decoded.groups.some(group => expectedGroups.includes(group));
@@ -78,28 +63,19 @@ export class LoginService {
       }
       
       public login(): void {
-
         this.loggedIn = this.keycloakService.isLoggedIn();
         if (this.loggedIn === true) {
           this.getUserData();
           return;
         }
-        this.keycloakService.login().then(() => {
-    
+        this.keycloakService.login().then(() => {    
           this.loggedIn = this.keycloakService.isLoggedIn();
           if (this.loggedIn === true) {
             this.getUserData();
           }
         });
-      }
-    
+      }   
 
-      private getHeaders(): HttpHeaders {
-        return new HttpHeaders({
-          "Content-Type": "application/json",
-        });
-    
-      }
 
       public isLoggedIn(): boolean {
         return this.loggedIn;
@@ -107,10 +83,8 @@ export class LoginService {
     
       public logout() {
         let home = window.location.toString().replace(this.router.url, '')
-
         this.keycloakService.logout(home)
-        this.keycloakService.clearToken();
-    
+        this.keycloakService.clearToken();    
         this.token = "";
       }
 

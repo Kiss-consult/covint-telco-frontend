@@ -1,20 +1,10 @@
 
-import { Component, ViewChild, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-
-
+import { Component, ViewChild} from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Filter } from 'src/app/models/filter/filter';
-
-
-
-import { LoginService } from 'src/app/services/login/login.service';
-
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
-
+import { Router } from '@angular/router';
 import { Location } from '@angular/common'
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { Campaign } from 'src/app/models/campaign/campaign';
@@ -24,11 +14,11 @@ import { Campaign } from 'src/app/models/campaign/campaign';
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
+
 export class ReportsComponent {
   DateFrom: string = "";
   DateTo: string = "";
   RelativeDate: string = "";
-
   timeActive: boolean = false;
   relativtimeActive: boolean = false;
   resultCampaing: ResultCampaign = new ResultCampaign;
@@ -47,6 +37,7 @@ export class ReportsComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   toggleContent(contentType: string) {
     if (contentType === 'time') {
       this.timeActive = true;
@@ -56,16 +47,14 @@ export class ReportsComponent {
       this.timeActive = false;
       this.relativtimeActive = true;
       console.log("Relativ dátumot választottam");
-    }
-  
+    }  
   }
   
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private backendService: BackendService, private location: Location, private router: Router,private _Activatedroute:ActivatedRoute) {
 
-
+  constructor(private backendService: BackendService, private location: Location, private router: Router) {
 
     this.backendService.getAllCampaign().subscribe(
       result => {
@@ -77,16 +66,13 @@ export class ReportsComponent {
         this.resultCampaings = result.unwrap();
         this.dataSource = new MatTableDataSource(this.resultCampaings);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.empTbSort;
-
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        this.dataSource.sort = this.empTbSort;       
         console.log("Kampányok sikeres betöltés");
         console.log(this.resultCampaings);
       });
-
   }
 
-
+// filter campaigns - backend filter
 public searchCampaign() {
   this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
     result => {
@@ -106,15 +92,14 @@ public searchCampaign() {
     });
 }
 
+// get the elected campaign results
 public callCampaignResult(campaign: ResultCampaign){
   console.log("result campaign",campaign)
-  console.log("VpbxUuid",campaign.VpbxUuid)
-  
+  console.log("VpbxUuid",campaign.VpbxUuid)  
    let id = campaign.id;
     this.router.navigate(
         ['/result', id]
     ); 
 }
-
 
 }

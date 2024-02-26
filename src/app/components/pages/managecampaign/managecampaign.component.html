@@ -1,66 +1,72 @@
-
 <h1>
-    Kampányok
-    
-   </h1>
-   <h2>Kampányok </h2>
-   <div class="container">
-    <!--TABLE-->
-    <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+  Kampányok
 
-    <div class="container3">
+</h1>
+<h2>Kampányok </h2>
+<div class="container">
+  <!--TABLE-->
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
 
-      <div class="content">
-        <div>
-          <label class="text"> Szűrő: Kampány neve </label>
-        </div>
-        <div>
-          <input class="droptextbox" type="text" id="name" name="institution" [(ngModel)]="campaign.name" placeholder="???" title="Kérem töltse ki a mezőt">
-        </div>
+  <div class="container3">
+
+    <div class="content">
+      <div>
+        <label class="text"> Szűrő: Kampány neve </label>
       </div>
+      <div>
+        <input class="droptextbox" type="text" id="name" name="institution" [(ngModel)]="campaign.name"
+          placeholder="???" title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
 
-      <div class="content">
+    <div class="content">
       <div>
         <label class="text">Szűrő: Kezdés dátuma </label>
       </div>
       <div>
-        <input class="droptextbox" type="date" id="startDate" name="institution" [(ngModel)]="campaign.startDate" placeholder="???" title="Kérem töltse ki a mezőt">
+        <input class="droptextbox" type="date" id="startDate" name="institution" [(ngModel)]="campaign.startDate"
+          placeholder="???" title="Kérem töltse ki a mezőt">
       </div>
     </div>
-  
-    
+
+
     <div class="content">
       <div>
         <label class="text">Szűrő: Befejezés dátuma</label>
       </div>
       <div>
-        <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate" placeholder="???" title="Kérem töltse ki a mezőt">
+        <input class="droptextbox" type="date" id="endDate" name="institution" [(ngModel)]="campaign.endDate"
+          placeholder="???" title="Kérem töltse ki a mezőt">
       </div>
     </div>
 
-    
+
     <div class="content">
       <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
         <label for="timeradioTime">Szűrés dátumra</label>
         <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
-      
-        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">  
-          <div>   
-          <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="DateFrom" placeholder="" title="Kérem válasszon"> - tól       
-          </div> 
+
+        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">
           <div>
-          <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"  [(ngModel)]="DateTo" title="Kérem válasszon"> - ig 
+            <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive"
+              [(ngModel)]="DateFrom" placeholder="" title="Kérem válasszon"> - tól
+          </div>
+          <div>
+            <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"
+              [(ngModel)]="DateTo" title="Kérem válasszon"> - ig
           </div>
         </form>
       </div>
-    
-      <div class="relativeclass" [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
+
+      <div class="relativeclass"
+        [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
         <div>
           <label for="timeradioRelative">Szűrés relativ időre </label>
-          <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')" >
+          <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')">
         </div>
         <div [ngStyle]="{'opacity': relativtimeActive ? '1' : '0.3'}">
-          <select class="droptextbox" name="relative" id="relative" [disabled]="timeActive" [(ngModel)]="RelativeDate" title="Kérem válasszon">
+          <select class="droptextbox" name="relative" id="relative" [disabled]="timeActive" [(ngModel)]="RelativeDate"
+            title="Kérem válasszon">
             <option value="" disabled selected hidden>Válasszon...</option>
             <option value="yesterday">tegnap</option>
             <option value="this_week">ez a hét</option>
@@ -69,11 +75,11 @@
             <option value="last_3_months">utolsó 3 hónap</option>
             <option value="this_year">ez az év</option>
           </select>
-          
+
         </div>
       </div>
     </div>
-    
+
 
     <div class="content">
       <button id="okebutton" (click)="searchCampaign()" style="z-index: 2; position: relative;">
@@ -85,90 +91,91 @@
 
 
 
-    <div class="acceptuser"  >
-      <mat-form-field>
-        <mat-label>Keresés</mat-label>
-        <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
-      </mat-form-field>
- 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">        
- 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Kampány neve</th>
-          <td mat-cell *matCellDef="let resultCampaing">
-              {{ resultCampaing.name}}
-          </td>
-        </ng-container>     
-      
-        <ng-container matColumnDef="startDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Kezdete</th>
-          <td mat-cell *matCellDef="let resultCampaing">
-              {{ resultCampaing.startDate}}
-          </td>
-          </ng-container>    
-  
-          <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Vége</th>
-            <td mat-cell *matCellDef="let resultCampaing">
-            {{ resultCampaing.endDate}}
-            </td>
-          </ng-container> 
+  <div class="acceptuser">
+    <mat-form-field>
+      <mat-label>Keresés</mat-label>
+      <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
+    </mat-form-field>
 
-          <ng-container matColumnDef="liveOrAuto">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Élő/Auto</th>
-            <td mat-cell *matCellDef="let resultCampaing">
-            {{ resultCampaing.liveOrAuto}}
-            </td>
-          </ng-container>  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
 
-          <ng-container matColumnDef="numberOfQuestions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Kérdésszám</th>
-            <td mat-cell *matCellDef="let resultCampaing">
-            {{ resultCampaing.numberOfQuestions}}
-            </td>
-          </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kampány neve</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.name}}
+        </td>
+      </ng-container>
 
-          <ng-container matColumnDef="VpbxUuid">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>VPBX UUID</th>
-            <td mat-cell *matCellDef="let resultCampaing">
-            {{ resultCampaing.VpbxUuid}}
-            </td>          
-          </ng-container>
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kezdete</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.startDate}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Vége</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.endDate}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="liveOrAuto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Élő/Auto</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.liveOrAuto}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numberOfQuestions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kérdésszám</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.numberOfQuestions}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="VpbxUuid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>VPBX UUID</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.VpbxUuid}}
+        </td>
+      </ng-container>
 
 
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-            <td mat-cell *matCellDef="let resultCampaing">
-            {{ resultCampaing.id}}
-            </td>          
-          </ng-container>
-            <ng-container matColumnDef="started">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Elindult</th>
-              <td mat-cell *matCellDef="let resultCampaing">
-              {{ resultCampaing.started}}
-              </td>
-          </ng-container>
-          <ng-container matColumnDef="campaign">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-            <td mat-cell *matCellDef="let resultCampaing">
-              <div class="ratestbutton">
-              
-            <button id="ratesbutton" style="margin-bottom: 5px;" (click)="callCampaign(resultCampaing)">Részletek</button>
-          
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.id}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="started">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Elindult</th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          {{ resultCampaing.started}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="campaign">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let resultCampaing">
+          <div class="ratestbutton">
+
+            <button id="ratesbutton" style="margin-bottom: 5px;"
+              (click)="callCampaign(resultCampaing)">Részletek</button>
+
           </div>
-            </td>
+        </td>
 
-          </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
-        
-        
-        
-      </table>
- 
-      <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
-    </div>
-   
-   </div>
+
+
+
+    </table>
+
+    <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

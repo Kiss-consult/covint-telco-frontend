@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { ResultCampaign } from 'src/app/models/result_campaign/result_campaign';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-managecampaign',
@@ -15,11 +15,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ManagecampaignComponent {
 
- DateFrom: string = "";
- DateTo: string = "";
- RelativeDate: string = "";
- timeActive: boolean = false;
- relativtimeActive: boolean = false;
+  DateFrom: string = "";
+  DateTo: string = "";
+  RelativeDate: string = "";
+  timeActive: boolean = false;
+  relativtimeActive: boolean = false;
   resultCampaing: ResultCampaign = new ResultCampaign;
   resultCampaings: ResultCampaign[] = [];
   dataSource!: MatTableDataSource<ResultCampaign>;
@@ -28,7 +28,7 @@ export class ManagecampaignComponent {
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid','id', 'started','campaign'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'id', 'started', 'campaign'];
 
   campaign: Campaign = new Campaign;
 
@@ -37,32 +37,23 @@ export class ManagecampaignComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
   toggleContent(contentType: string) {
-  if (contentType === 'time') {
-    this.timeActive = true;
-    this.relativtimeActive = false;
-    console.log("Dátumot választottam");
-  } else if (contentType === 'relativtime') {
-    this.timeActive = false;
-    this.relativtimeActive = true;
-    console.log("Relativ dátumot választottam");
+    if (contentType === 'time') {
+      this.timeActive = true;
+      this.relativtimeActive = false;
+      console.log("Dátumot választottam");
+    } else if (contentType === 'relativtime') {
+      this.timeActive = false;
+      this.relativtimeActive = true;
+      console.log("Relativ dátumot választottam");
+    }
   }
-
-}
-
-
-
-
-
 
   goBackToPrevPage(): void {
     this.location.back();
   }
-  
-  constructor(private backendService: BackendService, private location: Location, private router: Router,private _Activatedroute:ActivatedRoute) {
 
-
+  constructor(private backendService: BackendService, private location: Location, private router: Router) {
 
     this.backendService.getAllCampaign().subscribe(
       result => {
@@ -74,44 +65,40 @@ export class ManagecampaignComponent {
         this.resultCampaings = result.unwrap();
         this.dataSource = new MatTableDataSource(this.resultCampaings);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.empTbSort;
-
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        this.dataSource.sort = this.empTbSort;        
         console.log("Kampányok sikeres betöltés");
         console.log(this.resultCampaings);
       });
 
   }
 
+// filter campaigns  - backend filter
+  public searchCampaign() {
+    this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Kampányok keresése sikertelen betöltés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.resultCampaings = result.unwrap();
+        this.dataSource = new MatTableDataSource(this.resultCampaings);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.empTbSort;
+        this.dataSource.data = this.resultCampaings; 
+        console.log("Kampányok keresése sikeres betöltés");
+        console.log(this.resultCampaings);
+      });
+  }
 
-public searchCampaign() {
- 
-  this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
-    result => {
-      if (result.isErr()) {
-        alert("Kampányok keresése sikertelen betöltés");
-        console.error(result.unwrapErr());
-        return;
-      }
-      this.resultCampaings = result.unwrap();
-      this.dataSource = new MatTableDataSource(this.resultCampaings);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.empTbSort;
-
-      this.dataSource.data = this.resultCampaings; // Az adatforrás frissítése
-      console.log("Kampányok keresése sikeres betöltés");
-      console.log(this.resultCampaings);
-    });
-}
-
-public callCampaign(campaign: ResultCampaign){
-  console.log("result campaign",campaign)
-  console.log("id",campaign.id)
-   let id = campaign.id;
+  // get data of the selected campaign
+  public callCampaign(campaign: ResultCampaign) {
+    console.log("result campaign", campaign)
+    console.log("id", campaign.id)
+    let id = campaign.id;
     this.router.navigate(
-        ['/campaign', id]
-    ); 
-}
-
+      ['/campaign', id]
+    );
+  }
 
 }

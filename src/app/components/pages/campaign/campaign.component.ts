@@ -9,7 +9,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { DatePipe, Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Question } from 'src/app/models/question/question';
 import { Answer } from 'src/app/models/answer/answer';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
@@ -25,17 +25,13 @@ export class CampaignComponent {
 
 
   resultCampaign: ResultCampaign = new ResultCampaign;
-
   dataSource!: MatTableDataSource<ResultCampaign>;
   @ViewChild('paginator')
   paginator!: MatPaginator;
   @ViewChild('empTbSort') empTbSort = new MatSort();
   pageSizeOptions: number[] = [5, 10];
-
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'liveOrAuto', 'numberOfQuestions', 'VpbxUuid', 'started'];
-
   campaign: Campaign = new Campaign;
-
   campaignId: any = this.resultCampaign.id;
   autoActive: boolean = false;
   liveActive: boolean = false;
@@ -44,25 +40,24 @@ export class CampaignComponent {
   answer: Answer = new Answer;
   answers: Answer[] = [];
   questions: Question[] = [];
-
   calldays: CallDay[] = [];
   callday: CallDay = new CallDay;
   datePipe = new DatePipe('en');
   available: boolean = false;
-
   today = new Date();
   changedDate = '';
   pipe = new DatePipe('en-US');
+
   changeFormat(today: string | number | Date) {
     let ChangedFormat = this.pipe.transform(today, 'y-MM-dd');
     this.changedDate = ChangedFormat!;
     console.log(this.changedDate);
     return this.changedDate;
   }
+
   getNumbersArray(count: number): number[] {
     return Array.from({ length: count }, (_, index) => index + 1);
   }
-
 
   goBackToPrevPage(): void {
     this.location.back();
@@ -74,22 +69,17 @@ export class CampaignComponent {
 
     this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
     console.log("lekerdeztem", this.campaignId);
-
     let today: number = Date.now();
     this.changeFormat(today);
-
     this.loadData(this.campaignId)
 
   }
 
-
-
-
+  //load selected campaing data , id come from manage campaign page
   private loadData(id: number) {
     this.campaignId = id;
 
     this.backendService.getCampaignById(this.campaignId).subscribe(result => {
-
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
         if (mess === "You are not allowed to interact the data of this user") {
@@ -117,31 +107,20 @@ export class CampaignComponent {
         console.log(this.available);
       }
 
-
-
-
-
-      this.backendService.getListById(this.resultCampaign.numberListId,1,1).subscribe(
+      this.backendService.getListById(this.resultCampaign.numberListId, 1, 1).subscribe(
         result => {
           if (result.isErr()) {
-            alert("lista sikertelen leállítása");
+            alert("lista sikertelen lekérdezése");
             console.error(result.unwrapErr());
             return;
           }
           this.list = result.unwrap();
           console.log(this.list.name)
-
-          // window.location.reload();
         });
-
-
-
     });
-
-
-
   }
 
+  // start campaign
   public startCampaign(id: number) {
     this.backendService.startCampaignById(id).subscribe(
       result => {
@@ -151,15 +130,12 @@ export class CampaignComponent {
           return;
         }
         alert("kampány sikeres indítása");
-
         console.log("kampany elindult", id)
         this.loadData(id);
-
-        console.log("kampany oldal ujratoltve? ", id)
       });
-
   }
 
+  // stop campaign
   public stopCampaign(id: number) {
     this.backendService.stopCampaignById(id).subscribe(
       result => {
@@ -171,39 +147,33 @@ export class CampaignComponent {
         alert("kampány sikeres leállítása");
         console.log("kampany leállt", id)
         this.loadData(id);
-        console.log("kampany oldal ujratoltve? ", id)
       });
-
   }
 
-
+  // update selected campaigd
   public updateCampaign(id: number) {
-
     this.router.navigate(
       ['/campaignupdate', id]
     );
-
   }
-  public getListName(id: number) {
 
-    this.backendService.getListById(id,1, 1).subscribe(
+  // get name of the list
+  public getListName(id: number) {
+    this.backendService.getListById(id, 1, 1).subscribe(
       result => {
         if (result.isErr()) {
-          alert("lista sikertelen leállítása");
+          alert("lista sikertelen lekérdezése");
           console.error(result.unwrapErr());
           return;
         }
         this.list = result.unwrap();
         console.log(this.list.name)
         return this.list.name;
-        // window.location.reload();
       });
-
   }
 
-
+  // delete campaign
   public deleteCampaign(id: number) {
-
     this.backendService.deleteCampaignById(id).subscribe(
       result => {
         if (result.isErr()) {
@@ -218,6 +188,7 @@ export class CampaignComponent {
       });
   }
 
+  // play the sound 
   public Play(url: string) {
     console.log(url)
     let audio: HTMLAudioElement = new Audio(url);
