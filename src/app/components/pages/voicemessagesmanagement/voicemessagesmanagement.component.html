@@ -1,43 +1,43 @@
-<h1>Hangfile feltöltése 
-  
+<h1>Hangfile feltöltése
+
 </h1>
 <h2>Hang </h2>
 <div class="container">
 
   <div class="container2">
     <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-      <div class="exportbutton">
-    
-        <div class="tab-button">
-          Hang file feltöltése
-        </div>        
-        <div hidden>
-          <input type="file" accept=".wav" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-          <p>Hang file feltöltése</p>
+    <div class="exportbutton">
+
+      <div class="tab-button">
+        Hang file feltöltése
+      </div>
+      <div hidden>
+        <input type="file" accept=".wav" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+        <p>Hang file feltöltése</p>
+      </div>
+
+      <div class="file-upload">
+        <div class="exportbutton2">
+          <p>Elvárt formátum: wav, 8 kHz, mono , 16 bit</p>
+          <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
+              attach_file</mat-icon></button>
         </div>
+        <div class="nofile">
+          {{uploadedMessage|| noFileMessage}}
+        </div>
+      </div>
 
-        <div class="file-upload">        
-          <div class="exportbutton2">
-            <p>Elvárt formátum: wav, 8 kHz, mono </p>
-            <button mat-mini-fab color="primary" (click)="fileUpload.click()" tabindex="39"> FELTÖLT <mat-icon>
-            attach_file</mat-icon></button>
-          </div>
-          <div class="nofile">
-            {{uploadedMessage|| noFileMessage}}
-          </div>   
-        </div>   
+      <div class="progress">
 
-        <div class="progress">
-
-          <mat-progress-bar class="progress-bar" mode="determinate" [value]="backendService.uploadProgress"
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="backendService.uploadProgress"
           *ngIf="backendService.uploadProgress">
 
-          </mat-progress-bar>
+        </mat-progress-bar>
 
-          <mat-icon class="cancel-upload" (click)="backendService.cancelUpload()"
-            *ngIf="backendService.uploadProgress">delete_forever</mat-icon>
-        </div>
-      </div>  
+        <mat-icon class="cancel-upload" (click)="backendService.cancelUpload()"
+          *ngIf="backendService.uploadProgress">delete_forever</mat-icon>
+      </div>
+    </div>
 
     <div class="exportbutton">
 
@@ -45,61 +45,61 @@
         Hang fileok
       </div>
 
-      <div class="acceptuser"  >
+      <div class="acceptuser">
         <mat-form-field style="width: 100%;">
-            <mat-label>Keresés</mat-label>
-            <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
-          </mat-form-field>
+          <mat-label>Keresés</mat-label>
+          <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
+        </mat-form-field>
 
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">  
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
 
-            <ng-container matColumnDef="Name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Hangfile neve</th>
-              <td mat-cell *matCellDef="let sound">
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Hangfile neve</th>
+            <td mat-cell *matCellDef="let sound">
               {{ sound.Name}}
-              </td>
-            </ng-container>     
-          
-            <ng-container matColumnDef="Url">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Url cím </th>
-              <td mat-cell *matCellDef="let sound">
-                {{ sound.Url}}
-              </td>
-            </ng-container>    
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="UploadDate">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>feltöltés ideje </th>
-              <td mat-cell *matCellDef="let sound">
-                {{ sound.UploadDate}}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-              <td mat-cell *matCellDef="let sound">
-                <div class="ratestbutton">          
-                  <button id="deleteplay" style="margin-bottom: 5px;" (click)="deleteSound(sound.Name)">Törlés</button>       
-                </div>
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="play">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-              <td mat-cell *matCellDef="let sound">
-                <div class="ratestbutton">          
-                  <button id="deleteplay" style="margin-bottom: 5px;" (click)="Play(sound.Url)">Lejatszas</button>       
-                </div>
-              </td>
-            </ng-container>            
-        
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          <ng-container matColumnDef="Url">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Url cím </th>
+            <td mat-cell *matCellDef="let sound">
+              {{ sound.Url}}
+            </td>
+          </ng-container>
 
-        <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
-      
+          <ng-container matColumnDef="UploadDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>feltöltés ideje </th>
+            <td mat-cell *matCellDef="let sound">
+              {{ sound.UploadDate}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let sound">
+              <div class="ratestbutton">
+                <button id="deleteplay" style="margin-bottom: 5px;" (click)="deleteSound(sound.Name)">Törlés</button>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="play">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let sound">
+              <div class="ratestbutton">
+                <button id="deleteplay" style="margin-bottom: 5px;" (click)="Play(sound.Url)">Lejatszas</button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+
       </div>
     </div>
   </div>
-    <footer>   
-      <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
-    </footer>
+  <footer>
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
 </div>

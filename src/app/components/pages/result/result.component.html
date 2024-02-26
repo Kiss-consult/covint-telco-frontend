@@ -12,7 +12,7 @@
             <div class="content">
                 <div>
                     <div>
-                        <label class="text">Autómatikus / Élőhangos</label>
+                        <label class="text">Automatikus / Élőhangos</label>
                     </div>
                     <div>
                         <input type="checkbox" id="auto" name="liveOrAuto" [checked]="!resultCampaign.liveOrAuto"><label
@@ -35,29 +35,25 @@
                             [(ngModel)]="resultCampaign.name" readonly placeholder="???"
                             title="Kérem töltse ki a mezőt">
                     </div>
-                    <div  *ngIf="resultCampaign.started">
+                    <div *ngIf="resultCampaign.started">
                         <div>
                             <label class="text">A kampány elindult</label>
                         </div>
                     </div>
-                    <div  *ngIf="!resultCampaign.started">
+                    <div *ngIf="!resultCampaign.started">
                         <div>
                             <label class="text">A kampány nem indult el vagy már leállt</label>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-
-        <!--startDate, endDate               <button id="addQuestionbutton" (click)="addQuestion()">Kérdés Kész</button>                 -->
 
         <div class="tab-button">
             <label>Idővallumok</label>
         </div>
 
         <div class="container3">
-
             <div id="datetime" class="content">
                 <div>
                     <div>
@@ -90,7 +86,8 @@
                     </div>
                     <div>
                         <input class="droptextbox" type="time" id="fromTime" name="institution"
-                            [(ngModel)]="resultCampaign.fromTime"readonly placeholder="???" title="Kérem töltse ki a mezőt">
+                            [(ngModel)]="resultCampaign.fromTime" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
                     </div>
                 </div>
 
@@ -100,7 +97,8 @@
                     </div>
                     <div>
                         <input class="droptextbox" type="time" id="toTime" name="institution"
-                            [(ngModel)]="resultCampaign.toTime" readonly placeholder="???" title="Kérem töltse ki a mezőt">
+                            [(ngModel)]="resultCampaign.toTime" readonly placeholder="???"
+                            title="Kérem töltse ki a mezőt">
                     </div>
                 </div>
             </div>
@@ -121,10 +119,10 @@
                             <div *ngFor="let addDate of this.calldays; let i = index" style="margin-bottom: 30px;">
                                 <div style="flex-grow: 1;">
                                     <input class="droptextbox" type="date" readonly id="period" name="institution"
-                                    [(ngModel)]="addDate.Date" >
-                                    
+                                        [(ngModel)]="addDate.Date">
+
                                 </div>
-                               
+
                             </div>
                         </div>
                     </ng-container>
@@ -135,7 +133,7 @@
 
             <!--period-->
 
-            
+
         </div>
 
         <div id="tabbutton">
@@ -143,7 +141,7 @@
                 <label>Hívások</label>
             </div>
             <div id="tab-button-hang">
-                <div  class="tab-button">
+                <div class="tab-button">
                     <label>Hangfelvételek</label>
                 </div>
             </div>
@@ -152,7 +150,7 @@
         <!--callsPerPeriod-->
         <div id="calls" class="container5">
             <div id="callscontent">
-                
+
 
                 <!--numberListId-->
 
@@ -162,18 +160,9 @@
                             <label class="text">Telefonszám lista</label>
                         </div>
                         <div>
-
                             <input class="droptextbox" type="text" id="listname" name="institution"
                                 [(ngModel)]="list.name" readonly placeholder="lista neve">
-                            <!--
-              <p §type="text" id="numberListname" name="institution"   > {{ getListById(resultCampaign.numberListId)}}</p>
--->
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -185,12 +174,10 @@
                         <div>
                             <label class="text">Üdvözlő üzenet</label>
                         </div>
-
                         <div>
                             <input class="droptextbox" type="text" id="welcomepath" name="welcomepath"
                                 [(ngModel)]="resultCampaign.welcomeSound.Name" readonly placeholder="lista neve">
                         </div>
-
                     </div>
                 </div>
 
@@ -201,12 +188,10 @@
                         <div>
                             <label class="text">Elköszönő üzenet</label>
                         </div>
-
                         <div>
                             <input class="droptextbox" type="text" id="goodbyepath" name="goodbyapath"
                                 [(ngModel)]="resultCampaign.goodbyeSound.Name" readonly placeholder="lista neve">
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -223,33 +208,33 @@
             <label></label>
         </div>
     </div>
-    
-    <div id="filter" class="container3">
 
+    <div id="filter" class="container3">
         <div id="filter2" class="content">
             <div>
                 <label class="text">Szűrő: Bontókód </label>
             </div>
             <div>
-                <input class="droptextbox" type="text" id="hangupcode" name="institution" [(ngModel)]="resultFilter.HangupCode" placeholder="???" title="Kérem töltse ki a mezőt">
+                <input class="droptextbox" type="text" id="hangupcode" name="institution"
+                    [(ngModel)]="resultFilter.HangupCode" placeholder="???" title="Kérem töltse ki a mezőt">
             </div>
         </div>
-    
         <div id="filter2" class="content">
             <div>
                 <label class="text">Szűrő: Név </label>
             </div>
             <div>
-                <input class="droptextbox" type="text" id="Name" name="institution" [(ngModel)]="resultFilter.Name" placeholder="???" title="Kérem töltse ki a mezőt">
+                <input class="droptextbox" type="text" id="Name" name="institution" [(ngModel)]="resultFilter.Name"
+                    placeholder="???" title="Kérem töltse ki a mezőt">
             </div>
         </div>
-    
         <div id="filter2" class="content">
             <div>
                 <label class="text">Szűrő: Telefonszám</label>
             </div>
             <div>
-                <input class="droptextbox" type="text" id="number" name="institution" [(ngModel)]="resultFilter.Number" placeholder="???" title="Kérem töltse ki a mezőt">
+                <input class="droptextbox" type="text" id="number" name="institution" [(ngModel)]="resultFilter.Number"
+                    placeholder="???" title="Kérem töltse ki a mezőt">
             </div>
         </div>
         <div id="filter2" class="content">
@@ -257,125 +242,115 @@
                 <label class="text">Szűrő: Egyéb</label>
             </div>
             <div>
-                <input class="droptextbox" type="text" id="number" name="institution" [(ngModel)]="resultFilter.Other" placeholder="???" title="Kérem töltse ki a mezőt">
+                <input class="droptextbox" type="text" id="number" name="institution" [(ngModel)]="resultFilter.Other"
+                    placeholder="???" title="Kérem töltse ki a mezőt">
             </div>
         </div>
         <div id="filter2" class="content">
             <div>
-                <label class="text">Szűrő: Hívás hossza  - Nagyobb mint:</label>
+                <label class="text">Szűrő: Hívás hossza - Nagyobb mint:</label>
             </div>
             <div>
-                  
-                <input class="droptextbox" type="number" id="number" name="institution" [(ngModel)]="resultFilter.MinCallLength" placeholder="???" title="Kérem töltse ki a mezőt">
-         
+                <input class="droptextbox" type="number" id="number" name="institution"
+                    [(ngModel)]="resultFilter.MinCallLength" placeholder="???" title="Kérem töltse ki a mezőt">
             </div>
         </div>
-       
-    
+
         <div id="okebutton" id="filter3" class="content">
             <div>
                 <label class="text"> Szűrő indítása</label>
             </div>
-            <button  (click)="getFilteredResult()" style="z-index: 2; position: relative;">
+            <button (click)="getFilteredResult()" style="z-index: 2; position: relative;">
                 Szürés
             </button>
         </div>
-       
-        <div class="okebutton"  id="filter3" class="content"> 
-           
+
+        <div class="okebutton" id="filter3" class="content">
             <div>
                 <label class="text"> Exportálja a teljes eredmény adatokat</label>
             </div>
-            <button  (click)="rates()" style="z-index: 2; position: relative;">
+            <button (click)="rates()" style="z-index: 2; position: relative;">
                 Export
             </button>
-          
-         
-        </div> 
+        </div>
+
         <div id="okebutton" id="filter3" class="content">
             <div>
                 <label class="text">Diagram megnyitás új lapon</label>
             </div>
-            <button  (click)="openDiagram()" style="z-index: 2; position: relative;">
-                Diagram 
+            <button (click)="openDiagram()" style="z-index: 2; position: relative;">
+                Diagram
             </button>
         </div>
     </div>
-<div>
-    <iframe [src]="resultdiagram.Url | safe: 'url' "  showToolbar={false} height="500"  width=100% frameborder="0">
-    </iframe>
-</div>
-    <div class="acceptuser"  >
+
+    <div>
+        <iframe [src]="resultdiagram.Url | safe: 'url' " showToolbar={false} height="500" width=100% frameborder="0">
+        </iframe>
+    </div>
+
+    <div class="acceptuser">
         <mat-form-field>
-          <mat-label>Keresés</mat-label>
-          <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
+            <mat-label>Keresés</mat-label>
+            <input matInput (keyup)="Filter($event)" placeholder="Kampány keresése a betöltött kampányokban" #input>
         </mat-form-field>
-    
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">        
-    
-          <ng-container matColumnDef="HangupCode">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Bontókód</th>
-            <td mat-cell *matCellDef="let datas">
-                {{ datas.HangupCode}}
-            </td>
-          </ng-container>     
-        
-          <ng-container matColumnDef="Number">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefonszám</th>
-            <td mat-cell *matCellDef="let datas">
-                {{ datas.Number}}
-            </td>
-            </ng-container>    
-    
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
+
+            <ng-container matColumnDef="HangupCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Bontókód</th>
+                <td mat-cell *matCellDef="let datas">
+                    {{ datas.HangupCode}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefonszám</th>
+                <td mat-cell *matCellDef="let datas">
+                    {{ datas.Number}}
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="Name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
-              <td mat-cell *matCellDef="let datas">
-              {{ datas.Name}}
-              </td>
-            </ng-container> 
-    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
+                <td mat-cell *matCellDef="let datas">
+                    {{ datas.Name}}
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="Other">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Egyéb</th>
-              <td mat-cell *matCellDef="let datas">
-              {{ datas.Other}}
-              </td>
-            </ng-container>  
-    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Egyéb</th>
+                <td mat-cell *matCellDef="let datas">
+                    {{ datas.Other}}
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="CallLength">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hívás hossz</th>
                 <td mat-cell *matCellDef="let datas">
-                {{ datas.CallLength}} s
+                    {{ datas.CallLength}} s
                 </td>
-              </ng-container>
-              <ng-container matColumnDef="DialStatus">
+            </ng-container>
+            <ng-container matColumnDef="DialStatus">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hívás státusz</th>
                 <td mat-cell *matCellDef="let datas">
-                {{ datas.DialStatus}} 
+                    {{ datas.DialStatus}}
                 </td>
-              </ng-container>
-              <ng-container matColumnDef="Result">
+            </ng-container>
+            <ng-container matColumnDef="Result">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hívás eredmény</th>
                 <td mat-cell *matCellDef="let datas">
-                {{ datas.Result}} 
+                    {{ datas.Result}}
                 </td>
-              </ng-container>
-           
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
-    
-          
-          
-          
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
         </table>
-    
-        <mat-paginator #paginator  
-        [length]="length"
-        [pageIndex]="pageIndex"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        (page)="getServerData($event)"  showFirstLastButtons></mat-paginator> 
+
+        <mat-paginator #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]" (page)="getServerData($event)" showFirstLastButtons></mat-paginator>
     </div>
 
 </div>
-

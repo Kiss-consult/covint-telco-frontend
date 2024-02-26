@@ -10,14 +10,10 @@ import { ConfigService } from './services/config/config.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'covint-telco-frontend';
-
-  flag: boolean = true;
-  /* orvos = Orvos;
-   kutatoorvos = KutatoOrvos;
-   portaladmin = PortalKezelo;
-   portalvezeto = PortalVezeto;*/
+  flag: boolean = true;  
   isMenuOpen = false;
 
   constructor(public loginService: LoginService, private router: Router, private configService: ConfigService) { }

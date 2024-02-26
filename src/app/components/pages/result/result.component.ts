@@ -8,7 +8,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DatePipe, Location } from '@angular/common'
 import { Campaign } from 'src/app/models/campaign/campaign';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { Question } from 'src/app/models/question/question';
 import { Answer } from 'src/app/models/answer/answer';
 import { List_of_numbers } from 'src/app/models/list_of_numbers/list_of_numbers';
@@ -17,7 +17,6 @@ import { ResultFilter } from 'src/app/models/filter/resultfilter';
 import { Data } from 'src/app/models/respons/data';
 import { Page } from 'src/app/models/list_of_numbers/page';
 import { Respons } from 'src/app/models/respons/respons';
-import { ResultDiagram } from 'src/app/models/diagram/result_diagram';
 import { Diagram } from 'src/app/models/diagram/diagram';
 
 
@@ -26,6 +25,7 @@ import { Diagram } from 'src/app/models/diagram/diagram';
   templateUrl: './result.component.html',
   styleUrl: './result.component.css'
 })
+
 export class ResultComponent {
 
   DateFrom: string = "";
@@ -53,16 +53,19 @@ export class ResultComponent {
   today = new Date();
   changedDate = '';
   pipe = new DatePipe('en-US');
+
   changeFormat(today: string | number | Date) {
     let ChangedFormat = this.pipe.transform(today, 'y-MM-dd');
     this.changedDate = ChangedFormat!;
     console.log(this.changedDate);
     return this.changedDate;
   }
+
   Filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   dataSource!: MatTableDataSource<Data>;
   @ViewChild('paginator')
   paginator!: MatPaginator;
@@ -76,22 +79,7 @@ export class ResultComponent {
   datas: Data[] = [];
   page: Page = new Page;
 
-  displayedColumns: string[] = ['HangupCode', 'Number', 'Name', 'Other', 'CallLength','DialStatus','Result'];
-  constructor(private backendService: BackendService, private location: Location, private fb: FormBuilder,
-    private _Activatedroute: ActivatedRoute, private router: Router) {
-
-
-    this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
-    console.log("lekerdeztem", this.campaignId);
-
-    let today: number = Date.now();
-    this.changeFormat(today);
-
-    this.loadData(this.campaignId);
-
-
-
-  }
+  displayedColumns: string[] = ['HangupCode', 'Number', 'Name', 'Other', 'CallLength', 'DialStatus', 'Result'];
 
   toggleContent(contentType: string) {
     if (contentType === 'time') {
@@ -103,16 +91,25 @@ export class ResultComponent {
       this.relativtimeActive = true;
       console.log("Relativ dátumot választottam");
     }
+  } 
 
+
+  constructor(private backendService: BackendService, private location: Location,
+    private _Activatedroute: ActivatedRoute) {
+
+    this.campaignId = this._Activatedroute.snapshot.paramMap.get("id"); /// majd ide jon a masik componensbol a valtozo
+    console.log("lekerdeztem", this.campaignId);
+    let today: number = Date.now();
+    this.changeFormat(today);
+    this.loadData(this.campaignId);
   }
 
-
+// filter result - backend filter
   public getFilteredResult() {
     this.resultFilter.VpbxUuid = this.resultCampaign.VpbxUuid;
     console.log(this.resultFilter)
 
     this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex).subscribe(result => {
-
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
         if (mess === "You are not allowed to interact the data of this user") {
@@ -126,7 +123,6 @@ export class ResultComponent {
       }
       this.respons = result.unwrap();
 
-
       this.datas = this.respons.data;
       this.pageIndex = this.respons.page;
       this.pageSize = this.respons.pageSize;
@@ -136,26 +132,24 @@ export class ResultComponent {
       console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
       console.log("ellenorzes list:", this.respons,);
 
-      // console.log("ellenorzes data:" , this.list);
-      // alert("elenorzes");
-
       this.dataSource = new MatTableDataSource(this.datas);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.empTbSort;
       console.log("telefonszám lista sikeres betöltés");
-
       console.log("számok", this.data);
       console.log("paginator", this.paginator);
       console.log("ellenorzes page3:", this.paginator.length);
     });
   }
+
+
+// paginator ue it to get data from backend
   public getServerData(event: PageEvent) {
     console.log("event", event);
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
 
     this.backendService.filterResults(this.resultFilter, this.pageSize, this.pageIndex).subscribe(result => {
-
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
         if (mess === "You are not allowed to interact the data of this user") {
@@ -169,7 +163,6 @@ export class ResultComponent {
       }
       this.respons = result.unwrap();
 
-
       this.datas = this.respons.data;
       this.pageIndex = this.respons.page;
       this.pageSize = this.respons.pageSize;
@@ -179,12 +172,9 @@ export class ResultComponent {
       console.log("ellenorzes page2:", this.paginator.getNumberOfPages())
       console.log("ellenorzes list:", this.respons,);
 
-      console.log("ellenorzes page.data:", this.respons.data);
-      // console.log("ellenorzes data:" , this.list);
-      // alert("elenorzes");
-
+      console.log("ellenorzes page.data:", this.respons.data); 
       this.dataSource = new MatTableDataSource(this.datas);
-      //this.dataSource.paginator = this.paginator;
+    
       this.dataSource.sort = this.empTbSort;
       console.log("telefonszám lista sikeres betöltés");
 
@@ -194,11 +184,11 @@ export class ResultComponent {
     });
   }
 
+// load selected campaign data
   private loadData(id: number) {
     this.campaignId = id;
 
     this.backendService.getCampaignById(this.campaignId).subscribe(result => {
-
       if (result.isErr()) {
         let mess = result.unwrapErr().error.Error;
         if (mess === "You are not allowed to interact the data of this user") {
@@ -233,78 +223,50 @@ export class ResultComponent {
             return;
           }
           this.list = result.unwrap();
-          console.log(this.list.name)
-
-          // window.location.reload();
+          console.log(this.list.name)    
         });
       this.getFilteredResult();
       this.getDiagrams(this.campaignId);
-      
     });
   }
 
-  public searchCampaign() {
-    this.backendService.searchCampaign(this.campaign.name, this.campaign.startDate, this.campaign.endDate, this.DateFrom, this.DateTo, this.RelativeDate).subscribe(
+// get result diagram 
+
+  public getDiagrams(id: number) {
+    this.campaignId = id;
+    this.backendService.getResultDiagramById(this.campaignId).subscribe(
       result => {
         if (result.isErr()) {
-          alert("Kampányok keresése sikertelen betöltés");
+          alert("diagramok sikertelen betöltése");
           console.error(result.unwrapErr());
           return;
         }
-        this.resultCampaings = result.unwrap();
-        this.dataSource = new MatTableDataSource(this.datas);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.empTbSort;
-
-        this.dataSource.data = this.datas; // Az adatforrás frissítése
-        console.log("Kampányok keresése sikeres betöltés");
-        console.log(this.resultCampaings);
+        this.resultdiagram = result.unwrap();
+        console.log(this.resultdiagram)     
       });
   }
 
-public getDiagrams(id : number) {
-  this.campaignId = id;
-  this.backendService.getResultDiagramById(this.campaignId).subscribe(
-    result => {
-      if (result.isErr()) {
-        alert("diagramok sikertelen betöltése");
-        console.error(result.unwrapErr());
-        return;
-      }
-      this.resultdiagram = result.unwrap();
-      console.log(this.resultdiagram)
 
-      // window.location.reload();
-    });
-}
- public openDiagram(){
 
-  window.open(this.resultdiagram.Url,  "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
- }
- public getIframeCallLengthDiagram(){
+  public openDiagram() {
+    window.open(this.resultdiagram.Url, "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=800,height=400");
+  }
 
-  return this.resultdiagram.Iframe
- }
- public getUrlCallLengthDiagram(){
-  
- console.log(this.resultdiagram)
-  return this.resultdiagram.Url
- }
 
   goBackToPrevPage(): void {
     this.location.back();
   }
- 
-  public rates() {
 
+  // export and download full result list
+  public rates() {
     const filename = "eredmenyek_teljes.xlsx";
     this.backendService.downloadResults(this.resultCampaign.VpbxUuid).subscribe((result) => {
       if (result.isErr()) {
-        console.error("error",result.unwrapErr());
+        console.error("error", result.unwrapErr());
         return;
       }
       let response = result.unwrap();
-      console.log("respons",response);
+      console.log("respons", response);
       let data = response[0];
       let dataType = response[1];
       let downloadLink = document.createElement('a');
