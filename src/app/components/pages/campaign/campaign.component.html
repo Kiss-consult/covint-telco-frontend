@@ -45,33 +45,46 @@
                             <label class="text">A kampány nem indult el vagy már leállt</label>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="content">
-                <div>
-
-                    <div *ngIf="available">
-                        <button id="addQuestionbutton" (click)="startCampaign(resultCampaign.id)">Start</button>
-                    </div>
                     <div *ngIf="!available">
-                        <button id="addQuestionbutton" disabled="disabled" (click)="startCampaign(resultCampaign.id)"
+                        <div>
+                            <label class="text">A kampányidőszak lezárult!</label>
+                        </div>
+                    </div>
+                    <div *ngIf="available">
+                        <div>
+                            <label class="text">A kampányidőszak nyitva van!</label>
+                        </div>
+                    </div>
+                    <div *ngIf="resultCampaign.started">
+                        <button id="addQuestionbutton"  hidden disabled="disabled" (click)="startCampaign(resultCampaign.id)">Start</button>
+                    </div>
+                    <div *ngIf="!resultCampaign.started">
+                        <button id="addQuestionbutton"  (click)="startCampaign(resultCampaign.id)"
                             title="A kampány ideje már lejárt">Start</button>
                     </div>
-                    <div *ngIf="available">
+                    <div *ngIf="resultCampaign.started">
                         <button id="addQuestionbutton" (click)="stopCampaign(resultCampaign.id)">Stop</button>
                     </div>
-                    <div *ngIf="!available">
-                        <button id="addQuestionbutton" disabled="disabled" (click)="stopCampaign(resultCampaign.id)"
+                    <div *ngIf="!resultCampaign.started">
+                        <button id="addQuestionbutton"  hidden disabled="disabled" (click)="stopCampaign(resultCampaign.id)"
                             title="A kampány ideje már lejárt">Stop</button>
                     </div>
+
+
+
+
                 </div>
             </div>
+
+           
             <div class="content">
                 <div>
 
-                    <div>
-                        <button id="addQuestionbutton" (click)="deleteCampaign(resultCampaign.id)">Törlés</button>
+                    <div  *ngIf="resultCampaign.started">
+                        <button id="addQuestionbutton" hidden disabled="disabled" (click)="deleteCampaign(resultCampaign.id)">Törlés</button>
+                    </div>
+                    <div  *ngIf="!resultCampaign.started">
+                        <button id="addQuestionbutton"  (click)="deleteCampaign(resultCampaign.id)">Törlés</button>
                     </div>
                 </div>
             </div>

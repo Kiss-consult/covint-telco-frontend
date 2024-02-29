@@ -58,7 +58,9 @@ export class ManagecampaignComponent {
     this.backendService.getAllCampaign().subscribe(
       result => {
         if (result.isErr()) {
-          alert("Kampányok sikertelen betöltés");
+          let mess = result.unwrapErr().error.Error;
+          alert("kampány sikertelen betöltése, hiba :\n"+ mess);
+          
           console.error(result.unwrapErr());
           return;
         }

@@ -98,7 +98,8 @@ export class CampaignComponent {
       console.log("kérdések", this.questions);
       console.log(this.changedDate);
       console.log(this.resultCampaign.endDate);
-      if (this.resultCampaign.endDate < this.changedDate) {
+
+      if ((this.resultCampaign.endDate < this.changedDate) ) {
         this.available = false;
         console.log(this.available);
       }
@@ -140,7 +141,8 @@ export class CampaignComponent {
     this.backendService.stopCampaignById(id).subscribe(
       result => {
         if (result.isErr()) {
-          alert("kampány sikertelen leállítása");
+          let mess = result.unwrapErr().error.Error;
+          alert("kampány sikertelen leállítása, hiba :\n"+ mess);
           console.error(result.unwrapErr());
           return;
         }
