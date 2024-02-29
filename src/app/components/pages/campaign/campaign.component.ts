@@ -99,7 +99,7 @@ export class CampaignComponent {
       console.log(this.changedDate);
       console.log(this.resultCampaign.endDate);
 
-      if ((this.resultCampaign.endDate < this.changedDate) ) {
+      if ((this.resultCampaign.endDate <= this.changedDate) ) { 
         this.available = false;
         console.log(this.available);
       }
